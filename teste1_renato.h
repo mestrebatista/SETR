@@ -6,3 +6,4 @@
 #define SETR_TESTE1_RENATO_H
 
 #endif //SETR_TESTE1_RENATO_H
+// bye
