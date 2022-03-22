@@ -2,17 +2,40 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(void)
-{	
-	/* And finish */
-	return 0;
+int main (void)
+{
+    MyFIFOInit();
+
+    printf("You have initiated a FIFO\n");
+
+    int n = 0;
+
+    while(n != 5) {
+        printf("1 - ADD AN ELEMENT TO THE FIFO \n");
+        printf("2 - REMOVES AN ELEMENT TO THE FIFO \n");
+        printf("3 - RETURN THE OLDEST ELEMENT IN THE FIFO \n");
+        printf("4 - NUMBER OF ELEMENTS IN THE FIFO\n");
+        printf("5 - EXIT\n");
+
+        printf("Please enter your option: ");
+        scanf("%d",&n);
+        printf("\n");
+        printf("Valor lido : %d \n",n);
+
+        if (n == 1) MyFIFOInsert();
+        if (n == 2) MyFIFORemove();
+        if (n == 3) MyFIFOPeep();
+        if (n == 4) MyFIFOSize();
+
+    }
+    return 0;
 }
+
 
 void MyFIFOInit()
 {
     int fifo [50];
 
-    return fifo;
 }
 
 void MyFIFOInsert(int* fifo)
@@ -34,20 +57,35 @@ void MyFIFOInsert(int* fifo)
 }
 
 
-void MyFIFORemove()
+void MyFIFORemove(int* fifo)
 {
+    for (int i = 0;i<sizeof(fifo);i++)
+    {
+        if(fifo[i] == NULL)
+        {
 
-    return 0;
+        }
+        else{
+            fifo[i] = NULL;
+            for (int a = i; a<sizeof(fifo);a++)
+            {
+                fifo[a] =fifo[a+1];
+                fifo[a+1] = NULL;
+            }
+            printf("The first element of the FIFO has been removed");
+            break;
+        }
+    }
 }
 
-void MyFIFOPeep()
+void MyFIFOSize(int* fifo)
 {
-
-    return 0;
+    // int size_fifo = sizeof(fifo);
+    // printf("The size of the FIFO is ", size_fifo);
+    printf("The Size of the FIFO is : \n",sizeof(fifo) );
 }
 
-void MyFIFOSize()
+void MyFIFOPeep(int* fifo)
 {
-
-    return 0;
+    printf("Elemento mais antigo : %d \n",&fifo[0]);
 }
