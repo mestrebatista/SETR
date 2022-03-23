@@ -22,20 +22,7 @@ void MyFIFOSize(int*);
 
 int write_pointer;
 int read_pointer;
-static int SIZE_FIFO = 10;
 
-
-/**
- * @brief Brief decription of main().
- *
- * Here it goes the long description of main()
- * main has no input arguments.
- * It declares two variables and calls function1() using them 
- * as argument. 
- * It then prints the result and returns.
- * 
- * @return main() always returns 0
- */
 
 int main (void)
 {

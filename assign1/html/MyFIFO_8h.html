@@ -105,28 +105,28 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structelem.html">elem</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">brief description of elem typedef struct.  <a href="structelem.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Elements used for the manipulation of the queue.  <a href="structelem.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a840291bc02cba5474a4cb46a9b9566fe"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MyFIFO_8h.html#a840291bc02cba5474a4cb46a9b9566fe">main</a> (void)</td></tr>
-<tr class="memdesc:a840291bc02cba5474a4cb46a9b9566fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Brief decription of the main.  <a href="MyFIFO_8h.html#a840291bc02cba5474a4cb46a9b9566fe">More...</a><br /></td></tr>
+<tr class="memdesc:a840291bc02cba5474a4cb46a9b9566fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface UI This function call all other functions. It's used for the user interaction (crude UI), so it prints the FIFO in each usage.  <a href="MyFIFO_8h.html#a840291bc02cba5474a4cb46a9b9566fe">More...</a><br /></td></tr>
 <tr class="separator:a840291bc02cba5474a4cb46a9b9566fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3265c94311ec920f72c3c5683c97b13"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MyFIFO_8h.html#af3265c94311ec920f72c3c5683c97b13">MyFIFOInit</a> ()</td></tr>
-<tr class="memdesc:af3265c94311ec920f72c3c5683c97b13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Brief decription of function1 prototype.  <a href="MyFIFO_8h.html#af3265c94311ec920f72c3c5683c97b13">More...</a><br /></td></tr>
+<tr class="memdesc:af3265c94311ec920f72c3c5683c97b13"><td class="mdescLeft">&#160;</td><td class="mdescRight">initiates the fifo This function creates an array of integers with a size of 10 elements and puts all the elements to 0. It also sets the read_pointer variable and the write_pointer variable to 0.  <a href="MyFIFO_8h.html#af3265c94311ec920f72c3c5683c97b13">More...</a><br /></td></tr>
 <tr class="separator:af3265c94311ec920f72c3c5683c97b13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85f4c55570d28da8e622bfa3ec11111e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MyFIFO_8h.html#a85f4c55570d28da8e622bfa3ec11111e">MyFIFOInsert</a> (int *)</td></tr>
-<tr class="memdesc:a85f4c55570d28da8e622bfa3ec11111e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Brief decription of function1 prototype.  <a href="MyFIFO_8h.html#a85f4c55570d28da8e622bfa3ec11111e">More...</a><br /></td></tr>
+<tr class="memdesc:a85f4c55570d28da8e622bfa3ec11111e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an element to the FIFO This function asks the user to choose a number to add to the FIFO and then the function adds it to the next position of the FIFO The function also checks if the FIFO is full, and warns the user if that is the case.  <a href="MyFIFO_8h.html#a85f4c55570d28da8e622bfa3ec11111e">More...</a><br /></td></tr>
 <tr class="separator:a85f4c55570d28da8e622bfa3ec11111e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24d6cf416b83c54662695503912ef941"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MyFIFO_8h.html#a24d6cf416b83c54662695503912ef941">MyFIFORemove</a> (int *)</td></tr>
-<tr class="memdesc:a24d6cf416b83c54662695503912ef941"><td class="mdescLeft">&#160;</td><td class="mdescRight">Brief decription of function1 prototype.  <a href="MyFIFO_8h.html#a24d6cf416b83c54662695503912ef941">More...</a><br /></td></tr>
+<tr class="memdesc:a24d6cf416b83c54662695503912ef941"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the oldest element from the FIFO This function uses the read_pointer to find out the oldest element on the FIFO, and removes it from the FIFO. It also checks if the FIFO is empty and if it is, both read_pointer and write_pointer variables return to 0.  <a href="MyFIFO_8h.html#a24d6cf416b83c54662695503912ef941">More...</a><br /></td></tr>
 <tr class="separator:a24d6cf416b83c54662695503912ef941"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae93f3b165914f7ba43f63d0138885c0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MyFIFO_8h.html#ae93f3b165914f7ba43f63d0138885c0a">MyFIFOPeep</a> (int *)</td></tr>
-<tr class="memdesc:ae93f3b165914f7ba43f63d0138885c0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Brief decription of function1 prototype.  <a href="MyFIFO_8h.html#ae93f3b165914f7ba43f63d0138885c0a">More...</a><br /></td></tr>
+<tr class="memdesc:ae93f3b165914f7ba43f63d0138885c0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the oldest element on the FIFO, but does not remove it This function uses the read_pointer to find out the oldest element on the FIFO, and prints it on the terminal.  <a href="MyFIFO_8h.html#ae93f3b165914f7ba43f63d0138885c0a">More...</a><br /></td></tr>
 <tr class="separator:ae93f3b165914f7ba43f63d0138885c0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af512356a795d8622fc35e3f295a2ebe1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MyFIFO_8h.html#af512356a795d8622fc35e3f295a2ebe1">MyFIFOSize</a> (int *)</td></tr>
-<tr class="memdesc:af512356a795d8622fc35e3f295a2ebe1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Brief decription of function1 prototype.  <a href="MyFIFO_8h.html#af512356a795d8622fc35e3f295a2ebe1">More...</a><br /></td></tr>
+<tr class="memdesc:af512356a795d8622fc35e3f295a2ebe1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of elements on the FIFO This function counts the number of occupied positions on the FIFO, for this, the function uses a for loop to check all the positions.  <a href="MyFIFO_8h.html#af512356a795d8622fc35e3f295a2ebe1">More...</a><br /></td></tr>
 <tr class="separator:af512356a795d8622fc35e3f295a2ebe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -151,22 +151,13 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Brief decription of the main. </p>
-<p>Here it goes the long description of fucntion 1. Description of what the function does. Usually this part describes whatr the fiunction does and its interface, namelly input arguments and return value. Verbatim text can also be used: </p><pre class="fragment">* This is my email:pbrp@ua.pt
-* </pre><p> You can also include an example of usage: </p><div class="fragment"><div class="line">res = function1(param1, param2);</div>
-<div class="line">printf(<span class="stringliteral">&quot;res=%d\n&quot;</span>,res);</div>
-</div><!-- fragment --><p> You can uset HTML tags e.g. to make <b>bold text</b> </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">arg1</td><td>Description of the first parameter of the function. </td></tr>
-    <tr><td class="paramname">arg2</td><td>Description of the second parameter of the function. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Describe the function return value</dd></dl>
-<p>Brief decription of the main.</p>
-<p>Here it goes the long description of <a class="el" href="MyFIFO_8h.html#a840291bc02cba5474a4cb46a9b9566fe" title="Brief decription of the main.">main()</a> main has no input arguments. It declares two variables and calls function1() using them as argument. It then prints the result and returns.</p>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="MyFIFO_8h.html#a840291bc02cba5474a4cb46a9b9566fe" title="Brief decription of the main.">main()</a> always returns 0 </dd></dl>
-
+<p>Interface UI This function call all other functions. It's used for the user interaction (crude UI), so it prints the FIFO in each usage. </p>
+<p>This is the interaction presented for the user: </p><pre class="fragment">  1 - ADD AN ELEMENT TO THE FIFO
+  2 - REMOVES AN ELEMENT TO THE FIFO
+  3 - RETURN THE OLDEST ELEMENT IN THE FIFO
+  4 - NUMBER OF ELEMENTS IN THE FIFO
+  5 - EXIT
+</pre> 
 </div>
 </div>
 <a id="af3265c94311ec920f72c3c5683c97b13"></a>
@@ -184,18 +175,17 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Brief decription of function1 prototype. </p>
-<p>Here it goes the long description of fucntion 1. Description of what the function does. Usually this part describes whatr the fiunction does and its interface, namelly input arguments and return value. Verbatim text can also be used: </p><pre class="fragment">* This is my email:pbrp@ua.pt
-* </pre><p> You can also include an example of usage: </p><div class="fragment"><div class="line">res = function1(param1, param2);</div>
-<div class="line">printf(<span class="stringliteral">&quot;res=%d\n&quot;</span>,res);</div>
-</div><!-- fragment --><p> You can uset HTML tags e.g. to make <b>bold text</b> </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">arg1</td><td>Description of the first parameter of the function. </td></tr>
-    <tr><td class="paramname">arg2</td><td>Description of the second parameter of the function. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Describe the function return value </dd></dl>
+<p>initiates the fifo This function creates an array of integers with a size of 10 elements and puts all the elements to 0. It also sets the read_pointer variable and the write_pointer variable to 0. </p>
+<div class="fragment"><div class="line"> <span class="keyword">static</span> <span class="keywordtype">int</span> fifo [10];</div>
+<div class="line"><span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i&lt;10;i++)</div>
+<div class="line">{</div>
+<div class="line">    fifo[i] = 0;</div>
+<div class="line">}</div>
+<div class="line">read_pointer = 0;</div>
+<div class="line">write_pointer = 0;</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordflow">return</span> fifo;</div>
+</div><!-- fragment --><dl class="section return"><dt>Returns</dt><dd>Returns an array of integers full of 0 </dd></dl>
 
 </div>
 </div>
@@ -215,18 +205,26 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Brief decription of function1 prototype. </p>
-<p>Here it goes the long description of fucntion 1. Description of what the function does. Usually this part describes whatr the fiunction does and its interface, namelly input arguments and return value. Verbatim text can also be used: </p><pre class="fragment">* This is my email:pbrp@ua.pt
-* </pre><p> You can also include an example of usage: </p><div class="fragment"><div class="line">res = function1(param1, param2);</div>
-<div class="line">printf(<span class="stringliteral">&quot;res=%d\n&quot;</span>,res);</div>
-</div><!-- fragment --><p> You can uset HTML tags e.g. to make <b>bold text</b> </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Adds an element to the FIFO This function asks the user to choose a number to add to the FIFO and then the function adds it to the next position of the FIFO The function also checks if the FIFO is full, and warns the user if that is the case. </p>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> new_n;</div>
+<div class="line">printf(<span class="stringliteral">&quot;What number you want to add?\n&quot;</span>);</div>
+<div class="line">scanf(<span class="stringliteral">&quot;%d&quot;</span>,&amp;new_n);</div>
+<div class="line"><span class="keywordflow">if</span> (fifo[write_pointer] == 0)</div>
+<div class="line">{</div>
+<div class="line">    fifo[write_pointer] = new_n;</div>
+<div class="line">    write_pointer++;</div>
+<div class="line">    <span class="keywordflow">if</span>(write_pointer == 10) write_pointer = 0;</div>
+<div class="line">}</div>
+<div class="line"><span class="keywordflow">else</span></div>
+<div class="line">{</div>
+<div class="line">    printf(<span class="stringliteral">&quot;FIFO is full. Please Remove one before adding\n&quot;</span>);</div>
+<div class="line">}</div>
+</div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">arg1</td><td>Description of the first parameter of the function. </td></tr>
-    <tr><td class="paramname">arg2</td><td>Description of the second parameter of the function. </td></tr>
+    <tr><td class="paramname">fifo</td><td>array of numbers of FIFO </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Describe the function return value </dd></dl>
 
 </div>
 </div>
@@ -246,18 +244,14 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Brief decription of function1 prototype. </p>
-<p>Here it goes the long description of fucntion 1. Description of what the function does. Usually this part describes whatr the fiunction does and its interface, namelly input arguments and return value. Verbatim text can also be used: </p><pre class="fragment">* This is my email:pbrp@ua.pt
-* </pre><p> You can also include an example of usage: </p><div class="fragment"><div class="line">res = function1(param1, param2);</div>
-<div class="line">printf(<span class="stringliteral">&quot;res=%d\n&quot;</span>,res);</div>
-</div><!-- fragment --><p> You can uset HTML tags e.g. to make <b>bold text</b> </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Returns the oldest element on the FIFO, but does not remove it This function uses the read_pointer to find out the oldest element on the FIFO, and prints it on the terminal. </p>
+<div class="fragment"><div class="line">printf(<span class="stringliteral">&quot;Elemento mais antigo : %d \n&quot;</span>,fifo[read_pointer]);</div>
+</div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">arg1</td><td>Description of the first parameter of the function. </td></tr>
-    <tr><td class="paramname">arg2</td><td>Description of the second parameter of the function. </td></tr>
+    <tr><td class="paramname">fifo</td><td>array of numbers of FIFO </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Describe the function return value </dd></dl>
 
 </div>
 </div>
@@ -277,18 +271,27 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Brief decription of function1 prototype. </p>
-<p>Here it goes the long description of fucntion 1. Description of what the function does. Usually this part describes whatr the fiunction does and its interface, namelly input arguments and return value. Verbatim text can also be used: </p><pre class="fragment">* This is my email:pbrp@ua.pt
-* </pre><p> You can also include an example of usage: </p><div class="fragment"><div class="line">res = function1(param1, param2);</div>
-<div class="line">printf(<span class="stringliteral">&quot;res=%d\n&quot;</span>,res);</div>
-</div><!-- fragment --><p> You can uset HTML tags e.g. to make <b>bold text</b> </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Removes the oldest element from the FIFO This function uses the read_pointer to find out the oldest element on the FIFO, and removes it from the FIFO. It also checks if the FIFO is empty and if it is, both read_pointer and write_pointer variables return to 0. </p>
+<div class="fragment"><div class="line">fifo[read_pointer] = 0;</div>
+<div class="line">read_pointer++;</div>
+<div class="line"><span class="keywordtype">int</span> check = 0;</div>
+<div class="line"><span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0;i&lt;10;i++)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">if</span>(fifo[i] != 0)</div>
+<div class="line">        check = 1;</div>
+<div class="line">}</div>
+<div class="line"><span class="keywordflow">if</span>(check == 0)</div>
+<div class="line">{</div>
+<div class="line">    printf(<span class="stringliteral">&quot;FIFO is empty. Please Add an element before removing\n&quot;</span>);</div>
+<div class="line">    write_pointer = 0;</div>
+<div class="line">    read_pointer = 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">arg1</td><td>Description of the first parameter of the function. </td></tr>
-    <tr><td class="paramname">arg2</td><td>Description of the second parameter of the function. </td></tr>
+    <tr><td class="paramname">fifo</td><td>array of numbers of FIFO </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Describe the function return value </dd></dl>
 
 </div>
 </div>
@@ -308,18 +311,19 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Brief decription of function1 prototype. </p>
-<p>Here it goes the long description of fucntion 1. Description of what the function does. Usually this part describes whatr the fiunction does and its interface, namelly input arguments and return value. Verbatim text can also be used: </p><pre class="fragment">* This is my email:pbrp@ua.pt
-* </pre><p> You can also include an example of usage: </p><div class="fragment"><div class="line">res = function1(param1, param2);</div>
-<div class="line">printf(<span class="stringliteral">&quot;res=%d\n&quot;</span>,res);</div>
-</div><!-- fragment --><p> You can uset HTML tags e.g. to make <b>bold text</b> </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Returns the number of elements on the FIFO This function counts the number of occupied positions on the FIFO, for this, the function uses a for loop to check all the positions. </p>
+<div class="fragment"><div class="line">  <span class="keywordtype">int</span> count = 0;</div>
+<div class="line"><span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0;i&lt;10;i++)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">if</span>(fifo[i] != 0) count++;</div>
+<div class="line">}</div>
+<div class="line">printf(<span class="stringliteral">&quot;The total number of elements in the fifo is -&gt; %d \n&quot;</span>,count);</div>
+</div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">arg1</td><td>Description of the first parameter of the function. </td></tr>
-    <tr><td class="paramname">arg2</td><td>Description of the second parameter of the function. </td></tr>
+    <tr><td class="paramname">fifo</td><td>array of numbers of FIFO </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Describe the function return value </dd></dl>
 
 </div>
 </div>

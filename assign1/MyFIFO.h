@@ -16,66 +16,42 @@
 
 
 /**
- * @brief brief description of elem typedef struct.
+ * @brief Elements used for the manipulation of the queue.
  * 
  *
- * Then it may follow a detailed explanation of the elem structure.
  */ 
 typedef struct 
 {
     
-    int write_pointer; /**< Some info for this elem struct member */
-	int read_pointer;  /**< Some info for this elem struct member */
+    int write_pointer; /**< Variable used to write new element in the queue */
+	int read_pointer;  /**< Variable used to see the oldest element of the queue */
 } elem;
 
 
 /**
  * @brief Interface UI
- * This function call all other functions, dependent to what the users
- * chooses. It also prints the FIFO after any interaction from the user.
- * You can also include an example of usage:
- * @code
- *   int* pfifo;
- *   pfifo = MyFIFOInit();
- *
- *   printf("You have initiated a FIFO\n");
- *
- *   int n = 0;
- *
- *   while(n != 5) {
- *
- *       for(int t = 0; t<10;t++)
- *       {
- *           printf("%d -> %d // ",t,pfifo[t]);
- *       }
- +       printf("\n");
- *
- *       printf("1 - ADD AN ELEMENT TO THE FIFO \n");
- *       printf("2 - REMOVES AN ELEMENT TO THE FIFO \n");
- *       printf("3 - RETURN THE OLDEST ELEMENT IN THE FIFO \n");
- *       printf("4 - NUMBER OF ELEMENTS IN THE FIFO\n");
- *       printf("5 - EXIT\n");
- *
- *       printf("Please enter your option: ");
- *       scanf("%d",&n);
- *       printf("\n");
- *       printf("Valor lido : %d \n",n);
- *
- *       if (n == 1) MyFIFOInsert(pfifo);
- *       if (n == 2) MyFIFORemove(pfifo);
- *       if (n == 3) MyFIFOPeep(pfifo);
- *       if (n == 4) MyFIFOSize(pfifo);
- *
- *   }
- *   return 0;
- * @endcode
+ * This function call all other functions. It's used for the user interaction (crude UI),
+ * so it prints the FIFO in each usage.
+ * 
+ * 
+ * This is the interaction presented for the user:
+ * @verbatim 
+	1 - ADD AN ELEMENT TO THE FIFO
+	2 - REMOVES AN ELEMENT TO THE FIFO
+	3 - RETURN THE OLDEST ELEMENT IN THE FIFO
+	4 - NUMBER OF ELEMENTS IN THE FIFO
+	5 - EXIT
+  @endverbatim
+ *	
+ */
+ 
 int main(void);
 /**
  * @brief initiates the fifo
  * This function creates an array of integers with a size of 10 elements
  * and puts all the elements to 0. It also sets the read_pointer variable
  * and the write_pointer variable to 0.
- * You can also include an example of usage:
+ * 
  * @code
  *    static int fifo [10];
  *   for(int i = 0; i<10;i++)
@@ -87,6 +63,7 @@ int main(void);
  *
  *   return fifo;
  * @endcode
+ * 
  * @return Returns an array of integers full of 0
  */
 int* MyFIFOInit();
@@ -95,8 +72,8 @@ int* MyFIFOInit();
  * This function asks the user to choose a number to add to the FIFO
  * and then the function adds it to the next position of the FIFO
  * The function also checks if the FIFO is full, and warns the user
- * if that is the case
- * You can also include an example of usage:
+ * if that is the case.
+ *
  * @code
  *   int new_n;
  *   printf("What number you want to add?\n");
@@ -112,6 +89,7 @@ int* MyFIFOInit();
  *       printf("FIFO is full. Please Remove one before adding\n");
  *   }
  * @endcode
+ * 
  * @param fifo array of numbers of FIFO
  */
 void MyFIFOInsert(int*);
@@ -136,23 +114,27 @@ void MyFIFOInsert(int*);
  *       read_pointer = 0;
  *   }
  * @endcode
+ * 
  * @param fifo array of numbers of FIFO
  */
 void MyFIFORemove(int*);
 /**
  * @brief Returns the oldest element on the FIFO, but does not remove it
  * This function uses the read_pointer to find out the oldest element
- * on the FIFO, and prints it on the terminal
+ * on the FIFO, and prints it on the terminal.
+ * 
  * @code
  * printf("Elemento mais antigo : %d \n",fifo[read_pointer]);
  * @endcode
+ * 
  * @param fifo array of numbers of FIFO
  */
 void MyFIFOPeep(int*);
 /**
  * @brief Returns the number of elements on the FIFO
  * This function counts the number of occupied positions on the FIFO,
- * for this, the function uses a for loop to check all the positions
+ * for this, the function uses a for loop to check all the positions.
+ * 
  * @code
  *     int count = 0;
  *   for(int i = 0;i<10;i++)
@@ -161,7 +143,8 @@ void MyFIFOPeep(int*);
  *   }
  *   printf("The total number of elements in the fifo is -> %d \n",count);
  * @endcode
- * You can uset HTML tags e.g. to make <b>bold text</b>
+ * 
+ * 
  * @param fifo array of numbers of FIFO
  */
 void MyFIFOSize(int*);

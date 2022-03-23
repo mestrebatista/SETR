@@ -1,0 +1,202 @@
+\hypertarget{MyFIFO_8h}{}\doxysection{My\+F\+I\+F\+O.\+h File Reference}
+\label{MyFIFO_8h}\index{MyFIFO.h@{MyFIFO.h}}
+
+
+header support file  
+
+
+This graph shows which files directly or indirectly include this file\+:
+% FIG 0
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structelem}{elem}}
+\begin{DoxyCompactList}\small\item\em Elements used for the manipulation of the queue. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{MyFIFO_8h_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\begin{DoxyCompactList}\small\item\em Interface UI This function call all other functions. It\textquotesingle{}s used for the user interaction (crude UI), so it prints the F\+I\+FO in each usage. \end{DoxyCompactList}\item 
+int $\ast$ \mbox{\hyperlink{MyFIFO_8h_af3265c94311ec920f72c3c5683c97b13}{My\+F\+I\+F\+O\+Init}} ()
+\begin{DoxyCompactList}\small\item\em initiates the fifo This function creates an array of integers with a size of 10 elements and puts all the elements to 0. It also sets the read\+\_\+pointer variable and the write\+\_\+pointer variable to 0. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{MyFIFO_8h_a85f4c55570d28da8e622bfa3ec11111e}{My\+F\+I\+F\+O\+Insert}} (int $\ast$)
+\begin{DoxyCompactList}\small\item\em Adds an element to the F\+I\+FO This function asks the user to choose a number to add to the F\+I\+FO and then the function adds it to the next position of the F\+I\+FO The function also checks if the F\+I\+FO is full, and warns the user if that is the case. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{MyFIFO_8h_a24d6cf416b83c54662695503912ef941}{My\+F\+I\+F\+O\+Remove}} (int $\ast$)
+\begin{DoxyCompactList}\small\item\em Removes the oldest element from the F\+I\+FO This function uses the read\+\_\+pointer to find out the oldest element on the F\+I\+FO, and removes it from the F\+I\+FO. It also checks if the F\+I\+FO is empty and if it is, both read\+\_\+pointer and write\+\_\+pointer variables return to 0. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{MyFIFO_8h_ae93f3b165914f7ba43f63d0138885c0a}{My\+F\+I\+F\+O\+Peep}} (int $\ast$)
+\begin{DoxyCompactList}\small\item\em Returns the oldest element on the F\+I\+FO, but does not remove it This function uses the read\+\_\+pointer to find out the oldest element on the F\+I\+FO, and prints it on the terminal. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{MyFIFO_8h_af512356a795d8622fc35e3f295a2ebe1}{My\+F\+I\+F\+O\+Size}} (int $\ast$)
+\begin{DoxyCompactList}\small\item\em Returns the number of elements on the F\+I\+FO This function counts the number of occupied positions on the F\+I\+FO, for this, the function uses a for loop to check all the positions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+header support file 
+
+This file consists on the header for the My\+F\+I\+FO file. It helps in the organization.
+
+\begin{DoxyAuthor}{Author}
+José Mestre Batista and Renato Rocha 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+23 March 2022 
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{MyFIFO_8h_a840291bc02cba5474a4cb46a9b9566fe}\label{MyFIFO_8h_a840291bc02cba5474a4cb46a9b9566fe}} 
+\index{MyFIFO.h@{MyFIFO.h}!main@{main}}
+\index{main@{main}!MyFIFO.h@{MyFIFO.h}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Interface UI This function call all other functions. It\textquotesingle{}s used for the user interaction (crude UI), so it prints the F\+I\+FO in each usage. 
+
+This is the interaction presented for the user\+: \begin{DoxyVerb}  1 - ADD AN ELEMENT TO THE FIFO
+  2 - REMOVES AN ELEMENT TO THE FIFO
+  3 - RETURN THE OLDEST ELEMENT IN THE FIFO
+  4 - NUMBER OF ELEMENTS IN THE FIFO
+  5 - EXIT
+\end{DoxyVerb}
+ \mbox{\Hypertarget{MyFIFO_8h_af3265c94311ec920f72c3c5683c97b13}\label{MyFIFO_8h_af3265c94311ec920f72c3c5683c97b13}} 
+\index{MyFIFO.h@{MyFIFO.h}!MyFIFOInit@{MyFIFOInit}}
+\index{MyFIFOInit@{MyFIFOInit}!MyFIFO.h@{MyFIFO.h}}
+\doxysubsubsection{\texorpdfstring{MyFIFOInit()}{MyFIFOInit()}}
+{\footnotesize\ttfamily int$\ast$ My\+F\+I\+F\+O\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+initiates the fifo This function creates an array of integers with a size of 10 elements and puts all the elements to 0. It also sets the read\+\_\+pointer variable and the write\+\_\+pointer variable to 0. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ \textcolor{keyword}{static} \textcolor{keywordtype}{int} fifo [10];}
+\DoxyCodeLine{\textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i<10;i++)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    fifo[i] = 0;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{read\_pointer = 0;}
+\DoxyCodeLine{write\_pointer = 0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{return} fifo;}
+\end{DoxyCode}
+
+
+\begin{DoxyReturn}{Returns}
+Returns an array of integers full of 0 
+\end{DoxyReturn}
+\mbox{\Hypertarget{MyFIFO_8h_a85f4c55570d28da8e622bfa3ec11111e}\label{MyFIFO_8h_a85f4c55570d28da8e622bfa3ec11111e}} 
+\index{MyFIFO.h@{MyFIFO.h}!MyFIFOInsert@{MyFIFOInsert}}
+\index{MyFIFOInsert@{MyFIFOInsert}!MyFIFO.h@{MyFIFO.h}}
+\doxysubsubsection{\texorpdfstring{MyFIFOInsert()}{MyFIFOInsert()}}
+{\footnotesize\ttfamily void My\+F\+I\+F\+O\+Insert (\begin{DoxyParamCaption}\item[{int $\ast$}]{ }\end{DoxyParamCaption})}
+
+
+
+Adds an element to the F\+I\+FO This function asks the user to choose a number to add to the F\+I\+FO and then the function adds it to the next position of the F\+I\+FO The function also checks if the F\+I\+FO is full, and warns the user if that is the case. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} new\_n;}
+\DoxyCodeLine{printf(\textcolor{stringliteral}{"What number you want to add?\(\backslash\)n"});}
+\DoxyCodeLine{scanf(\textcolor{stringliteral}{"\%d"},\&new\_n);}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (fifo[write\_pointer] == 0)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    fifo[write\_pointer] = new\_n;}
+\DoxyCodeLine{    write\_pointer++;}
+\DoxyCodeLine{    \textcolor{keywordflow}{if}(write\_pointer == 10) write\_pointer = 0;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{keywordflow}{else}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    printf(\textcolor{stringliteral}{"FIFO is full. Please Remove one before adding\(\backslash\)n"});}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em fifo} & array of numbers of F\+I\+FO \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{MyFIFO_8h_ae93f3b165914f7ba43f63d0138885c0a}\label{MyFIFO_8h_ae93f3b165914f7ba43f63d0138885c0a}} 
+\index{MyFIFO.h@{MyFIFO.h}!MyFIFOPeep@{MyFIFOPeep}}
+\index{MyFIFOPeep@{MyFIFOPeep}!MyFIFO.h@{MyFIFO.h}}
+\doxysubsubsection{\texorpdfstring{MyFIFOPeep()}{MyFIFOPeep()}}
+{\footnotesize\ttfamily void My\+F\+I\+F\+O\+Peep (\begin{DoxyParamCaption}\item[{int $\ast$}]{ }\end{DoxyParamCaption})}
+
+
+
+Returns the oldest element on the F\+I\+FO, but does not remove it This function uses the read\+\_\+pointer to find out the oldest element on the F\+I\+FO, and prints it on the terminal. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{printf(\textcolor{stringliteral}{"Elemento mais antigo : \%d \(\backslash\)n"},fifo[read\_pointer]);}
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em fifo} & array of numbers of F\+I\+FO \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{MyFIFO_8h_a24d6cf416b83c54662695503912ef941}\label{MyFIFO_8h_a24d6cf416b83c54662695503912ef941}} 
+\index{MyFIFO.h@{MyFIFO.h}!MyFIFORemove@{MyFIFORemove}}
+\index{MyFIFORemove@{MyFIFORemove}!MyFIFO.h@{MyFIFO.h}}
+\doxysubsubsection{\texorpdfstring{MyFIFORemove()}{MyFIFORemove()}}
+{\footnotesize\ttfamily void My\+F\+I\+F\+O\+Remove (\begin{DoxyParamCaption}\item[{int $\ast$}]{ }\end{DoxyParamCaption})}
+
+
+
+Removes the oldest element from the F\+I\+FO This function uses the read\+\_\+pointer to find out the oldest element on the F\+I\+FO, and removes it from the F\+I\+FO. It also checks if the F\+I\+FO is empty and if it is, both read\+\_\+pointer and write\+\_\+pointer variables return to 0. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{fifo[read\_pointer] = 0;}
+\DoxyCodeLine{read\_pointer++;}
+\DoxyCodeLine{\textcolor{keywordtype}{int} check = 0;}
+\DoxyCodeLine{\textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0;i<10;i++)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if}(fifo[i] != 0)}
+\DoxyCodeLine{        check = 1;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{keywordflow}{if}(check == 0)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    printf(\textcolor{stringliteral}{"FIFO is empty. Please Add an element before removing\(\backslash\)n"});}
+\DoxyCodeLine{    write\_pointer = 0;}
+\DoxyCodeLine{    read\_pointer = 0;}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em fifo} & array of numbers of F\+I\+FO \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{MyFIFO_8h_af512356a795d8622fc35e3f295a2ebe1}\label{MyFIFO_8h_af512356a795d8622fc35e3f295a2ebe1}} 
+\index{MyFIFO.h@{MyFIFO.h}!MyFIFOSize@{MyFIFOSize}}
+\index{MyFIFOSize@{MyFIFOSize}!MyFIFO.h@{MyFIFO.h}}
+\doxysubsubsection{\texorpdfstring{MyFIFOSize()}{MyFIFOSize()}}
+{\footnotesize\ttfamily void My\+F\+I\+F\+O\+Size (\begin{DoxyParamCaption}\item[{int $\ast$}]{ }\end{DoxyParamCaption})}
+
+
+
+Returns the number of elements on the F\+I\+FO This function counts the number of occupied positions on the F\+I\+FO, for this, the function uses a for loop to check all the positions. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  \textcolor{keywordtype}{int} count = 0;}
+\DoxyCodeLine{\textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0;i<10;i++)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if}(fifo[i] != 0) count++;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{printf(\textcolor{stringliteral}{"The total number of elements in the fifo is -\/> \%d \(\backslash\)n"},count);}
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em fifo} & array of numbers of F\+I\+FO \\
+\hline
+\end{DoxyParams}
