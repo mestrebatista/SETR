@@ -2,15 +2,35 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int* MyFIFOInit();
+void MyFIFOInsert(int*);
+void MyFIFORemove(int*);
+void MyFIFOPeep(int*);
+void MyFIFOSize(int*);
+
+int write_pointer;
+int read_pointer;
+
 int main (void)
 {
-    MyFIFOInit();
+    int* pfifo;
+    pfifo = MyFIFOInit();
+
 
     printf("You have initiated a FIFO\n");
 
     int n = 0;
 
+
+
     while(n != 5) {
+
+        for(int t = 0; t<10;t++)
+        {
+            printf("%d -> %d // ",t,pfifo[t]);
+        }
+        printf("\n");
+
         printf("1 - ADD AN ELEMENT TO THE FIFO \n");
         printf("2 - REMOVES AN ELEMENT TO THE FIFO \n");
         printf("3 - RETURN THE OLDEST ELEMENT IN THE FIFO \n");
@@ -22,70 +42,78 @@ int main (void)
         printf("\n");
         printf("Valor lido : %d \n",n);
 
-        if (n == 1) MyFIFOInsert();
-        if (n == 2) MyFIFORemove();
-        if (n == 3) MyFIFOPeep();
-        if (n == 4) MyFIFOSize();
+        if (n == 1) MyFIFOInsert(pfifo);
+        if (n == 2) MyFIFORemove(pfifo);
+        if (n == 3) MyFIFOPeep(pfifo);
+        if (n == 4) MyFIFOSize(pfifo);
 
     }
     return 0;
 }
 
 
-void MyFIFOInit()
+int* MyFIFOInit()
 {
-    int fifo [50];
+    static int fifo [10];
+    for(int i = 0; i<10;i++)
+    {
+        fifo[i] = 0;
+    }
+    read_pointer = 0;
+    write_pointer = 0;
 
+    return fifo;
 }
 
 void MyFIFOInsert(int* fifo)
 {
-    volatile int count=sizeof(fifo);
-    volatile int new_n;
-
-    for (size_t i = 0; i < count; i++)
+    int new_n;
+    printf("What number you want to add?\n");
+    scanf("%d",&new_n);
+    if (fifo[write_pointer] == 0)
     {
-        if (fifo[i] == NULL)
-        {
-            printf("What number you want to add?\n");
-            scanf("%d",&new_n);
-            break;
-        }
-        
-    }    
-    return 0;
+        fifo[write_pointer] = new_n;
+        write_pointer++;
+        if(write_pointer == 10) write_pointer = 0;
+    }
+    else
+    {
+        printf("FIFO is full. Please Remove one before adding\n");
+    }
+
 }
 
 
-void MyFIFORemove(int* fifo)
+void MyFIFORemove(int *fifo)
 {
-    for (int i = 0;i<sizeof(fifo);i++)
+    fifo[read_pointer] = 0;
+    read_pointer++;
+    int check = 0;
+    for(int i = 0;i<10;i++)
     {
-        if(fifo[i] == NULL)
-        {
-
-        }
-        else{
-            fifo[i] = NULL;
-            for (int a = i; a<sizeof(fifo);a++)
-            {
-                fifo[a] =fifo[a+1];
-                fifo[a+1] = NULL;
-            }
-            printf("The first element of the FIFO has been removed");
-            break;
-        }
+        if(fifo[i] != 0)
+            check = 1;
+    }
+    if(check == 0)
+    {
+        write_pointer = 0;
+        read_pointer = 0;
     }
 }
 
-void MyFIFOSize(int* fifo)
+void MyFIFOPeep(int *fifo)
 {
-    // int size_fifo = sizeof(fifo);
-    // printf("The size of the FIFO is ", size_fifo);
-    printf("The Size of the FIFO is : \n",sizeof(fifo) );
+    printf("Elemento mais antigo : %d \n",fifo[read_pointer]);
 }
 
-void MyFIFOPeep(int* fifo)
+void MyFIFOSize(int *fifo)
 {
-    printf("Elemento mais antigo : %d \n",&fifo[0]);
+    int count = 0;
+    for(int i = 0;i<10;i++)
+    {
+        if(fifo[i] != 0) count++;
+    }
+    printf("The total number of elements in the fifo is -> %d \n1",count);
+
 }
+
