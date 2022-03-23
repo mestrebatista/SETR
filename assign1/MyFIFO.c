@@ -22,6 +22,7 @@ void MyFIFOSize(int*);
 
 int write_pointer;
 int read_pointer;
+static int SIZE_FIFO = 10;
 
 
 /**
@@ -41,12 +42,9 @@ int main (void)
     int* pfifo;
     pfifo = MyFIFOInit();
 
-
     printf("You have initiated a FIFO\n");
 
     int n = 0;
-
-
 
     while(n != 5) {
 
