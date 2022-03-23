@@ -96,6 +96,7 @@ void MyFIFORemove(int *fifo)
     }
     if(check == 0)
     {
+        printf("FIFO is empty. Please Add an element before removing\n");
         write_pointer = 0;
         read_pointer = 0;
     }
@@ -113,7 +114,7 @@ void MyFIFOSize(int *fifo)
     {
         if(fifo[i] != 0) count++;
     }
-    printf("The total number of elements in the fifo is -> %d \n1",count);
+    printf("The total number of elements in the fifo is -> %d \n",count);
 
 }
 
