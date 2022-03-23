@@ -161,3 +161,4 @@ void MyFIFOPeep(int*);
  * @return Describe the function return value 
  */
 void MyFIFOSize(int*);
+#endif
