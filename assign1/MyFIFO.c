@@ -1,3 +1,14 @@
+/** @file MyFIFO.c
+ * @brief Main file with the creation of the queue and related functions.
+ * 
+ * This file contains the main function with the treatment of the queue for the user.
+ * It also contains the functions for each interaction
+ * 
+ * @author José Mestre Batista and Renato Rocha
+ * @date 23 March 2022
+ */
+
+
 /* Includes */
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,6 +21,19 @@ void MyFIFOSize(int*);
 
 int write_pointer;
 int read_pointer;
+
+
+/**
+ * @brief Brief decription of main().
+ *
+ * Here it goes the long description of main()
+ * main has no input arguments.
+ * It declares two variables and calls function1() using them 
+ * as argument. 
+ * It then prints the result and returns.
+ * 
+ * @return main() always returns 0
+ */
 
 int main (void)
 {
@@ -117,4 +141,3 @@ void MyFIFOSize(int *fifo)
     printf("The total number of elements in the fifo is -> %d \n",count);
 
 }
-
