@@ -98,6 +98,7 @@ void MyFIFORemove(int *fifo)
 {
     fifo[read_pointer] = 0;
     read_pointer++;
+    if(read_pointer == 10) read_pointer = 0;
     int check = 0;
     for(int i = 0;i<10;i++)
     {
