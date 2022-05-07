@@ -1,6 +1,6 @@
-C:\Users\renat\ncs\Assigment3\build_nrf52840dk_nrf52840\Kconfig\Kconfig.modules
-C:\Users\renat\ncs\Assigment3\build_nrf52840dk_nrf52840\Kconfig\Kconfig.shield
-C:\Users\renat\ncs\Assigment3\build_nrf52840dk_nrf52840\Kconfig\Kconfig.shield.defconfig
+C:\Users\renat\ncs\SETR\Assigment3\build_nrf52840dk_nrf52840\Kconfig\Kconfig.modules
+C:\Users\renat\ncs\SETR\Assigment3\build_nrf52840dk_nrf52840\Kconfig\Kconfig.shield
+C:\Users\renat\ncs\SETR\Assigment3\build_nrf52840dk_nrf52840\Kconfig\Kconfig.shield.defconfig
 C:\Users\renat\ncs\v1.9.1\modules\debug\TraceRecorder\kernelports\Zephyr\Kconfig
 C:\Users\renat\ncs\v1.9.1\modules\debug\TraceRecorder\kernelports\Zephyr\streamports\ARM_ITM\Kconfig
 C:\Users\renat\ncs\v1.9.1\modules\debug\TraceRecorder\kernelports\Zephyr\streamports\Jlink_RTT\Kconfig

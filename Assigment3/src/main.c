@@ -291,7 +291,7 @@ void Check()
       showMenu();
       showSpace();
       printk("Produto Entregue (Coffee)\n\r");
-      printk("Dinheiro Descontado: 150 Centimos\n\r");
+      printk("Dinheiro Descontado: 50 Centimos\n\r");
       printk("Dinheiro Atual : %d Centimos\n\r", credit); 
     } else 
     {

@@ -1,6 +1,6 @@
 zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj: \
  C:/Users/renat/ncs/v1.9.1/zephyr/kernel/stack.c \
- C:/Users/renat/ncs/Assigment3/build_nrf52840dk_nrf52840/zephyr/include/generated/autoconf.h \
+ C:/Users/renat/ncs/SETR/Assigment3/build_nrf52840dk_nrf52840/zephyr/include/generated/autoconf.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/toolchain/zephyr_stdint.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/kernel.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/kernel_includes.h \

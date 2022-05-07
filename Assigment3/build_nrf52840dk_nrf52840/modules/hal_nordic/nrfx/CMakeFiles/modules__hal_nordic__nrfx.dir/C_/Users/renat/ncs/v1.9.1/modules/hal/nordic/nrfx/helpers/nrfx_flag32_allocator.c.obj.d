@@ -1,6 +1,6 @@
 modules/hal_nordic/nrfx/CMakeFiles/modules__hal_nordic__nrfx.dir/C_/Users/renat/ncs/v1.9.1/modules/hal/nordic/nrfx/helpers/nrfx_flag32_allocator.c.obj: \
  C:/Users/renat/ncs/v1.9.1/modules/hal/nordic/nrfx/helpers/nrfx_flag32_allocator.c \
- C:/Users/renat/ncs/Assigment3/build_nrf52840dk_nrf52840/zephyr/include/generated/autoconf.h \
+ C:/Users/renat/ncs/SETR/Assigment3/build_nrf52840dk_nrf52840/zephyr/include/generated/autoconf.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/toolchain/zephyr_stdint.h \
  C:/Users/renat/ncs/v1.9.1/modules/hal/nordic/nrfx/helpers/nrfx_flag32_allocator.h \
  C:/Users/renat/ncs/v1.9.1/modules/hal/nordic/nrfx/nrfx.h \

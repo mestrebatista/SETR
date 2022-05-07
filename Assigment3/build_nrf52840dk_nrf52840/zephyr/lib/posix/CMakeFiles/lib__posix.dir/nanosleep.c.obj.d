@@ -1,6 +1,6 @@
 zephyr/lib/posix/CMakeFiles/lib__posix.dir/nanosleep.c.obj: \
  C:/Users/renat/ncs/v1.9.1/zephyr/lib/posix/nanosleep.c \
- C:/Users/renat/ncs/Assigment3/build_nrf52840dk_nrf52840/zephyr/include/generated/autoconf.h \
+ C:/Users/renat/ncs/SETR/Assigment3/build_nrf52840dk_nrf52840/zephyr/include/generated/autoconf.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/toolchain/zephyr_stdint.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/lib/libc/minimal/include/stdint.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/kernel.h \

@@ -1,6 +1,6 @@
 zephyr/arch/arch/arm/core/aarch32/cortex_m/CMakeFiles/arch__arm__core__aarch32__cortex_m.dir/fault.c.obj: \
  C:/Users/renat/ncs/v1.9.1/zephyr/arch/arm/core/aarch32/cortex_m/fault.c \
- C:/Users/renat/ncs/Assigment3/build_nrf52840dk_nrf52840/zephyr/include/generated/autoconf.h \
+ C:/Users/renat/ncs/SETR/Assigment3/build_nrf52840dk_nrf52840/zephyr/include/generated/autoconf.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/toolchain/zephyr_stdint.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/kernel.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/kernel_includes.h \

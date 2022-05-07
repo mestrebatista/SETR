@@ -1,6 +1,6 @@
 zephyr/drivers/gpio/CMakeFiles/drivers__gpio.dir/gpio_nrfx.c.obj: \
  C:/Users/renat/ncs/v1.9.1/zephyr/drivers/gpio/gpio_nrfx.c \
- C:/Users/renat/ncs/Assigment3/build_nrf52840dk_nrf52840/zephyr/include/generated/autoconf.h \
+ C:/Users/renat/ncs/SETR/Assigment3/build_nrf52840dk_nrf52840/zephyr/include/generated/autoconf.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/toolchain/zephyr_stdint.h \
  C:/Users/renat/ncs/v1.9.1/modules/hal/nordic/nrfx/drivers/include/nrfx_gpiote.h \
  C:/Users/renat/ncs/v1.9.1/modules/hal/nordic/nrfx/nrfx.h \

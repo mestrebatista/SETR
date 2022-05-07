@@ -1,6 +1,6 @@
 zephyr/arch/common/CMakeFiles/arch__common.dir/sw_isr_common.c.obj: \
  C:/Users/renat/ncs/v1.9.1/zephyr/arch/common/sw_isr_common.c \
- C:/Users/renat/ncs/Assigment3/build_nrf52840dk_nrf52840/zephyr/include/generated/autoconf.h \
+ C:/Users/renat/ncs/SETR/Assigment3/build_nrf52840dk_nrf52840/zephyr/include/generated/autoconf.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/toolchain/zephyr_stdint.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/sw_isr_table.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/zephyr/types.h \

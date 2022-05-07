@@ -39,26 +39,26 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/renat/ncs/Assigment3/build_nrf52840dk_nrf52840/modules/nrf/drivers/hw_cc310/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment3/build_nrf52840dk_nrf52840/modules/nrf/drivers/hw_cc310/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/renat/ncs/Assigment3/build_nrf52840dk_nrf52840/modules/nrf/drivers/entropy/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment3/build_nrf52840dk_nrf52840/modules/nrf/drivers/entropy/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/renat/ncs/Assigment3/build_nrf52840dk_nrf52840/modules/nrf/drivers/flash/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment3/build_nrf52840dk_nrf52840/modules/nrf/drivers/flash/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/renat/ncs/Assigment3/build_nrf52840dk_nrf52840/modules/nrf/drivers/gps/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment3/build_nrf52840dk_nrf52840/modules/nrf/drivers/gps/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/renat/ncs/Assigment3/build_nrf52840dk_nrf52840/modules/nrf/drivers/serial/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment3/build_nrf52840dk_nrf52840/modules/nrf/drivers/serial/cmake_install.cmake")
 endif()
 

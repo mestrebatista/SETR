@@ -1,6 +1,6 @@
 zephyr/soc/arm/nordic_nrf/nrf52/CMakeFiles/soc__arm__nordic_nrf__nrf52.dir/soc.c.obj: \
  C:/Users/renat/ncs/v1.9.1/zephyr/soc/arm/nordic_nrf/nrf52/soc.c \
- C:/Users/renat/ncs/Assigment3/build_nrf52840dk_nrf52840/zephyr/include/generated/autoconf.h \
+ C:/Users/renat/ncs/SETR/Assigment3/build_nrf52840dk_nrf52840/zephyr/include/generated/autoconf.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/toolchain/zephyr_stdint.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/kernel.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/kernel_includes.h \

@@ -1,6 +1,6 @@
 zephyr/CMakeFiles/zephyr.dir/lib/os/dec.c.obj: \
  C:/Users/renat/ncs/v1.9.1/zephyr/lib/os/dec.c \
- C:/Users/renat/ncs/Assigment3/build_nrf52840dk_nrf52840/zephyr/include/generated/autoconf.h \
+ C:/Users/renat/ncs/SETR/Assigment3/build_nrf52840dk_nrf52840/zephyr/include/generated/autoconf.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/toolchain/zephyr_stdint.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/sys/util.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/sys/util_macro.h \

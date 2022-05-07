@@ -1,6 +1,6 @@
 zephyr/CMakeFiles/offsets.dir/arch/arm/core/offsets/offsets.c.obj: \
  C:/Users/renat/ncs/v1.9.1/zephyr/arch/arm/core/offsets/offsets.c \
- C:/Users/renat/ncs/Assigment3/build_nrf52840dk_nrf52840/zephyr/include/generated/autoconf.h \
+ C:/Users/renat/ncs/SETR/Assigment3/build_nrf52840dk_nrf52840/zephyr/include/generated/autoconf.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/toolchain/zephyr_stdint.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/kernel/include/gen_offset.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/toolchain.h \

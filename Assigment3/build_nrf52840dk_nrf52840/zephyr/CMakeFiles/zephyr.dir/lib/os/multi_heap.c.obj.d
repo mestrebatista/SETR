@@ -1,6 +1,6 @@
 zephyr/CMakeFiles/zephyr.dir/lib/os/multi_heap.c.obj: \
  C:/Users/renat/ncs/v1.9.1/zephyr/lib/os/multi_heap.c \
- C:/Users/renat/ncs/Assigment3/build_nrf52840dk_nrf52840/zephyr/include/generated/autoconf.h \
+ C:/Users/renat/ncs/SETR/Assigment3/build_nrf52840dk_nrf52840/zephyr/include/generated/autoconf.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/toolchain/zephyr_stdint.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/sys/__assert.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/lib/libc/minimal/include/stdbool.h \
