@@ -22,6 +22,8 @@
  */
 void main(void); 
 
+
+void StateMachine();
 /**
  * @brief Adds the value chosen to the credit of the user.
  *
@@ -34,6 +36,7 @@ void main(void);
  * @endcode
  * 
  */
+
 void addMoney(int cach);
 
 /**
