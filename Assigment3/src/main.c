@@ -24,7 +24,7 @@
  * This file contains the main function with the treatment of the state machine.
  * It also contains the functions for the user interface.
  * 
- * @author José Mestre Batista and Renato Rocha
+ * @author Jose Mestre Batista and Renato Rocha
  * @date 17 May 2022
  */
 
@@ -302,7 +302,7 @@ void Check()
       showMenu();
       showSpace();
       printk("Produto Entregue (Coffee)\n\r");
-      printk("Dinheiro Descontado: 50 Centimos\n\r");
+      printk("Dinheiro Descontado: 150 Centimos\n\r");
       printk("Dinheiro Atual : %d Centimos\n\r", credit); 
     } else 
     {
@@ -409,4 +409,3 @@ void CONFIG_BUTTONS()
     gpio_init_callback(&but8_cb_data, but8press_cbfunction, BIT(BOARDBUT8));
     gpio_add_callback(gpio0_dev, &but8_cb_data);
 }
-
