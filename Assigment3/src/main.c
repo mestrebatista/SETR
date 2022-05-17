@@ -24,7 +24,7 @@
  * This file contains the main function with the treatment of the state machine.
  * It also contains the functions for the user interface.
  * 
- * @author José Mestre Batista and Renato Rocha
+ * @author Jose Mestre Batista and Renato Rocha
  * @date 17 May 2022
  */
 
@@ -52,6 +52,13 @@
 #define BOARDBUT6 0x4
 #define BOARDBUT7 0x1c
 #define BOARDBUT8 0x1d
+/* Define States*/
+
+#define S0 0
+#define S1 1
+#define S2 2
+#define S3 3
+#define S4 4
 
 #define BLINKPERIOD_MS 500 /* Blink period in ms*/ 
 
@@ -156,13 +163,6 @@ int credit = 0;
 int choice = 1;
 int state = 0;
 
-/* Define States*/
-
-#define S0 0
-#define S1 1
-#define S2 2
-#define S3 3
-#define S4 4
 
 /* Main function */
 void main(void) 
