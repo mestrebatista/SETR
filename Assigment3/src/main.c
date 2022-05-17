@@ -24,7 +24,7 @@
  * This file contains the main function with the treatment of the state machine.
  * It also contains the functions for the user interface.
  * 
- * @author Jose Mestre Batista and Renato Rocha
+ * @author José Mestre Batista and Renato Rocha
  * @date 17 May 2022
  */
 
@@ -154,12 +154,19 @@ const struct device *gpio0_dev;         /* Pointer to GPIO device structure */\
 /* Variables for Assigment */
 int credit = 0;
 int choice = 1;
+int state = 0;
 
+/* Define States*/
+
+#define S0 0
+#define S1 1
+#define S2 2
+#define S3 3
+#define S4 4
 
 /* Main function */
 void main(void) 
 {
-
     
     /* Bind to GPIO 0 */
     gpio0_dev = device_get_binding(DT_LABEL(GPIO0_NID));
@@ -177,52 +184,92 @@ void main(void)
 
     showMenu(1);
 
-    while(1)
-    {
-      if(dcToggleFlag1 == 1) 
-      {
-        addMoney(10);
-        dcToggleFlag1 = 0;
-      }
-      if(dcToggleFlag2 == 1) 
-      {
-        addMoney(20);
-        dcToggleFlag2 = 0;
-      }
-      if(dcToggleFlag3 == 1) 
-      {
-        addMoney(50);
-        dcToggleFlag3 = 0;
-      }
-      if(dcToggleFlag4 == 1) 
-      {
-        addMoney(100);
-        dcToggleFlag4 = 0;
-      }
-      if(dcToggleFlag6 == 1)
-      {
-        resetMoney();
-        dcToggleFlag6 = 0;
-      }
-      if(dcToggleFlag5 == 1)
-      {
-        UpOrDown(2);
-        dcToggleFlag5 = 0;
-      }
-      if(dcToggleFlag7 == 1)
-      {
-        UpOrDown(1);
-        dcToggleFlag7 = 0;
-      }
-      if(dcToggleFlag8 == 1)
-      {
-        Check();
-        dcToggleFlag8 = 0;
-      }
-    }                          
+    StateMachine();                       
         
     return;
 } 
+
+void StateMachine()
+{
+    while(1)
+    {
+      switch(state)
+      {
+        case S0:
+
+          if((dcToggleFlag1 == 1) || (dcToggleFlag2 == 1) || (dcToggleFlag3 == 1) || (dcToggleFlag4 == 1) )
+          {
+            state = S1;
+          }
+
+          if(dcToggleFlag6 == 1)
+          {
+            state = S2;
+          }
+
+          if((dcToggleFlag5 == 1) || (dcToggleFlag7 == 1))
+          {
+            state = S3;
+          }
+
+          if(dcToggleFlag8 == 1)
+          {
+            state = S4;
+          }
+          break;
+        case S1:
+          if(dcToggleFlag1 == 1) 
+          {
+            addMoney(10);
+            dcToggleFlag1 = 0;
+          }
+          if(dcToggleFlag2 == 1) 
+          {
+            addMoney(20);
+            dcToggleFlag2 = 0;
+          }
+          if(dcToggleFlag3 == 1) 
+          {
+            addMoney(50);
+            dcToggleFlag3 = 0;
+          }
+          if(dcToggleFlag4 == 1) 
+          {
+            addMoney(100);
+            dcToggleFlag4 = 0;
+          }
+          state = S0;
+          break;
+        case S2: 
+          resetMoney();
+          dcToggleFlag6 = 0;
+          state = S0;
+        
+        case S3:
+          if(dcToggleFlag5 == 1)
+          {
+            UpOrDown(2);
+            dcToggleFlag5 = 0;
+          }
+          if(dcToggleFlag7 == 1)
+          {
+            UpOrDown(1);
+            dcToggleFlag7 = 0;
+          }
+          state = S0;
+          break;
+         case S4:
+          Check();
+          dcToggleFlag8 = 0; 
+          state = S0;
+          break;
+         default: 
+          state = S0; 
+          break;    
+      }
+    }   
+    return;
+}
 
 void addMoney(int cach)
 {
@@ -231,6 +278,7 @@ void addMoney(int cach)
   showSpace();
   printk("Dinheiro adicionado : %d Centimos\n\r", cach);
   printk("Dinheiro Atual : %d Centimos\n\r", credit); 
+  return;
 }
 
 void resetMoney()
@@ -239,7 +287,8 @@ void resetMoney()
   showSpace();
   printk("Dinheiro devolvido : %d Centimos\n\r", credit);
   credit = 0;
-  printk("Dinheiro Atual : %d Centimos\n\r", credit); 
+  printk("Dinheiro Atual : %d Centimos\n\r", credit);
+  return; 
 }
 
 void UpOrDown(int flag)
@@ -254,6 +303,7 @@ void UpOrDown(int flag)
     if(choice <= 0) choice = 3;
   }
   showMenu(1);
+  return;
 }
 
 void Check()
@@ -302,7 +352,7 @@ void Check()
       showMenu();
       showSpace();
       printk("Produto Entregue (Coffee)\n\r");
-      printk("Dinheiro Descontado: 150 Centimos\n\r");
+      printk("Dinheiro Descontado: 50 Centimos\n\r");
       printk("Dinheiro Atual : %d Centimos\n\r", credit); 
     } else 
     {
@@ -313,6 +363,7 @@ void Check()
       printk("Dinheiro Atual : %d Centimos\n\r", credit); 
     }
   }
+  return;
 }
 
 void showMenu(int flag)
@@ -342,6 +393,7 @@ void showMenu(int flag)
     showSpace();
     printk("Dinheiro Atual : %d Centimos\n\r", credit); 
   }
+  return;
 }
 
 void showSpace()
@@ -349,6 +401,7 @@ void showSpace()
   printk("\n\r");
   printk("----------------------------------------------------\n\r");
   printk("\n\r");
+  return;
 }
 
 /*Configure Buttons*/
@@ -409,3 +462,4 @@ void CONFIG_BUTTONS()
     gpio_init_callback(&but8_cb_data, but8press_cbfunction, BIT(BOARDBUT8));
     gpio_add_callback(gpio0_dev, &but8_cb_data);
 }
+
