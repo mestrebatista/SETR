@@ -184,9 +184,9 @@ void main(void)
 
     showMenu(1);
 
-    StateMachine();                       
+    StateMachine();  /* Initialize State Machine*/                
         
-    return;
+    return 0;
 } 
 
 void StateMachine()
@@ -195,58 +195,60 @@ void StateMachine()
     {
       switch(state)
       {
-        case S0:
+        case S0:  /* Fundamental State*/
 
-          if((dcToggleFlag1 == 1) || (dcToggleFlag2 == 1) || (dcToggleFlag3 == 1) || (dcToggleFlag4 == 1) )
+          if((dcToggleFlag1 == 1) || (dcToggleFlag2 == 1) || (dcToggleFlag3 == 1) || (dcToggleFlag4 == 1) ) /* If any money is added change state*/
           {
-            state = S1;
+            state = S1; /* change of state to "Add Money" State*/
           }
 
-          if(dcToggleFlag6 == 1)
+          if(dcToggleFlag6 == 1)  /* If return button is pressed change state*/
           {
-            state = S2;
+            state = S2; /* change of state to "Return Money" State*/
           }
 
-          if((dcToggleFlag5 == 1) || (dcToggleFlag7 == 1))
+          if((dcToggleFlag5 == 1) || (dcToggleFlag7 == 1)) /* If Up or Down button is pressed change state*/
           {
-            state = S3;
+            state = S3; /* change of state to "Browse Up/Down" State*/
           }
 
-          if(dcToggleFlag8 == 1)
+          if(dcToggleFlag8 == 1) /* If Select button is pressed change state*/
           {
-            state = S4;
+            state = S4; /* change of state to "Select Product" State*/
           }
           break;
+
         case S1:
-          if(dcToggleFlag1 == 1) 
+          if(dcToggleFlag1 == 1) /* Checks the amount of money added */
           {
-            addMoney(10);
+            addMoney(10);  /* Adds 10 cents to credit */
             dcToggleFlag1 = 0;
           }
           if(dcToggleFlag2 == 1) 
           {
-            addMoney(20);
+            addMoney(20); /* Adds 20 cents to credit */
             dcToggleFlag2 = 0;
           }
           if(dcToggleFlag3 == 1) 
           {
-            addMoney(50);
+            addMoney(50); /* Adds 50 cents to credit */
             dcToggleFlag3 = 0;
           }
           if(dcToggleFlag4 == 1) 
           {
-            addMoney(100);
+            addMoney(100); /* Adds 100 cents to credit */
             dcToggleFlag4 = 0;
           }
-          state = S0;
+          state = S0;  /* Return to Fundamental State*/
           break;
+
         case S2: 
-          resetMoney();
+          resetMoney();   /* Returns money and puts money to 0*/
           dcToggleFlag6 = 0;
-          state = S0;
+          state = S0; /* Return to Fundamental State*/
         
         case S3:
-          if(dcToggleFlag5 == 1)
+          if(dcToggleFlag5 == 1) /* Checks which button was pressed (Up or Down)*/
           {
             UpOrDown(2);
             dcToggleFlag5 = 0;
@@ -256,19 +258,21 @@ void StateMachine()
             UpOrDown(1);
             dcToggleFlag7 = 0;
           }
-          state = S0;
+          state = S0; /* Return to Fundamental State*/
           break;
+
          case S4:
-          Check();
+          Check();  /* Checks if theres is money available and returns product or returns error*/
           dcToggleFlag8 = 0; 
-          state = S0;
+          state = S0; /* Return to Fundamental State*/
           break;
+
          default: 
-          state = S0; 
+          state = S0; /* Return to Fundamental State*/
           break;    
       }
     }   
-    return;
+    return 0;
 }
 
 void addMoney(int cach)
@@ -278,7 +282,7 @@ void addMoney(int cach)
   showSpace();
   printk("Dinheiro adicionado : %d Centimos\n\r", cach);
   printk("Dinheiro Atual : %d Centimos\n\r", credit); 
-  return;
+  return 0;
 }
 
 void resetMoney()
@@ -288,7 +292,7 @@ void resetMoney()
   printk("Dinheiro devolvido : %d Centimos\n\r", credit);
   credit = 0;
   printk("Dinheiro Atual : %d Centimos\n\r", credit);
-  return; 
+  return 0; 
 }
 
 void UpOrDown(int flag)
@@ -303,7 +307,7 @@ void UpOrDown(int flag)
     if(choice <= 0) choice = 3;
   }
   showMenu(1);
-  return;
+  return 0;
 }
 
 void Check()
@@ -363,7 +367,7 @@ void Check()
       printk("Dinheiro Atual : %d Centimos\n\r", credit); 
     }
   }
-  return;
+  return 0;
 }
 
 void showMenu(int flag)
@@ -393,7 +397,7 @@ void showMenu(int flag)
     showSpace();
     printk("Dinheiro Atual : %d Centimos\n\r", credit); 
   }
-  return;
+  return 0;
 }
 
 void showSpace()
@@ -401,7 +405,7 @@ void showSpace()
   printk("\n\r");
   printk("----------------------------------------------------\n\r");
   printk("\n\r");
-  return;
+  return 0;
 }
 
 /*Configure Buttons*/

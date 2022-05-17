@@ -628,7 +628,7 @@ static inline int gpio_pin_interrupt_configure(const struct device * port, gpio_
 
 000005c4 <showSpace>:
   }
-  return;
+  return 0;
 }
 
 void showSpace()
@@ -643,7 +643,7 @@ void showSpace()
      5d0:	f006 fcb0 	bl	6f34 <printk>
   printk("\n\r");
      5d4:	4620      	mov	r0, r4
-  return;
+  return 0;
 }
      5d6:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
   printk("\n\r");
@@ -970,7 +970,7 @@ void showSpace()
      828:	5751      	.short	0x5751
      82a:	67          	.byte	0x67
      82b:	00          	.byte	0x00
-          if((dcToggleFlag1 == 1) || (dcToggleFlag2 == 1) || (dcToggleFlag3 == 1) || (dcToggleFlag4 == 1) )
+          if((dcToggleFlag1 == 1) || (dcToggleFlag2 == 1) || (dcToggleFlag3 == 1) || (dcToggleFlag4 == 1) ) /* If any money is added change state*/
      82c:	4b36      	ldr	r3, [pc, #216]	; (908 <StateMachine+0xf4>)
      82e:	681b      	ldr	r3, [r3, #0]
      830:	2b01      	cmp	r3, #1
@@ -987,18 +987,18 @@ void showSpace()
      846:	681b      	ldr	r3, [r3, #0]
      848:	2b01      	cmp	r3, #1
      84a:	d101      	bne.n	850 <StateMachine+0x3c>
-            state = S1;
+            state = S1; /* change of state to "Add Money" State*/
      84c:	2301      	movs	r3, #1
      84e:	6023      	str	r3, [r4, #0]
-          if(dcToggleFlag6 == 1)
+          if(dcToggleFlag6 == 1)  /* If return button is pressed change state*/
      850:	4b31      	ldr	r3, [pc, #196]	; (918 <StateMachine+0x104>)
      852:	681b      	ldr	r3, [r3, #0]
      854:	2b01      	cmp	r3, #1
-            state = S2;
+            state = S2; /* change of state to "Return Money" State*/
      856:	bf04      	itt	eq
      858:	2302      	moveq	r3, #2
      85a:	6023      	streq	r3, [r4, #0]
-          if((dcToggleFlag5 == 1) || (dcToggleFlag7 == 1))
+          if((dcToggleFlag5 == 1) || (dcToggleFlag7 == 1)) /* If Up or Down button is pressed change state*/
      85c:	4b2f      	ldr	r3, [pc, #188]	; (91c <StateMachine+0x108>)
      85e:	681b      	ldr	r3, [r3, #0]
      860:	2b01      	cmp	r3, #1
@@ -1007,25 +1007,25 @@ void showSpace()
      866:	681b      	ldr	r3, [r3, #0]
      868:	2b01      	cmp	r3, #1
      86a:	d101      	bne.n	870 <StateMachine+0x5c>
-            state = S3;
+            state = S3; /* change of state to "Browse Up/Down" State*/
      86c:	2303      	movs	r3, #3
      86e:	6023      	str	r3, [r4, #0]
-          if(dcToggleFlag8 == 1)
+          if(dcToggleFlag8 == 1) /* If Select button is pressed change state*/
      870:	6833      	ldr	r3, [r6, #0]
      872:	2b01      	cmp	r3, #1
      874:	d1d2      	bne.n	81c <StateMachine+0x8>
-            state = S4;
+            state = S4; /* change of state to "Select Product" State*/
      876:	2304      	movs	r3, #4
-          state = S0; 
+          state = S0; /* Return to Fundamental State*/
      878:	6023      	str	r3, [r4, #0]
           break;    
      87a:	e7cf      	b.n	81c <StateMachine+0x8>
-          if(dcToggleFlag1 == 1) 
+          if(dcToggleFlag1 == 1) /* Checks the amount of money added */
      87c:	4f22      	ldr	r7, [pc, #136]	; (908 <StateMachine+0xf4>)
      87e:	683b      	ldr	r3, [r7, #0]
      880:	2b01      	cmp	r3, #1
      882:	d104      	bne.n	88e <StateMachine+0x7a>
-            addMoney(10);
+            addMoney(10);  /* Adds 10 cents to credit */
      884:	200a      	movs	r0, #10
      886:	f7ff ff15 	bl	6b4 <addMoney>
             dcToggleFlag1 = 0;
@@ -1036,7 +1036,7 @@ void showSpace()
      890:	683b      	ldr	r3, [r7, #0]
      892:	2b01      	cmp	r3, #1
      894:	d104      	bne.n	8a0 <StateMachine+0x8c>
-            addMoney(20);
+            addMoney(20); /* Adds 20 cents to credit */
      896:	2014      	movs	r0, #20
      898:	f7ff ff0c 	bl	6b4 <addMoney>
             dcToggleFlag2 = 0;
@@ -1047,7 +1047,7 @@ void showSpace()
      8a2:	683b      	ldr	r3, [r7, #0]
      8a4:	2b01      	cmp	r3, #1
      8a6:	d104      	bne.n	8b2 <StateMachine+0x9e>
-            addMoney(50);
+            addMoney(50); /* Adds 50 cents to credit */
      8a8:	2032      	movs	r0, #50	; 0x32
      8aa:	f7ff ff03 	bl	6b4 <addMoney>
             dcToggleFlag3 = 0;
@@ -1058,24 +1058,24 @@ void showSpace()
      8b4:	683b      	ldr	r3, [r7, #0]
      8b6:	2b01      	cmp	r3, #1
      8b8:	d104      	bne.n	8c4 <StateMachine+0xb0>
-            addMoney(100);
+            addMoney(100); /* Adds 100 cents to credit */
      8ba:	2064      	movs	r0, #100	; 0x64
      8bc:	f7ff fefa 	bl	6b4 <addMoney>
             dcToggleFlag4 = 0;
      8c0:	2300      	movs	r3, #0
      8c2:	603b      	str	r3, [r7, #0]
-          state = S0; 
+          state = S0; /* Return to Fundamental State*/
      8c4:	2300      	movs	r3, #0
      8c6:	e7d7      	b.n	878 <StateMachine+0x64>
-          resetMoney();
+          resetMoney();   /* Returns money and puts money to 0*/
      8c8:	f7ff ff10 	bl	6ec <resetMoney>
           dcToggleFlag6 = 0;
      8cc:	4a12      	ldr	r2, [pc, #72]	; (918 <StateMachine+0x104>)
      8ce:	2300      	movs	r3, #0
      8d0:	6013      	str	r3, [r2, #0]
-          state = S0;
+          state = S0; /* Return to Fundamental State*/
      8d2:	6023      	str	r3, [r4, #0]
-          if(dcToggleFlag5 == 1)
+          if(dcToggleFlag5 == 1) /* Checks which button was pressed (Up or Down)*/
      8d4:	4f11      	ldr	r7, [pc, #68]	; (91c <StateMachine+0x108>)
      8d6:	683b      	ldr	r3, [r7, #0]
      8d8:	2b01      	cmp	r3, #1
@@ -1095,12 +1095,12 @@ void showSpace()
      8ee:	f7ff fec9 	bl	684 <UpOrDown>
             dcToggleFlag7 = 0;
      8f2:	e7e5      	b.n	8c0 <StateMachine+0xac>
-          Check();
+          Check();  /* Checks if theres is money available and returns product or returns error*/
      8f4:	f7ff ff12 	bl	71c <Check>
           dcToggleFlag8 = 0; 
      8f8:	2300      	movs	r3, #0
      8fa:	6033      	str	r3, [r6, #0]
-          state = S0;
+          state = S0; /* Return to Fundamental State*/
      8fc:	e7bc      	b.n	878 <StateMachine+0x64>
      8fe:	bf00      	nop
      900:	20000358 	.word	0x20000358
@@ -1346,7 +1346,7 @@ void CONFIG_BUTTONS()
     showMenu(1);
      abe:	2001      	movs	r0, #1
      ac0:	f7ff fd92 	bl	5e8 <showMenu>
-    StateMachine();                       
+    StateMachine();  /* Initialize State Machine*/                
      ac4:	f7ff fea6 	bl	814 <StateMachine>
      ac8:	00007d2a 	.word	0x00007d2a
      acc:	20000354 	.word	0x20000354
