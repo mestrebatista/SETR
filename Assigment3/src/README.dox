@@ -1,0 +1,18 @@
+/**
+
+@mainpage Vending Machine documentation
+
+@author José Mestre Batista and Renato Rocha
+
+<b>Welcome!</b>
+This index has the purpose to present a better and organized documentation of the scripts for a Vending Machine.
+The Vending Machine executes a program that can be interacted by the user using 8 buttons. There are 4 buttons that simulate 
+the insertion of the coins. Other 2 buttons are used to navegate through the items of the vending machine. There is one button to "reset" 
+and give the change, the other button functions chooses the item to buy.
+
+<b>BUGS:</b>
+If bug's are found please contact one of the developers: joseomb@ua.pt or renatorocha21@ua.pt
+
+
+*/
+

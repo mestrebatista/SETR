@@ -18,6 +18,17 @@
  * 
  */
 
+/** @file main.c
+ * @brief Main file with the creation of the state machine, UI and all the logic.
+ * 
+ * This file contains the main function with the treatment of the state machine.
+ * It also contains the functions for the user interface.
+ * 
+ * @author José Mestre Batista and Renato Rocha
+ * @date 17 May 2022
+ */
+
+
 #include <zephyr.h>
 #include <device.h>
 #include <devicetree.h>
