@@ -15,5 +15,6 @@ var main_8h =
     [ "resetMoney", "main_8h.html#ad37313c3d4fec42278bd975a745a768a", null ],
     [ "showMenu", "main_8h.html#a27f1fd031fab80acc3e5fca5159dc3ef", null ],
     [ "showSpace", "main_8h.html#aa1433e601d64dfb8213c5eb0cdcc7982", null ],
+    [ "StateMachine", "main_8h.html#acf49f24738b365d9efdd0a909f82c3cf", null ],
     [ "UpOrDown", "main_8h.html#afb719dbb7f47cbc6d2be4c077c575f0c", null ]
 ];

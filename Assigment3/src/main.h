@@ -15,14 +15,38 @@
 
 /**
  * @brief 
- * The main function implements the core of the state machine used in the code.
- * \n The concept consistes on the states and the transitions that comprise them.
- * \n It is also focused on the inner states when a coin it's used.
+ * The main function calls all the other functions and initializes the buttons and the State Machine.
+ * 
+ * 
+ * @code
+ * 
+ * CONFIG_BUTTONS();
+ *
+ * showMenu(1);
+ *
+ * StateMachine(); 
+ * 
+ * @endcode
+ * 
  * 
  */
 void main(void); 
 
-
+/**
+ * @brief 
+ * This function implements the core of the state machine used in the code.
+ * \n The concept consistes on the states and the transitions that comprise them.
+ * \n It is also focused on the inner states when a coin it's used.
+ * 
+ * @verbatim
+  - State 0 (Default State)
+  - State 1 (Add Money)
+  - State 2 (Return Credit)
+  - State 3 (Browse Up/Down)
+  - State 4 (Select Product)
+  @endverbatim
+ * 
+ */
 void StateMachine();
 /**
  * @brief Adds the value chosen to the credit of the user.

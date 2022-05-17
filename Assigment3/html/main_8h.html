@@ -96,12 +96,14 @@ $(document).ready(function(){initNavTree('main_8h.html',''); initResizable(); })
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a6288eba0f8e8ad3ab1544ad731eb7667"><td class="memItemLeft" align="right" valign="top"><a id="a6288eba0f8e8ad3ab1544ad731eb7667" name="a6288eba0f8e8ad3ab1544ad731eb7667"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>main</b> (void)</td></tr>
-<tr class="memdesc:a6288eba0f8e8ad3ab1544ad731eb7667"><td class="mdescLeft">&#160;</td><td class="mdescRight">The main function implements the core of the state machine used in the code. <br  />
- The concept consistes on the states and the transitions that comprise them. <br  />
- It is also focused on the inner states when a coin it's used. <br /></td></tr>
+<tr class="memitem:a6288eba0f8e8ad3ab1544ad731eb7667"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8h.html#a6288eba0f8e8ad3ab1544ad731eb7667">main</a> (void)</td></tr>
+<tr class="memdesc:a6288eba0f8e8ad3ab1544ad731eb7667"><td class="mdescLeft">&#160;</td><td class="mdescRight">The main function calls all the other functions and initializes the buttons and the State Machine.  <a href="main_8h.html#a6288eba0f8e8ad3ab1544ad731eb7667">More...</a><br /></td></tr>
 <tr class="separator:a6288eba0f8e8ad3ab1544ad731eb7667"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf49f24738b365d9efdd0a909f82c3cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8h.html#acf49f24738b365d9efdd0a909f82c3cf">StateMachine</a> ()</td></tr>
+<tr class="memdesc:acf49f24738b365d9efdd0a909f82c3cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function implements the core of the state machine used in the code. <br  />
+ The concept consistes on the states and the transitions that comprise them. <br  />
+ It is also focused on the inner states when a coin it's used.  <a href="main_8h.html#acf49f24738b365d9efdd0a909f82c3cf">More...</a><br /></td></tr>
+<tr class="separator:acf49f24738b365d9efdd0a909f82c3cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60fb00c895d1d1b7ecafc7a068fbb682"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8h.html#a60fb00c895d1d1b7ecafc7a068fbb682">addMoney</a> (int cach)</td></tr>
 <tr class="memdesc:a60fb00c895d1d1b7ecafc7a068fbb682"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the value chosen to the credit of the user.  <a href="main_8h.html#a60fb00c895d1d1b7ecafc7a068fbb682">More...</a><br /></td></tr>
 <tr class="separator:a60fb00c895d1d1b7ecafc7a068fbb682"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -192,8 +194,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>but8press_cbfunction<
 <div class="line"><a class="code hl_function" href="main_8c.html#aa1433e601d64dfb8213c5eb0cdcc7982">showSpace</a>();</div>
 <div class="line">printk(<span class="stringliteral">&quot;Dinheiro adicionado : %d Centimos\n\r&quot;</span>, cach);</div>
 <div class="line">printk(<span class="stringliteral">&quot;Dinheiro Atual : %d Centimos\n\r&quot;</span>, credit); </div>
-<div class="ttc" id="amain_8c_html_a27f1fd031fab80acc3e5fca5159dc3ef"><div class="ttname"><a href="main_8c.html#a27f1fd031fab80acc3e5fca5159dc3ef">showMenu</a></div><div class="ttdeci">void showMenu(int flag)</div><div class="ttdoc">Main function of the UI for the products. This function is called in all the others....</div><div class="ttdef"><b>Definition:</b> main.c:318</div></div>
-<div class="ttc" id="amain_8c_html_aa1433e601d64dfb8213c5eb0cdcc7982"><div class="ttname"><a href="main_8c.html#aa1433e601d64dfb8213c5eb0cdcc7982">showSpace</a></div><div class="ttdeci">void showSpace()</div><div class="ttdoc">Function only to print a separation space between the products and the actions.</div><div class="ttdef"><b>Definition:</b> main.c:347</div></div>
+<div class="ttc" id="amain_8c_html_a27f1fd031fab80acc3e5fca5159dc3ef"><div class="ttname"><a href="main_8c.html#a27f1fd031fab80acc3e5fca5159dc3ef">showMenu</a></div><div class="ttdeci">void showMenu(int flag)</div><div class="ttdoc">Main function of the UI for the products. This function is called in all the others....</div><div class="ttdef"><b>Definition:</b> main.c:373</div></div>
+<div class="ttc" id="amain_8c_html_aa1433e601d64dfb8213c5eb0cdcc7982"><div class="ttname"><a href="main_8c.html#aa1433e601d64dfb8213c5eb0cdcc7982">showSpace</a></div><div class="ttdeci">void showSpace()</div><div class="ttdoc">Function only to print a separation space between the products and the actions.</div><div class="ttdef"><b>Definition:</b> main.c:403</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -242,6 +244,33 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>but8press_cbfunction<
 
 </div>
 </div>
+<a id="a6288eba0f8e8ad3ab1544ad731eb7667" name="a6288eba0f8e8ad3ab1544ad731eb7667"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6288eba0f8e8ad3ab1544ad731eb7667">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void main </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The main function calls all the other functions and initializes the buttons and the State Machine. </p>
+<div class="fragment"><div class="line"><a class="code hl_function" href="main_8c.html#aad1d83e51f4029bf6982a956f1615c96">CONFIG_BUTTONS</a>();</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_function" href="main_8c.html#a27f1fd031fab80acc3e5fca5159dc3ef">showMenu</a>(1);</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_function" href="main_8c.html#acf49f24738b365d9efdd0a909f82c3cf">StateMachine</a>(); </div>
+<div class="ttc" id="amain_8c_html_aad1d83e51f4029bf6982a956f1615c96"><div class="ttname"><a href="main_8c.html#aad1d83e51f4029bf6982a956f1615c96">CONFIG_BUTTONS</a></div><div class="ttdeci">void CONFIG_BUTTONS()</div><div class="ttdoc">Function for the configuration of all the buttons.</div><div class="ttdef"><b>Definition:</b> main.c:413</div></div>
+<div class="ttc" id="amain_8c_html_acf49f24738b365d9efdd0a909f82c3cf"><div class="ttname"><a href="main_8c.html#acf49f24738b365d9efdd0a909f82c3cf">StateMachine</a></div><div class="ttdeci">void StateMachine()</div><div class="ttdoc">This function implements the core of the state machine used in the code.   The concept consistes on t...</div><div class="ttdef"><b>Definition:</b> main.c:192</div></div>
+</div><!-- fragment --> 
+</div>
+</div>
 <a id="ad37313c3d4fec42278bd975a745a768a" name="ad37313c3d4fec42278bd975a745a768a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad37313c3d4fec42278bd975a745a768a">&#9670;&nbsp;</a></span>resetMoney()</h2>
 
@@ -288,6 +317,32 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>but8press_cbfunction<
 <p >This is the product options presented for the user: </p><pre class="fragment">  - Beer : 150 Centimos              &lt;----
   - Tuna Sandwich : 100 Centimos 
   - Coffee Sandwich : 50 Centimos
+</pre> 
+</div>
+</div>
+<a id="acf49f24738b365d9efdd0a909f82c3cf" name="acf49f24738b365d9efdd0a909f82c3cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf49f24738b365d9efdd0a909f82c3cf">&#9670;&nbsp;</a></span>StateMachine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StateMachine </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function implements the core of the state machine used in the code. <br  />
+ The concept consistes on the states and the transitions that comprise them. <br  />
+ It is also focused on the inner states when a coin it's used. </p>
+<pre class="fragment">- State 0 (Default State)
+- State 1 (Add Money)
+- State 2 (Return Credit)
+- State 3 (Browse Up/Down)
+- State 4 (Select Product)
 </pre> 
 </div>
 </div>
