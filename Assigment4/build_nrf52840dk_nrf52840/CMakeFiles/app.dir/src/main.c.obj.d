@@ -141,4 +141,5 @@ CMakeFiles/app.dir/src/main.c.obj: ../src/main.c \
  C:/Users/renat/ncs/v1.9.1/zephyr/lib/libc/minimal/include/string.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/timing/timing.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/lib/libc/minimal/include/stdio.h \
+ C:/Users/renat/ncs/v1.9.1/zephyr/lib/libc/minimal/include/stdlib.h \
  C:/Users/renat/ncs/v1.9.1/modules/hal/nordic/nrfx/hal/nrf_saadc.h

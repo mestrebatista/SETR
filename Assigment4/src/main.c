@@ -40,6 +40,7 @@
 #include <sys/__assert.h>
 #include <timing/timing.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 
 
@@ -52,13 +53,13 @@
 #define ADC_RESOLUTION 10
 #define ADC_GAIN ADC_GAIN_1_4
 #define ADC_REFERENCE ADC_REF_VDD_1_4
-#define ADC_ACQUISITION_TIME ADC_ACQ_TIME(ADC_ACQ_TIME_MICROSECONDS, 10)
+#define ADC_ACQUISITION_TIME ADC_ACQ_TIME(ADC_ACQ_TIME_MICROSECONDS, 40)
 #define ADC_CHANNEL_ID 1  
 
 
 #define ADC_CHANNEL_INPUT NRF_SAADC_INPUT_AIN1 
 
-#define BUFFER_SIZE 10
+#define BUFFER_SIZE 1
 
 /* Other defines */
 #define TIMER_INTERVAL_MSEC 10000 /* Interval between ADC samples */
@@ -76,11 +77,7 @@ static const struct adc_channel_cfg my_channel_cfg = {
 struct k_timer my_timer;
 const struct device *adc_dev = NULL;
 static uint16_t adc_sample_buffer[BUFFER_SIZE];
-volatile uint16_t res = 0;
-volatile uint16_t buffer[BUFFER_SIZE];
-volatile uint16_t res_2 = 0;
-volatile uint16_t desvio = 0;
-volatile uint16_t media = 0;
+
 
 /* Takes one sample */
 static int adc_sample(void)
@@ -105,9 +102,7 @@ static int adc_sample(void)
 
 	return ret;
 }
-/* ########################################################################################################################################## */
-/* ##################################                              ADC FINITO                              ##################################*/
-/* ########################################################################################################################################## */
+
 
 /* ########################################################################################################################################## */
 /* ##################################                            PWM DEFINITIONS                           ##################################*/
@@ -116,9 +111,6 @@ static int adc_sample(void)
 #define GPIO0_NID DT_NODELABEL(gpio0) 
 #define PWM0_NID DT_NODELABEL(pwm0)
 #define BOARDLED_PIN 0x0d
-/* ########################################################################################################################################## */
-/* ##################################                              PWM FINITO                              ##################################*/
-/* ########################################################################################################################################## */
 
 /* ########################################################################################################################################## */
 /* ##################################                         THREAD DEFINITIONS                           ##################################*/
@@ -151,8 +143,8 @@ void thread_B_code(void *argA, void *argB, void *argC);
 void thread_C_code(void *argA, void *argB, void *argC);
 
 /* Semaphores */
-int ab = 100;
-int bc = 200;
+int var_ab = 0;
+int var_bc = 0;
 
 struct k_sem sem_ab;
 struct k_sem sem_bc;
@@ -160,8 +152,15 @@ struct k_sem sem_bc;
 /*############*/
 
 /* ########################################################################################################################################## */
-/* ##################################                            THREAD FINITO                             ##################################*/
+/* ###################################                         GLOBAL VARIABLES                           ###################################*/
 /* ########################################################################################################################################## */
+
+#define WINDOW_SIZE 10
+
+volatile uint16_t media = 0;
+volatile uint16_t buffer[WINDOW_SIZE] = {0,0,0,0,0,0,0,0,0,0};
+volatile uint16_t media_2 = 0;
+volatile uint16_t desvio = 0;
 
 
 void main(void)
@@ -208,6 +207,7 @@ void main(void)
 /* ########################################################################################################################################## */
 
 /* ###################    THREAD A    ######################*/
+
 void thread_A_code(void *argA , void *argB, void *argC)
 {
   int err=0;
@@ -224,28 +224,24 @@ void thread_A_code(void *argA , void *argB, void *argC)
   {
     printk("Thread A Activated\n\r");
 
-    for (i = 0; i < 10; i++) 
+    err = adc_sample();
+    if (err) 
     {
-      err = adc_sample();
-      if (err)
+      printk("adc_sample() failed with error code %d\n\r", err);
+    } 
+    else 
+    {
+      if (adc_sample_buffer[0] > 1023) 
       {
-        printk("adc_sample() failed with error code %d\n\r", err);
+        printk("adc reading out of range\n\r");
       } 
       else 
       {
-        if (adc_sample_buffer[0] > 1023) 
-        {
-          printk("adc reading out of range\n\r");
-        } 
-        else 
-        {
-          buffer[i] = adc_sample_buffer[0];
-          /*printk("adc reading %d: raw:%4u / %4u mV: \n\r", i, adc_sample_buffer[0], (uint16_t)(1000 * adc_sample_buffer[0] * ((float)3 / 1023)));*/
-        }
+        var_ab = adc_sample_buffer[0];
+        printk("adc reading  raw: %4u / %4u mV: \n\r", var_ab, (uint16_t)(1000 * var_ab * ((float)3 / 1023)));
       }
-
     }
-    
+
     k_sem_give(&sem_ab);
 
     fin_time = k_uptime_get();
@@ -260,10 +256,11 @@ void thread_A_code(void *argA , void *argB, void *argC)
 }
 
 /* ###################    THREAD B    ######################*/
+
 void thread_B_code(void *argA , void *argB, void *argC)
 {
   int err=0;
-  int count = 0;
+  uint16_t count = 0;
   int i;
 
   printk("Thread B Init\n\r");
@@ -272,40 +269,53 @@ void thread_B_code(void *argA , void *argB, void *argC)
   {
 
    k_sem_take(&sem_ab, K_FOREVER);
-    printk("Thread B Activated\n\r");
+   printk("Thread B Activated\n\r");
 
-      res = 0;
-      desvio = 0;
-      media = 0;
-      res_2 = 0;
-      count = 0;
+   media = 0;
+   media_2 = 0;
+   count = 0;
 
-      
-      for(i = 0;i<10;i++)
-      {
-        res = res + adc_sample_buffer[0];
-      }
-      res = res / BUFFER_SIZE;
-      desvio = 0.1 * res;
+   for (i = 0; i < WINDOW_SIZE - 1; i++) 
+   {
+     buffer[i] = buffer[i + 1];
+     /*printk("adc reading %d: raw:%4u / %4u mV: \n\r", i, buffer[i], (uint16_t)(1000 * buffer[i] * ((float)3 / 1023))); */
+   }
+     buffer[WINDOW_SIZE - 1] = var_ab;
+     /*printk("adc reading %d: raw:%4u / %4u mV: \n\r", 9, buffer[9], (uint16_t)(1000 * buffer[9] * ((float)3 / 1023)));*/
 
-      for (i = 0; i < 10; i++) 
-      {
-        if ((res + desvio > buffer[i]) && (res - desvio < buffer[i])) 
-        {
-          res_2 += buffer[i];
-          count++;
-        }
-      }
-      media = res_2 / count;
-      printk("adc reading %d: raw:%4u / %4u mV: \n\r", count, media, (uint16_t)(1000 * media * ((float)3 / 1023)));
+   for (i = 0; i < WINDOW_SIZE; i++) 
+   {
+     media = media + buffer[i];
+   }
 
-      k_sem_give(&sem_bc);
+   media = media / WINDOW_SIZE;
+   desvio = 0.1 * media;
 
+   for (i = 0; i < WINDOW_SIZE; i++) 
+   {
+     if ((media + desvio > buffer[i]) && (media - desvio < buffer[i])) {
+       media_2 = media_2 + buffer[i];
+       count = count + 1;
+     }
+   }
+   if (count != 0) 
+   {
+     var_bc = media_2 / count;
+   } 
+   else 
+   {
+     var_bc = 0;
+   }
+
+   printk("adc reading %d: raw:%4u / %4u mV: \n\r", count, var_bc, (uint16_t)(1000 * var_bc * ((float)3 / 1023)));
+
+   k_sem_give(&sem_bc);
   }
-
-  
 }
+
+
 /* ###################    THREAD C    ######################*/
+
 void thread_C_code(void *argA , void *argB, void *argC)
 {
   int i;
@@ -314,58 +324,54 @@ void thread_C_code(void *argA , void *argB, void *argC)
   printk("Thread C Init\n\r");
 
   const struct device *gpio0_dev;
+
   gpio0_dev = device_get_binding(DT_LABEL(GPIO0_NID));
-  if (gpio0_dev == NULL) 
-  {
+
+  if (gpio0_dev == NULL) {
     printk("Error: Failed to bind to GPIO0\n\r");
     return;
-  } 
-  else 
-  {
+  } else {
     printk("Bind to GPIO0 successfull \n\r");
   }
 
-  
-    ret = gpio_pin_configure(gpio0_dev, BOARDLED_PIN, GPIO_OUTPUT_ACTIVE);
-    if (ret < 0) {
-        printk("gpio_pin_configure() failed with error %d\n\r", ret);        
-	return;
-    }   
+  ret = gpio_pin_configure(gpio0_dev, BOARDLED_PIN, GPIO_OUTPUT_ACTIVE);
+  if (ret < 0) {
+    printk("gpio_pin_configure() failed with error %d\n\r", ret);
+    return;
+  }
 
   const struct device *pwm0_dev;
 
   pwm0_dev = device_get_binding(DT_LABEL(PWM0_NID));
 
-  if (pwm0_dev == NULL) 
-  {
+  if (pwm0_dev == NULL) {
     printk("Error: Failed to bind to PWM0\n r");
     return;
-  } 
-  else 
-  {
+  } else {
     printk("Bind to PWM0 successful\n\r");
-  } 
+  }
 
-
-  unsigned int pwmPeriod_us = 250000;         
-  int fin = 0;               
+  unsigned int pwmPeriod_us = 250000;                       
 
   while(1)
   {
     k_sem_take(&sem_bc , K_FOREVER);
-    ret = 0;
+
     printk("Thread C Activated\n\r");
 
+    ret = 0;
+
     ret = pwm_pin_set_usec(pwm0_dev, BOARDLED_PIN,
-        pwmPeriod_us, (unsigned int)((pwmPeriod_us * media) / 1000), PWM_POLARITY_NORMAL);
+        pwmPeriod_us, (unsigned int)((pwmPeriod_us * var_bc) / 1023), PWM_POLARITY_NORMAL);
 
     if (ret) 
     {
       printk("Error %d: failed to set pulse width\n", ret);
       return;
     }
-    fin = (uint16_t)(1000 * media * ((float)3 / 1023));
-    printk("PWM -> %4u \n\r",(unsigned int)((pwmPeriod_us * fin) / 3000));
+
+    var_bc = (uint16_t)(1000 * var_bc * ((float)3 / 1023));
+    printk("PWM -> %4u \n\r",(unsigned int)((pwmPeriod_us * var_bc) / 3000));
   }
 }
 /* ########################################################################################################################################## */
