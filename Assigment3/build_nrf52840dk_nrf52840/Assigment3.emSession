@@ -43,5 +43,5 @@
  <Files>
   <SessionOpenFile windowGroup="DockEditLeft" x="54" y="247" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../src/main.c" selected="1" top="224" codecName="Default"/>
  </Files>
- <ARMCrossStudioWindow activeProject="zephyr/zephyr.elf(build)" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Common" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="" debugSearchPath="" autoConnectCapabilities="3711"/>
+ <ARMCrossStudioWindow activeProject="zephyr/zephyr.elf(build)" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Common" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>
