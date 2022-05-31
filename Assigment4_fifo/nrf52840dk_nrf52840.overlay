@@ -1,6 +1,0 @@
-&adc { /* ADC */
- status = "okay";
-};
-
-
-
