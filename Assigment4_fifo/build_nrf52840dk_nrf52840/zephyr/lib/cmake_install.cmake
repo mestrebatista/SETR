@@ -1,4 +1,4 @@
-# Install script for directory: D:/Programs_Repository/Nordic_ide/v1.9.1/zephyr/lib
+# Install script for directory: C:/Users/renat/ncs/v1.9.1/zephyr/lib
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,31 +34,31 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "D:/Programs_Repository/Nordic_ide/v1.9.1/toolchain/opt/bin/arm-none-eabi-objdump.exe")
+  set(CMAKE_OBJDUMP "C:/Users/renat/ncs/v1.9.1/toolchain/opt/bin/arm-none-eabi-objdump.exe")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/joseo/Downloads/setr2122_ncsDemosV2/basic_04_adcDemo/build_nrf52840dk_nrf52840/zephyr/lib/libc/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment4_fifo/build_nrf52840dk_nrf52840/zephyr/lib/libc/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/joseo/Downloads/setr2122_ncsDemosV2/basic_04_adcDemo/build_nrf52840dk_nrf52840/zephyr/lib/posix/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment4_fifo/build_nrf52840dk_nrf52840/zephyr/lib/posix/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/joseo/Downloads/setr2122_ncsDemosV2/basic_04_adcDemo/build_nrf52840dk_nrf52840/zephyr/lib/gui/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment4_fifo/build_nrf52840dk_nrf52840/zephyr/lib/gui/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/joseo/Downloads/setr2122_ncsDemosV2/basic_04_adcDemo/build_nrf52840dk_nrf52840/zephyr/lib/os/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment4_fifo/build_nrf52840dk_nrf52840/zephyr/lib/os/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/joseo/Downloads/setr2122_ncsDemosV2/basic_04_adcDemo/build_nrf52840dk_nrf52840/zephyr/lib/util/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment4_fifo/build_nrf52840dk_nrf52840/zephyr/lib/util/cmake_install.cmake")
 endif()
 

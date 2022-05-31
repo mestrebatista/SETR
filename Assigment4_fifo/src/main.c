@@ -62,7 +62,7 @@
 #define BUFFER_SIZE 1
 
 /* Other defines */
-#define TIMER_INTERVAL_MSEC 10000 /* Interval between ADC samples */
+/*#define TIMER_INTERVAL_MSEC 1000*/ /* Interval between ADC samples */
 
 /* ADC channel configuration */
 static const struct adc_channel_cfg my_channel_cfg = {
@@ -314,7 +314,7 @@ void thread_B_code(void *argA , void *argB, void *argC)
    } 
    else 
    {
-     data_bc.data= 0;
+     data_bc.data = 0;
    }
 
    printk("adc reading %d: raw:%4u / %4u mV: \n\r", count, data_bc.data, (uint16_t)(1000 * data_bc.data * ((float)3 / 1023)));
@@ -386,7 +386,7 @@ void thread_C_code(void *argA , void *argB, void *argC)
     }
 
     data_bc->data = (uint16_t)(1000 * data_bc->data * ((float)3 / 1023));
-    printk("PWM -> %4u \n\r",(unsigned int)((pwmPeriod_us * data_bc->data) / 3000));
+    printk("PWM -> %4u \n\r",(unsigned int)((pwmPeriod_us * data_bc->data) / 3000)); 
   }
 }
 /* ########################################################################################################################################## */

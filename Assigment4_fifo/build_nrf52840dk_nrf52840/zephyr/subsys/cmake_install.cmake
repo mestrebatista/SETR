@@ -1,4 +1,4 @@
-# Install script for directory: D:/Programs_Repository/Nordic_ide/v1.9.1/zephyr/subsys
+# Install script for directory: C:/Users/renat/ncs/v1.9.1/zephyr/subsys
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,91 +34,91 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "D:/Programs_Repository/Nordic_ide/v1.9.1/toolchain/opt/bin/arm-none-eabi-objdump.exe")
+  set(CMAKE_OBJDUMP "C:/Users/renat/ncs/v1.9.1/toolchain/opt/bin/arm-none-eabi-objdump.exe")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/joseo/Downloads/setr2122_ncsDemosV2/basic_04_adcDemo/build_nrf52840dk_nrf52840/zephyr/subsys/debug/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment4_fifo/build_nrf52840dk_nrf52840/zephyr/subsys/debug/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/joseo/Downloads/setr2122_ncsDemosV2/basic_04_adcDemo/build_nrf52840dk_nrf52840/zephyr/subsys/logging/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment4_fifo/build_nrf52840dk_nrf52840/zephyr/subsys/logging/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/joseo/Downloads/setr2122_ncsDemosV2/basic_04_adcDemo/build_nrf52840dk_nrf52840/zephyr/subsys/fs/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment4_fifo/build_nrf52840dk_nrf52840/zephyr/subsys/fs/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/joseo/Downloads/setr2122_ncsDemosV2/basic_04_adcDemo/build_nrf52840dk_nrf52840/zephyr/subsys/ipc/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment4_fifo/build_nrf52840dk_nrf52840/zephyr/subsys/ipc/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/joseo/Downloads/setr2122_ncsDemosV2/basic_04_adcDemo/build_nrf52840dk_nrf52840/zephyr/subsys/mgmt/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment4_fifo/build_nrf52840dk_nrf52840/zephyr/subsys/mgmt/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/joseo/Downloads/setr2122_ncsDemosV2/basic_04_adcDemo/build_nrf52840dk_nrf52840/zephyr/subsys/random/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment4_fifo/build_nrf52840dk_nrf52840/zephyr/subsys/random/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/joseo/Downloads/setr2122_ncsDemosV2/basic_04_adcDemo/build_nrf52840dk_nrf52840/zephyr/subsys/storage/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment4_fifo/build_nrf52840dk_nrf52840/zephyr/subsys/storage/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/joseo/Downloads/setr2122_ncsDemosV2/basic_04_adcDemo/build_nrf52840dk_nrf52840/zephyr/subsys/fb/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment4_fifo/build_nrf52840dk_nrf52840/zephyr/subsys/fb/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/joseo/Downloads/setr2122_ncsDemosV2/basic_04_adcDemo/build_nrf52840dk_nrf52840/zephyr/subsys/portability/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment4_fifo/build_nrf52840dk_nrf52840/zephyr/subsys/portability/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/joseo/Downloads/setr2122_ncsDemosV2/basic_04_adcDemo/build_nrf52840dk_nrf52840/zephyr/subsys/pm/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment4_fifo/build_nrf52840dk_nrf52840/zephyr/subsys/pm/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/joseo/Downloads/setr2122_ncsDemosV2/basic_04_adcDemo/build_nrf52840dk_nrf52840/zephyr/subsys/stats/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment4_fifo/build_nrf52840dk_nrf52840/zephyr/subsys/stats/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/joseo/Downloads/setr2122_ncsDemosV2/basic_04_adcDemo/build_nrf52840dk_nrf52840/zephyr/subsys/task_wdt/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment4_fifo/build_nrf52840dk_nrf52840/zephyr/subsys/task_wdt/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/joseo/Downloads/setr2122_ncsDemosV2/basic_04_adcDemo/build_nrf52840dk_nrf52840/zephyr/subsys/testsuite/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment4_fifo/build_nrf52840dk_nrf52840/zephyr/subsys/testsuite/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/joseo/Downloads/setr2122_ncsDemosV2/basic_04_adcDemo/build_nrf52840dk_nrf52840/zephyr/subsys/tracing/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment4_fifo/build_nrf52840dk_nrf52840/zephyr/subsys/tracing/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/joseo/Downloads/setr2122_ncsDemosV2/basic_04_adcDemo/build_nrf52840dk_nrf52840/zephyr/subsys/canbus/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment4_fifo/build_nrf52840dk_nrf52840/zephyr/subsys/canbus/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/joseo/Downloads/setr2122_ncsDemosV2/basic_04_adcDemo/build_nrf52840dk_nrf52840/zephyr/subsys/timing/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment4_fifo/build_nrf52840dk_nrf52840/zephyr/subsys/timing/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/joseo/Downloads/setr2122_ncsDemosV2/basic_04_adcDemo/build_nrf52840dk_nrf52840/zephyr/subsys/modbus/cmake_install.cmake")
+  include("C:/Users/renat/ncs/SETR/Assigment4_fifo/build_nrf52840dk_nrf52840/zephyr/subsys/modbus/cmake_install.cmake")
 endif()
 
