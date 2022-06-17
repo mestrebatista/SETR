@@ -1,0 +1,17 @@
+/**
+
+@mainpage Tasks in Zephyr documentation - Semaphores
+
+@author José Mestre Batista and Renato Rocha
+
+<b>Welcome!</b>
+This index has the purpose to present a better and organized documentation of the scripts for the Tasks in Zephyr.
+It is based on the logic of semaphores. Using ADC, PWM and a bit of the process of the data, with the variation of a potentiometer it can be 
+seen the variation of the frequency of a led on the board.
+
+<b>BUGS:</b>
+If bug's are found please contact one of the developers: joseomb@ua.pt or renatorocha21@ua.pt
+
+
+*/
+
