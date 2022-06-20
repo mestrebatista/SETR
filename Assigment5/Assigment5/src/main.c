@@ -51,6 +51,7 @@
 #include <timing/timing.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <console/console.h>
 
 
 /* ########################################################################################################################################## */
@@ -228,37 +229,6 @@ void but4press_cbfunction(const struct device *dev, struct gpio_callback *cb, ui
 }
 
 /* ########################################################################################################################################## */
-/* ###################################                         UART VARIABLES                             ###################################*/
-/* ########################################################################################################################################## */
-
-#define FATAL_ERR -1 /* Fatal error return code, app terminates */
-
-#define UART_NID DT_NODELABEL(uart0)    /* UART Node label, see dts */
-#define RXBUF_SIZE 60                   /* RX buffer size */
-#define TXBUF_SIZE 60                   /* TX buffer size */
-#define RX_TIMEOUT 1000                  /* Inactivity period after the instant when last char was received that triggers an rx event (in us) */
-
-/* Struct for UART configuration (if using default valuies is not needed) */
-const struct uart_config uart_cfg = {
-		.baudrate = 115200,
-		.parity = UART_CFG_PARITY_NONE,
-		.stop_bits = UART_CFG_STOP_BITS_1,
-		.data_bits = UART_CFG_DATA_BITS_8,
-		.flow_ctrl = UART_CFG_FLOW_CTRL_NONE
-};
-
-/* UAR related variables */
-const struct device *uart_dev;          /* Pointer to device struct */ 
-static uint8_t rx_buf[RXBUF_SIZE];      /* RX buffer, to store received data */
-static uint8_t rx_chars[RXBUF_SIZE];    /* chars actually received  */
-volatile int uart_rx_rdy_flag;          /* Flag to signal main() that a message is available */
-
-/* UART callback function prototype */
-static void uart_cb(const struct device *dev, struct uart_event *evt, void *user_data);
-
-
-
-/* ########################################################################################################################################## */
 /* ###################################                         GLOBAL VARIABLES                           ###################################*/
 /* ########################################################################################################################################## */
 
@@ -274,13 +244,32 @@ volatile uint16_t desvio = 0;
 
 volatile int count = 0;
 volatile int seconds = 0;
-volatile int minutes = 0;
-volatile int hours = 0;
-volatile int days = 0;
-uint8_t welcome_mesg[] = "UART demo: Type a few chars in a row and then pause for a little while ...\n\r"; 
-uint8_t rep_mesg[TXBUF_SIZE];
+int minutes = 0;
+int hours = 0;
+int days = 0;
+
+volatile int seconds_init = 0;
+int minutes_init = 0;
+int hours_init = 0;
+int days_init = 0;
+
+volatile int seconds_finito = 0;
+int minutes_finito = 0;
+int hours_finito = 0;
+int days_finito = 0;
 
 int ref = 50;
+
+char choice;
+int scan;
+int toggle_mode = 1;
+int flag_end_binds = 0;
+int flag_console = 0;
+int flag_setted = 0;
+
+volatile int nits;
+volatile int pwm;
+int nits_pret=0;
 
 
 void main(void)
@@ -299,7 +288,6 @@ void main(void)
     NRF_SAADC->TASKS_CALIBRATEOFFSET = 1;
 
     CONFIG_BUTTONS();
-    CONFIG_UART();
 
     /*###################### Semaphore Creation #####################*/
     k_sem_init(&sem_1a, 0, 1);
@@ -332,8 +320,31 @@ void main(void)
 
 
     /*##############################################################*/
-    
-    
+    console_init();  
+    printf("\n\x1b[2J\r");
+    while(1) {
+        MENU();
+        choice = console_getchar();
+        console_putchar(choice);
+        if(choice == '1') {
+          CHANGE_DATE();
+        }
+        if(choice == '2') {
+          SET_DATE_PWM();
+          flag_setted = 1;
+        }
+        if(choice == '3') {
+          SET_PWM();
+        }     
+        if(choice == '4') {
+          printk("\n");
+          printk("Hora Atual -> %d:%d:%d\n", hours, minutes, seconds);
+        }
+        if(choice == '5') {
+          printk("\n");
+          printk("ACTUAL -> %d    //    LUMINOSITY -> %d    //    PWM -> %d",ref, nits,pwm);
+        }
+    }
     return;
 }
 /* ########################################################################################################################################## */
@@ -351,42 +362,38 @@ void thread_1_code(void *argA , void *argB, void *argC)
   int i;
   int64_t fin_time=0, release_time = 0;
   int ret = 0;
-  int toggle_mode = 1;
 
 
-  printk("Thread 1 Init\n\r");
+  /*printk("Thread 1 Init\n\r");*/       
 
   release_time = k_uptime_get() + thread_1_period;
 
   while(1)
   {
-    printk("Thread 1 Activated\n\r");
+    /*printk("Thread 1 Activated\n\r");*/
 
-    clock();
+    if(flag_console == 0) clock();
 
-    if (uart_rx_rdy_flag == 1) {
-      uart_rx_rdy_flag = 0;
-
-      sprintf(rep_mesg, "You typed [%s]\n\r", rx_chars);
-
-      err = uart_tx(uart_dev, rep_mesg, strlen(rep_mesg), SYS_FOREVER_MS);
-      if (err) {
-        printk("uart_tx() error. Error code:%d\n\r", err);
-        return;
-      }
-    }
-
+    
     if(toggle_mode) 
     {
         if(dcToggleFlag1 == 1) 
-        {
+        {       
            toggle_mode = 0;
            dcToggleFlag1 = 0;
+        }
+        if( ((hours_init <= hours) && (hours_finito >= hours)) && ((minutes_init < minutes) || (minutes_finito > minutes)) && ((seconds_init < seconds) && (seconds_finito > seconds)) ) {
+           ref = nits_pret;
+        } 
+        else 
+        {
+           ref = 0;
         }
         k_sem_give(&sem_1a);
     } 
     else 
     {
+        printk("aqui");
        if(dcToggleFlag2 == 1) 
        {
           toggle_mode = 1;
@@ -431,14 +438,12 @@ void thread_A_code(void *argA , void *argB, void *argC)
   int i;
   int ret = 0;
 
-  printk("Thread A Init\n\r");
-
-  /*release_time = k_uptime_get() + thread_A_period; */
+  /*printk("Thread A Init\n\r");*/
 
   while(1)
   {
     k_sem_take(&sem_1a, K_FOREVER);
-    printk("Thread A Activated\n\r");
+    /*printk("Thread A Activated\n\r");*/
 
     err = adc_sample();
     if (err) 
@@ -449,12 +454,12 @@ void thread_A_code(void *argA , void *argB, void *argC)
     {
       if (adc_sample_buffer[0] > 1023) 
       {
-        printk("adc reading out of range\n\r");
+        /*printk("adc reading out of range\n\r");*/
       } 
       else 
       {
         var_ab = adc_sample_buffer[0];
-        printk("adc reading  raw: %4u / %4u mV: \n\r", var_ab, (uint16_t)(3000 * var_ab /((float)1023)));
+        /*printk("adc reading  raw: %4u / %4u mV: \n\r", var_ab, (uint16_t)(3000 * var_ab /((float)1023)));*/
       }
     }
 
@@ -470,20 +475,18 @@ void thread_B_code(void *argA , void *argB, void *argC)
   uint16_t count = 0;
   int i;
 
-  printk("Thread B Init\n\r");
+  /*printk("Thread B Init\n\r");*/
 
   while(1)
   {
 
    k_sem_take(&sem_ab, K_FOREVER);
-   printk("Thread B Activated\n\r");
+   /*printk("Thread B Activated\n\r");*/
 
    media = 0;
    media_2 = 0;
    count = 0;
 
-   if(var_ab <= 900)
-   {
      for (i = 0; i < WINDOW_SIZE - 1; i++) 
      {
        buffer[i] = buffer[i + 1];
@@ -491,7 +494,6 @@ void thread_B_code(void *argA , void *argB, void *argC)
      }
        buffer[WINDOW_SIZE - 1] = var_ab;
        /*printk("adc reading %d: raw:%4u / %4u mV: \n\r", 9, buffer[9], (uint16_t)(1000 * buffer[9] * ((float)3 / 1023)));*/
-   }
 
    for (i = 0; i < WINDOW_SIZE; i++) 
    {
@@ -516,8 +518,8 @@ void thread_B_code(void *argA , void *argB, void *argC)
    {
      var_bc = 0;
    }
-
-   printk("adc reading %d: raw:%4u / %4u mV: \n\r", count, var_bc, (uint16_t)(3000 * var_bc / ((float) 1023)));
+    
+   /*printk("adc reading %d: raw:%4u / %4u mV: \n\r", count, var_bc, (uint16_t)(3000 * var_bc / ((float) 1023)));*/
 
    k_sem_give(&sem_bc);
   }
@@ -530,34 +532,23 @@ void thread_C_code(void *argA , void *argB, void *argC)
 {
   int i;
   int ret = 0;
-  int pwm = 0;
-  int nits = 0;
   int u;
   int flag = 0;
 
-  printk("Thread C Init\n\r");
+  /*printk("Thread C Init\n\r");*/
 
   while(1)
   {
     k_sem_take(&sem_bc , K_FOREVER);
 
-    printk("Thread C Activated\n\r");
+    /*printk("Thread C Activated\n\r");*/
 
     ret = 0;
     flag = 1;
 
     nits = (uint16_t)(3000 * var_bc / ((float) 1023));
-    nits = 100-((nits-900)/16);
-    if(nits>=100 || nits <= 0) flag = 0;
-    if(nits>=100) nits = 100;
-    if(nits<= 0) nits = 0;
-    printf("nits -> %d %\n",nits);
-
-    /*
-    pwm = (uint16_t)(1000 * var_bc * ((float)3 / 1023));
-    if(pwm > 2800) pwm = 0;
-    else if(pwm<800) pwm = 100;
-    else pwm = -0.05*pwm+145; */
+    nits = -0.0455*nits + 136.36; 
+    
     if(flag){
       if(nits>ref) u--;
       else if(nits<ref) u++;
@@ -566,8 +557,9 @@ void thread_C_code(void *argA , void *argB, void *argC)
       if(u<=0) u = 0;
     }
 
-    printk("ref -> %d | nits -> %d | u -> %d",ref,nits,u);
-    var_cd = 50;
+    /*printk("ref -> %d | nits -> %d | u -> %d",ref,nits,u);*/
+    var_cd = 100 - u;
+    pwm = u;
       
     k_sem_give(&sem_cd);
   }
@@ -579,7 +571,7 @@ void thread_D_code(void *argA , void *argB, void *argC)
   int ret = 0;
   int pwm = 0;
 
-  printk("Thread D Init\n\r");
+  /*printk("Thread D Init\n\r");*/
 
   const struct device *gpio0_dev;
 
@@ -589,7 +581,7 @@ void thread_D_code(void *argA , void *argB, void *argC)
     printk("Error: Failed to bind to GPIO0\n\r");
     return;
   } else {
-    printk("Bind to GPIO0 successfull \n\r");
+    /*printk("Bind to GPIO0 successfull \n\r");*/
   }
 
   ret = gpio_pin_configure(gpio0_dev, BOARDLED_PIN, GPIO_OUTPUT_ACTIVE);
@@ -603,19 +595,19 @@ void thread_D_code(void *argA , void *argB, void *argC)
   pwm0_dev = device_get_binding(DT_LABEL(PWM0_NID));
 
   if (pwm0_dev == NULL) {
-    printk("Error: Failed to bind to PWM0\n r");
+    /*printk("Error: Failed to bind to PWM0\n r");*/
     return;
   } else {
-    printk("Bind to PWM0 successful\n\r");
+    /*printk("Bind to PWM0 successful\n\r");*/
   }
 
-  unsigned int pwmPeriod_us = 25000;                       
+  unsigned int pwmPeriod_us = 100;                       
 
   while(1)
   {
     k_sem_take(&sem_cd , K_FOREVER);
 
-    printk("Thread D Activated\n\r");
+    /*printk("Thread D Activated\n\r");*/
 
     ret = 0;
 
@@ -654,8 +646,8 @@ void clock(){
      days++;
      minutes -= 24;
   }
-
-  printk("seconds -> %d | minutes -> %d | hours -> %d\n",seconds,minutes,hours);
+/*
+  printk("seconds -> %d | minutes -> %d | hours -> %d\n",seconds,minutes,hours); */
 }
 
 void CONFIG_BUTTONS()
@@ -697,100 +689,156 @@ void CONFIG_BUTTONS()
     gpio_add_callback(gpio0_dev, &but4_cb_data);
 }
 
-
-void CONFIG_UART()
+void MENU()
 {
-int err=0; /* Generic error variable */
-
-
-    /* Bind to UART */
-    uart_dev= device_get_binding(DT_LABEL(UART_NID));
-    if (uart_dev == NULL) {
-        printk("device_get_binding() error for device %s!\n\r", DT_LABEL(UART_NID));
-        return;
-    }
-    else {
-        printk("UART binding successful\n\r");
-    }
-
-    /* Configure UART */
-    err = uart_configure(uart_dev, &uart_cfg);
-    if (err == -ENOSYS) { /* If invalid configuration */
-        printk("uart_configure() error. Invalid configuration\n\r");
-        return; 
-    }
-
-    /* Register callback */
-    err = uart_callback_set(uart_dev, uart_cb, NULL);
-    if (err) {
-        printk("uart_callback_set() error. Error code:%d\n\r",err);
-        return;
-    }
-		
-    /* Enable data reception */
-    err =  uart_rx_enable(uart_dev ,rx_buf,sizeof(rx_buf),RX_TIMEOUT);
-    if (err) {
-        printk("uart_rx_enable() error. Error code:%d\n\r",err);
-        return;
-    }
-
-    /* Send a welcome message */ 
-    /* Last arg is timeout. Only relevant if flow controll is used */
-    err = uart_tx(uart_dev, welcome_mesg, sizeof(welcome_mesg), SYS_FOREVER_MS);
-    if (err) {
-        printk("uart_tx() error. Error code:%d\n\r",err);
-        return;
-    }
+  printk("Modo Automatico - SENSOR DE LUZ\n");
+  printk("1 - Modificar data atual\n");
+  printk("2 - Escolher periodo de ON/OFF\n");
+  printk("3 - Escolher luminosidade\n");
+  printk("4 - Verficar data atual\n");
+  printk("5 - Verificar PWM atual\n");
+  printk("Escolha ->  ");
 }
 
-static void uart_cb(const struct device *dev, struct uart_event *evt, void *user_data)
+void CHANGE_DATE () 
 {
-    int err;
+    flag_console = 1;
+    hours = 0;
+    minutes = 0;
+    seconds = 0;
+    printk("\n");
+    printk("Coloque a hora (ex: 21): ");
+    for (int i = 0; i <= 2; i++) {
+      scan = console_getchar();
+      console_putchar(scan);
+      scan -= 48;
+      if ((scan <= 9) && (scan >= 0)) {
+        hours = hours * 10 + scan;
+      } else
+        break;
+    }
+    printk("\n");
+    printk("Coloque os minutos (ex: 21): ");
+    for (int i = 0; i <= 2; i++) {
+      scan = console_getchar();
+      console_putchar(scan);
+      scan -= 48;
+      if ((scan <= 9) && (scan >= 0)) {
+        minutes = minutes * 10 + scan;
+      } else
+        break;
+    }
+    printk("\n");
+    printk("Coloque os segundos(ex: 21): ");
+    for (int i = 0; i <= 2; i++) {
+      scan = console_getchar();
+      console_putchar(scan);
+      scan -= 48;
+      if ((scan <= 9) && (scan >= 0)) {
+        seconds = seconds * 10 + scan;
+      } else
+        break;
+    }
+    printk("\n");
+    printk("Hora Atual -> %d:%d:%d\n", hours, minutes, seconds);
+    flag_console = 0;
+}
 
-    switch (evt->type) {
-	
-        case UART_TX_DONE:
-		printk("UART_TX_DONE event \n\r");
-                break;
-
-	case UART_TX_ABORTED:
-		printk("UART_TX_ABORTED event \n\r");
-		break;
-		
-	case UART_RX_RDY:
-		printk("UART_RX_RDY event \n\r");
-                /* Just copy data to a buffer. Usually it is preferable to use e.g. a FIFO to communicate with a task that shall process the messages*/
-                memcpy(rx_chars,&(rx_buf[evt->data.rx.offset]),evt->data.rx.len); 
-                rx_chars[evt->data.rx.len]=0; /* Terminate the string */
-                uart_rx_rdy_flag = 1;
-		break;
-
-	case UART_RX_BUF_REQUEST:
-		printk("UART_RX_BUF_REQUEST event \n\r");
-		break;
-
-	case UART_RX_BUF_RELEASED:
-		printk("UART_RX_BUF_RELEASED event \n\r");
-		break;
-		
-	case UART_RX_DISABLED: 
-                /* When the RX_BUFF becomes full RX is is disabled automaticaly.  */
-                /* It must be re-enabled manually for continuous reception */
-                printk("UART_RX_DISABLED event \n\r");
-		err =  uart_rx_enable(uart_dev ,rx_buf,sizeof(rx_buf),RX_TIMEOUT);
-                if (err) {
-                    printk("uart_rx_enable() error. Error code:%d\n\r",err);
-                    exit(FATAL_ERR);                
-                }
-		break;
-
-	case UART_RX_STOPPED:
-		printk("UART_RX_STOPPED event \n\r");
-		break;
-		
-	default:
-                printk("UART: unknown event \n\r");
-		break;
+void SET_DATE_PWM () 
+{
+    hours_init = 0;
+    minutes_init = 0;
+    seconds_init = 0;
+    printk("\n");
+    printk("Coloque a hora de inicio(ex: 21): ");
+    for (int i = 0; i <= 2; i++) {
+      scan = console_getchar();
+      console_putchar(scan);
+      scan -= 48;
+      if ((scan <= 9) && (scan >= 0)) {
+        hours_init = hours_init * 10 + scan;
+      } else
+        break;
+    }
+    printk("\n");
+    printk("Coloque os minutos de inicio (ex: 21): ");
+    for (int i = 0; i <= 2; i++) {
+      scan = console_getchar();
+      console_putchar(scan);
+      scan -= 48;
+      if ((scan <= 9) && (scan >= 0)) {
+        minutes_init = minutes_init * 10 + scan;
+      } else
+        break;
+    }
+    printk("\n");
+    printk("Coloque os segundos de inicio (ex: 21): ");
+    for (int i = 0; i <= 2; i++) {
+      scan = console_getchar();
+      console_putchar(scan);
+      scan -= 48;
+      if ((scan <= 9) && (scan >= 0)) {
+        seconds_init = seconds_init * 10 + scan;
+      } else
+        break;
+    }
+    hours_finito = 0;
+    minutes_finito = 0;
+    seconds_finito = 0;
+    printk("\n");
+    printk("Coloque a hora de fim (ex: 21): ");
+    for (int i = 0; i <= 2; i++) {
+      scan = console_getchar();
+      console_putchar(scan);
+      scan -= 48;
+      if ((scan <= 9) && (scan >= 0)) {
+        hours_finito = hours_finito * 10 + scan;
+      } else
+        break;
+    }
+    printk("\n");
+    printk("Coloque os minutos de fim (ex: 21): ");
+    for (int i = 0; i <= 2; i++) {
+      scan = console_getchar();
+      console_putchar(scan);
+      scan -= 48;
+      if ((scan <= 9) && (scan >= 0)) {
+        minutes_finito = minutes_finito * 10 + scan;
+      } else
+        break;
+    }
+    printk("\n");
+    printk("Coloque os segundos de fim (ex: 21): ");
+    for (int i = 0; i <= 2; i++) {
+      scan = console_getchar();
+      console_putchar(scan);
+      scan -= 48;
+      if ((scan <= 9) && (scan >= 0)) {
+        seconds_finito = seconds_finito * 10 + scan;
+      } else
+        break;
     }
 
+    printk("\n");
+    printk("Hora Inicial -> %d:%d:%d\n", hours_init, minutes_init, seconds_init);
+    printk("Hora Final -> %d:%d:%d\n", hours_finito, minutes_finito, seconds_finito);
 }
+
+void SET_PWM() {
+    printk("\n");
+    printk("Coloque a iluminusiçao pretendida em %(ex: 21): ");
+    nits_pret = 0;
+    for (int i = 0; i <= 2; i++) {
+      scan = console_getchar();
+      console_putchar(scan);
+      scan -= 48;
+      if ((scan <= 9) && (scan >= 0)) {
+        nits_pret = nits_pret * 10 + scan;
+      } else
+        break;
+    }
+
+    printk("\n");
+    printk("Luminosidade -> %d\n", nits_pret);
+}
+

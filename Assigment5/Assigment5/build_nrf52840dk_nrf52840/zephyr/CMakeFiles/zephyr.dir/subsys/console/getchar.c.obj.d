@@ -1,4 +1,5 @@
-CMakeFiles/app.dir/src/main.c.obj: ../src/main.c \
+zephyr/CMakeFiles/zephyr.dir/subsys/console/getchar.c.obj: \
+ C:/Users/renat/ncs/v1.9.1/zephyr/subsys/console/getchar.c \
  C:/Users/renat/ncs/SETR/Assigment5/Assigment5/build_nrf52840dk_nrf52840/zephyr/include/generated/autoconf.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/toolchain/zephyr_stdint.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/zephyr.h \
@@ -127,24 +128,9 @@ CMakeFiles/app.dir/src/main.c.obj: ../src/main.c \
  zephyr/include/generated/syscalls/mem_manage.h \
  zephyr/include/generated/device_extern.h \
  zephyr/include/generated/syscalls/device.h \
- C:/Users/renat/ncs/v1.9.1/zephyr/include/drivers/gpio.h \
- C:/Users/renat/ncs/v1.9.1/zephyr/include/dt-bindings/gpio/gpio.h \
- zephyr/include/generated/syscalls/gpio.h \
- C:/Users/renat/ncs/v1.9.1/zephyr/include/drivers/pwm.h \
- C:/Users/renat/ncs/v1.9.1/zephyr/include/sys/math_extras.h \
- C:/Users/renat/ncs/v1.9.1/zephyr/include/sys/math_extras_impl.h \
- C:/Users/renat/ncs/v1.9.1/zephyr/include/dt-bindings/pwm/pwm.h \
- zephyr/include/generated/syscalls/pwm.h \
- C:/Users/renat/ncs/v1.9.1/zephyr/include/drivers/adc.h \
- C:/Users/renat/ncs/v1.9.1/zephyr/include/dt-bindings/adc/adc.h \
- zephyr/include/generated/syscalls/adc.h \
- C:/Users/renat/ncs/v1.9.1/zephyr/include/drivers/uart.h \
- zephyr/include/generated/syscalls/uart.h \
- C:/Users/renat/ncs/v1.9.1/zephyr/lib/libc/minimal/include/string.h \
- C:/Users/renat/ncs/v1.9.1/zephyr/include/timing/timing.h \
- C:/Users/renat/ncs/v1.9.1/zephyr/lib/libc/minimal/include/stdio.h \
- C:/Users/renat/ncs/v1.9.1/zephyr/lib/libc/minimal/include/stdlib.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/include/console/console.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/lib/libc/minimal/include/sys/types.h \
  C:/Users/renat/ncs/v1.9.1/zephyr/lib/libc/minimal/include/sys/_types.h \
- C:/Users/renat/ncs/v1.9.1/modules/hal/nordic/nrfx/hal/nrf_saadc.h
+ C:/Users/renat/ncs/v1.9.1/zephyr/include/console/tty.h \
+ C:/Users/renat/ncs/v1.9.1/zephyr/include/drivers/uart.h \
+ zephyr/include/generated/syscalls/uart.h

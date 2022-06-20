@@ -86,6 +86,8 @@ C:/Users/renat/ncs/SETR/Assigment5/Assigment5/build_nrf52840dk_nrf52840/zephyr/s
 C:/Users/renat/ncs/SETR/Assigment5/Assigment5/build_nrf52840dk_nrf52840/zephyr/subsys/debug/CMakeFiles/rebuild_cache.dir
 C:/Users/renat/ncs/SETR/Assigment5/Assigment5/build_nrf52840dk_nrf52840/zephyr/subsys/logging/CMakeFiles/edit_cache.dir
 C:/Users/renat/ncs/SETR/Assigment5/Assigment5/build_nrf52840dk_nrf52840/zephyr/subsys/logging/CMakeFiles/rebuild_cache.dir
+C:/Users/renat/ncs/SETR/Assigment5/Assigment5/build_nrf52840dk_nrf52840/zephyr/subsys/console/CMakeFiles/edit_cache.dir
+C:/Users/renat/ncs/SETR/Assigment5/Assigment5/build_nrf52840dk_nrf52840/zephyr/subsys/console/CMakeFiles/rebuild_cache.dir
 C:/Users/renat/ncs/SETR/Assigment5/Assigment5/build_nrf52840dk_nrf52840/zephyr/subsys/fs/CMakeFiles/edit_cache.dir
 C:/Users/renat/ncs/SETR/Assigment5/Assigment5/build_nrf52840dk_nrf52840/zephyr/subsys/fs/CMakeFiles/rebuild_cache.dir
 C:/Users/renat/ncs/SETR/Assigment5/Assigment5/build_nrf52840dk_nrf52840/zephyr/subsys/ipc/CMakeFiles/edit_cache.dir
