@@ -323,27 +323,24 @@ void main(void)
     console_init();  
     printf("\n\x1b[2J\r");
     while(1) {
-        MENU();
-        choice = console_getchar();
-        console_putchar(choice);
-        if(choice == '1') {
-          CHANGE_DATE();
-        }
-        if(choice == '2') {
-          SET_DATE_PWM();
-          flag_setted = 1;
-        }
-        if(choice == '3') {
-          SET_PWM();
-        }     
-        if(choice == '4') {
-          printk("\n");
-          printk("Hora Atual -> %d:%d:%d\n", hours, minutes, seconds);
-        }
-        if(choice == '5') {
-          printk("\n");
-          printk("ACTUAL -> %d    //    LUMINOSITY -> %d    //    PWM -> %d",ref, nits,pwm);
-        }
+          MENU();
+          choice = console_getchar();
+          console_putchar(choice);
+          if(choice == '1') {
+            CHANGE_DATE();
+          } else if(choice == '2') {
+            SET_DATE_PWM();
+            flag_setted = 1;
+          } else if(choice == '3') {
+            SET_PWM();
+          } else if(choice == '4') {
+            printk("\n");
+            printk("Hora Atual -> %d:%d:%d\n", hours, minutes, seconds);
+          } else if(choice == '5') {
+            printk("\n");
+            printk("ACTUAL -> %d    //    LUMINOSITY -> %d    //    PWM -> %d \n",ref, nits,pwm);
+          } else break;
+        
     }
     return;
 }
@@ -380,7 +377,11 @@ void thread_1_code(void *argA , void *argB, void *argC)
         if(dcToggleFlag1 == 1) 
         {       
            toggle_mode = 0;
+           choice = '10';
+           printf("\n\x1b[2J\r");
+           printf("MODO MANUAL\n");
            dcToggleFlag1 = 0;
+
         }
         if( ((hours_init <= hours) && (hours_finito >= hours)) && ((minutes_init < minutes) || (minutes_finito > minutes)) && ((seconds_init < seconds) && (seconds_finito > seconds)) ) {
            ref = nits_pret;
@@ -393,7 +394,7 @@ void thread_1_code(void *argA , void *argB, void *argC)
     } 
     else 
     {
-        printk("aqui");
+        /*printk("aqui");*/
        if(dcToggleFlag2 == 1) 
        {
           toggle_mode = 1;
@@ -402,16 +403,17 @@ void thread_1_code(void *argA , void *argB, void *argC)
        if(dcToggleFlag3 == 1) 
        {
           ref-=10;
+          if(ref<= 0) ref = 0;
+          printk("ref -> %d\n",(100-ref));
           dcToggleFlag3 = 0;
        }
        if(dcToggleFlag4 == 1) 
        {
           ref+=10;
+          if(ref>= 100) ref = 100;
+          printk("ref -> %d\n",(100-ref));
           dcToggleFlag4 = 0;
        }
-       if(ref>= 100) ref = 100;
-       if(ref<= 0) ref = 0;
-       printk("ref -> %d",ref);
         var_cd = ref;
         k_sem_give(&sem_cd);
     }
