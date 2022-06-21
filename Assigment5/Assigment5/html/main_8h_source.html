@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Tasks in Zephyr (Assigment 4) - Semaphores: src/main.h Source File</title>
+<title>Closed loop control application in Zephyr (Assigment 5): src/main.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Tasks in Zephyr (Assigment 4) - Semaphores<span id="projectnumber">&#160;v1.0</span>
+   <div id="projectname">Closed loop control application in Zephyr (Assigment 5)<span id="projectnumber">&#160;v1.0</span>
    </div>
-   <div id="projectbrief">Processing an analog signal using semaphores and shared memory</div>
+   <div id="projectbrief">Develop an application to control the light intensity of a given region. This system can operate in Automatic mode and Manual mode.</div>
   </td>
  </tr>
  </tbody>
@@ -102,10 +102,10 @@ $(document).ready(function(){initNavTree('main_8h_source.html',''); initResizabl
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
-<div class="ttc" id="amain_8h_html_a61675a61bbec86901b2fe28f008e881c"><div class="ttname"><a href="main_8h.html#a61675a61bbec86901b2fe28f008e881c">thread_A_code</a></div><div class="ttdeci">void thread_A_code(void *argA, void *argB, void *argC)</div><div class="ttdoc">The thread A has the porpouse of reading the adc sampling and implement it in a semaphore....</div><div class="ttdef"><b>Definition:</b> main.c:220</div></div>
-<div class="ttc" id="amain_8h_html_a6288eba0f8e8ad3ab1544ad731eb7667"><div class="ttname"><a href="main_8h.html#a6288eba0f8e8ad3ab1544ad731eb7667">main</a></div><div class="ttdeci">void main(void)</div><div class="ttdoc">Where the semaphores are initialized and the each thread is created.   Every thread has it's specific...</div><div class="ttdef"><b>Definition:</b> main.c:175</div></div>
-<div class="ttc" id="amain_8h_html_a6eec62f04743b40b6d744ecd2f31cdd2"><div class="ttname"><a href="main_8h.html#a6eec62f04743b40b6d744ecd2f31cdd2">thread_C_code</a></div><div class="ttdeci">void thread_C_code(void *argA, void *argB, void *argC)</div><div class="ttdoc">The thread C deals with the values for the PWM.   Using the data from the mean done previously it is ...</div><div class="ttdef"><b>Definition:</b> main.c:328</div></div>
-<div class="ttc" id="amain_8h_html_a99cef2c8673e9c73162dd97f0247ca8e"><div class="ttname"><a href="main_8h.html#a99cef2c8673e9c73162dd97f0247ca8e">thread_B_code</a></div><div class="ttdeci">void thread_B_code(void *argA, void *argB, void *argC)</div><div class="ttdoc">This thread deals with the information from the semphores and calculates the mean with samples that d...</div><div class="ttdef"><b>Definition:</b> main.c:269</div></div>
+<div class="ttc" id="amain_8h_html_a61675a61bbec86901b2fe28f008e881c"><div class="ttname"><a href="main_8h.html#a61675a61bbec86901b2fe28f008e881c">thread_A_code</a></div><div class="ttdeci">void thread_A_code(void *argA, void *argB, void *argC)</div><div class="ttdoc">The thread A has the porpouse of reading the adc sampling and implement it in a semaphore....</div><div class="ttdef"><b>Definition:</b> main.c:438</div></div>
+<div class="ttc" id="amain_8h_html_a6288eba0f8e8ad3ab1544ad731eb7667"><div class="ttname"><a href="main_8h.html#a6288eba0f8e8ad3ab1544ad731eb7667">main</a></div><div class="ttdeci">void main(void)</div><div class="ttdoc">Where the semaphores are initialized and the each thread is created.   Every thread has it's specific...</div><div class="ttdef"><b>Definition:</b> main.c:274</div></div>
+<div class="ttc" id="amain_8h_html_a6eec62f04743b40b6d744ecd2f31cdd2"><div class="ttname"><a href="main_8h.html#a6eec62f04743b40b6d744ecd2f31cdd2">thread_C_code</a></div><div class="ttdeci">void thread_C_code(void *argA, void *argB, void *argC)</div><div class="ttdoc">The thread C deals with the values for the PWM.   Using the data from the mean done previously it is ...</div><div class="ttdef"><b>Definition:</b> main.c:535</div></div>
+<div class="ttc" id="amain_8h_html_a99cef2c8673e9c73162dd97f0247ca8e"><div class="ttname"><a href="main_8h.html#a99cef2c8673e9c73162dd97f0247ca8e">thread_B_code</a></div><div class="ttdeci">void thread_B_code(void *argA, void *argB, void *argC)</div><div class="ttdoc">This thread deals with the information from the semphores and calculates the mean with samples that d...</div><div class="ttdef"><b>Definition:</b> main.c:476</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

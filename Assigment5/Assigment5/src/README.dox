@@ -1,13 +1,13 @@
 /**
 
-@mainpage Tasks in Zephyr documentation - Semaphores
+@mainpage Closed loop control application in Zephyr 
 
 @author José Mestre Batista and Renato Rocha
 
 <b>Welcome!</b>
-This index has the purpose to present a better and organized documentation of the scripts for the Tasks in Zephyr.
-It is based on the logic of semaphores. Using ADC, PWM and a bit of the process of the data, with the variation of a potentiometer it can be 
-seen the variation of the frequency of a led on the board.
+This index has the purpose to present a better and organized documentation of the scripts for application in Zephyr.
+The system comprises a light sensor, an illumination system and a Human-Machine Interface. The
+system can operate in a manual mode and a automatic mode. The application is structured according with the real-time model.
 
 <b>BUGS:</b>
 If bug's are found please contact one of the developers: joseomb@ua.pt or renatorocha21@ua.pt

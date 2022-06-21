@@ -24,8 +24,8 @@
 */
 var NAVTREE =
 [
-  [ "Tasks in Zephyr (Assigment 4) - Semaphores", "index.html", [
-    [ "Tasks in Zephyr documentation - Semaphores", "index.html", null ],
+  [ "Closed loop control application in Zephyr (Assigment 5)", "index.html", [
+    [ "Closed loop control application in Zephyr", "index.html", null ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "Globals", "globals.html", [

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Tasks in Zephyr (Assigment 4) - Semaphores: src/main.c File Reference</title>
+<title>Closed loop control application in Zephyr (Assigment 5): src/main.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Tasks in Zephyr (Assigment 4) - Semaphores<span id="projectnumber">&#160;v1.0</span>
+   <div id="projectname">Closed loop control application in Zephyr (Assigment 5)<span id="projectnumber">&#160;v1.0</span>
    </div>
-   <div id="projectbrief">Processing an analog signal using semaphores and shared memory</div>
+   <div id="projectbrief">Develop an application to control the light intensity of a given region. This system can operate in Automatic mode and Manual mode.</div>
   </td>
  </tr>
  </tbody>
@@ -98,6 +98,7 @@ $(document).ready(function(){initNavTree('main_8c.html',''); initResizable(); })
 <code>#include &lt;drivers/gpio.h&gt;</code><br />
 <code>#include &lt;drivers/pwm.h&gt;</code><br />
 <code>#include &lt;drivers/adc.h&gt;</code><br />
+<code>#include &lt;drivers/uart.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;devicetree.h&gt;</code><br />
 <code>#include &lt;sys/printk.h&gt;</code><br />
@@ -105,6 +106,7 @@ $(document).ready(function(){initNavTree('main_8c.html',''); initResizable(); })
 <code>#include &lt;timing/timing.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;console/console.h&gt;</code><br />
 <code>#include &lt;hal/nrf_saadc.h&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
@@ -148,6 +150,9 @@ Macros</h2></td></tr>
 <tr class="memitem:a6423a880df59733d2d9b509c7718d3a9"><td class="memItemLeft" align="right" valign="top"><a id="a6423a880df59733d2d9b509c7718d3a9" name="a6423a880df59733d2d9b509c7718d3a9"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>STACK_SIZE</b>&#160;&#160;&#160;1024</td></tr>
 <tr class="separator:a6423a880df59733d2d9b509c7718d3a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53863970e9a29168fdb42edae8d0b614"><td class="memItemLeft" align="right" valign="top"><a id="a53863970e9a29168fdb42edae8d0b614" name="a53863970e9a29168fdb42edae8d0b614"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>thread_1_prio</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a53863970e9a29168fdb42edae8d0b614"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5936222e9802dbe8ceb1e99bd667466a"><td class="memItemLeft" align="right" valign="top"><a id="a5936222e9802dbe8ceb1e99bd667466a" name="a5936222e9802dbe8ceb1e99bd667466a"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>thread_A_prio</b>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a5936222e9802dbe8ceb1e99bd667466a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -157,15 +162,39 @@ Macros</h2></td></tr>
 <tr class="memitem:a1bd72aae8d0dd6e887547a1d5e0a8902"><td class="memItemLeft" align="right" valign="top"><a id="a1bd72aae8d0dd6e887547a1d5e0a8902" name="a1bd72aae8d0dd6e887547a1d5e0a8902"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>thread_C_prio</b>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a1bd72aae8d0dd6e887547a1d5e0a8902"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ed7791f41bc6281906a0878492b0894"><td class="memItemLeft" align="right" valign="top"><a id="a2ed7791f41bc6281906a0878492b0894" name="a2ed7791f41bc6281906a0878492b0894"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>thread_A_period</b>&#160;&#160;&#160;1000</td></tr>
-<tr class="separator:a2ed7791f41bc6281906a0878492b0894"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02433a30dac2e9bc252089790fc081e3"><td class="memItemLeft" align="right" valign="top"><a id="a02433a30dac2e9bc252089790fc081e3" name="a02433a30dac2e9bc252089790fc081e3"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>thread_D_prio</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a02433a30dac2e9bc252089790fc081e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cc20cd183a1b0f645987e72b9f33a9b"><td class="memItemLeft" align="right" valign="top"><a id="a9cc20cd183a1b0f645987e72b9f33a9b" name="a9cc20cd183a1b0f645987e72b9f33a9b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>thread_1_period</b>&#160;&#160;&#160;500</td></tr>
+<tr class="separator:a9cc20cd183a1b0f645987e72b9f33a9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3c05b8933cd253785fdd123f6dbfc18"><td class="memItemLeft" align="right" valign="top"><a id="ad3c05b8933cd253785fdd123f6dbfc18" name="ad3c05b8933cd253785fdd123f6dbfc18"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BOARDBUT1</b>&#160;&#160;&#160;0xb /* Pin at which BUT1 is connected. Addressing is direct (i.e., pin number) */</td></tr>
+<tr class="separator:ad3c05b8933cd253785fdd123f6dbfc18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a590d906828bd5948fafbef47dc1c3b0c"><td class="memItemLeft" align="right" valign="top"><a id="a590d906828bd5948fafbef47dc1c3b0c" name="a590d906828bd5948fafbef47dc1c3b0c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BOARDBUT2</b>&#160;&#160;&#160;0xc</td></tr>
+<tr class="separator:a590d906828bd5948fafbef47dc1c3b0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e82ac21050552495e5a8551178bf258"><td class="memItemLeft" align="right" valign="top"><a id="a2e82ac21050552495e5a8551178bf258" name="a2e82ac21050552495e5a8551178bf258"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BOARDBUT3</b>&#160;&#160;&#160;0x18</td></tr>
+<tr class="separator:a2e82ac21050552495e5a8551178bf258"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abee96e1280405ff973ee2b6b07eec104"><td class="memItemLeft" align="right" valign="top"><a id="abee96e1280405ff973ee2b6b07eec104" name="abee96e1280405ff973ee2b6b07eec104"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BOARDBUT4</b>&#160;&#160;&#160;0x19</td></tr>
+<tr class="separator:abee96e1280405ff973ee2b6b07eec104"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3f68d59e815ea166f8c983bc6e85c5b"><td class="memItemLeft" align="right" valign="top"><a id="ab3f68d59e815ea166f8c983bc6e85c5b" name="ab3f68d59e815ea166f8c983bc6e85c5b"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>WINDOW_SIZE</b>&#160;&#160;&#160;10</td></tr>
 <tr class="separator:ab3f68d59e815ea166f8c983bc6e85c5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade09c399dabf371d58b993b590bd5a23"><td class="memItemLeft" align="right" valign="top"><a id="ade09c399dabf371d58b993b590bd5a23" name="ade09c399dabf371d58b993b590bd5a23"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ref_max</b>&#160;&#160;&#160;100</td></tr>
+<tr class="separator:ade09c399dabf371d58b993b590bd5a23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc6387d948dad38ca8fb922a446fd3cd"><td class="memItemLeft" align="right" valign="top"><a id="abc6387d948dad38ca8fb922a446fd3cd" name="abc6387d948dad38ca8fb922a446fd3cd"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ref_min</b>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:abc6387d948dad38ca8fb922a446fd3cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a7ca74642afd8824bb7667040221ca4ae"><td class="memItemLeft" align="right" valign="top"><a id="a7ca74642afd8824bb7667040221ca4ae" name="a7ca74642afd8824bb7667040221ca4ae"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>K_THREAD_STACK_DEFINE</b> (thread_1_stack, STACK_SIZE)</td></tr>
+<tr class="separator:a7ca74642afd8824bb7667040221ca4ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa25f5f9092ccf13998f3cb9e9e1d10a6"><td class="memItemLeft" align="right" valign="top"><a id="aa25f5f9092ccf13998f3cb9e9e1d10a6" name="aa25f5f9092ccf13998f3cb9e9e1d10a6"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>K_THREAD_STACK_DEFINE</b> (thread_A_stack, STACK_SIZE)</td></tr>
 <tr class="separator:aa25f5f9092ccf13998f3cb9e9e1d10a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,6 +204,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a331fd55d9b95c3e662a4148fbc522271"><td class="memItemLeft" align="right" valign="top"><a id="a331fd55d9b95c3e662a4148fbc522271" name="a331fd55d9b95c3e662a4148fbc522271"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>K_THREAD_STACK_DEFINE</b> (thread_C_stack, STACK_SIZE)</td></tr>
 <tr class="separator:a331fd55d9b95c3e662a4148fbc522271"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1aa340a38690690e42169ae37089ca8f"><td class="memItemLeft" align="right" valign="top"><a id="a1aa340a38690690e42169ae37089ca8f" name="a1aa340a38690690e42169ae37089ca8f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>K_THREAD_STACK_DEFINE</b> (thread_D_stack, STACK_SIZE)</td></tr>
+<tr class="separator:a1aa340a38690690e42169ae37089ca8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34a4258fe75e1af4915bda747584375a"><td class="memItemLeft" align="right" valign="top"><a id="a34a4258fe75e1af4915bda747584375a" name="a34a4258fe75e1af4915bda747584375a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>thread_1_code</b> (void *argA, void *argB, void *argC)</td></tr>
+<tr class="separator:a34a4258fe75e1af4915bda747584375a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61675a61bbec86901b2fe28f008e881c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a61675a61bbec86901b2fe28f008e881c">thread_A_code</a> (void *argA, void *argB, void *argC)</td></tr>
 <tr class="memdesc:a61675a61bbec86901b2fe28f008e881c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The thread A has the porpouse of reading the adc sampling and implement it in a semaphore. <br  />
  Then it deals with the timing to read such samples.  <a href="main_8c.html#a61675a61bbec86901b2fe28f008e881c">More...</a><br /></td></tr>
@@ -187,10 +222,46 @@ Functions</h2></td></tr>
 <tr class="memdesc:a6eec62f04743b40b6d744ecd2f31cdd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The thread C deals with the values for the PWM. <br  />
  Using the data from the mean done previously it is possible to see the output on the led of the board and on the screen.  <a href="main_8c.html#a6eec62f04743b40b6d744ecd2f31cdd2">More...</a><br /></td></tr>
 <tr class="separator:a6eec62f04743b40b6d744ecd2f31cdd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a621f0dfdf57a438495482f571278e7"><td class="memItemLeft" align="right" valign="top"><a id="a1a621f0dfdf57a438495482f571278e7" name="a1a621f0dfdf57a438495482f571278e7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>thread_D_code</b> (void *argA, void *argB, void *argC)</td></tr>
+<tr class="separator:a1a621f0dfdf57a438495482f571278e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7d90a3db3be4d74a95d59cb9bc36764"><td class="memItemLeft" align="right" valign="top"><a id="ae7d90a3db3be4d74a95d59cb9bc36764" name="ae7d90a3db3be4d74a95d59cb9bc36764"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>but1press_cbfunction</b> (const struct device *dev, struct gpio_callback *cb, uint32_t pins)</td></tr>
+<tr class="separator:ae7d90a3db3be4d74a95d59cb9bc36764"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5a577fea0419d075e8b4de7c1416f9b"><td class="memItemLeft" align="right" valign="top"><a id="ad5a577fea0419d075e8b4de7c1416f9b" name="ad5a577fea0419d075e8b4de7c1416f9b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>but2press_cbfunction</b> (const struct device *dev, struct gpio_callback *cb, uint32_t pins)</td></tr>
+<tr class="separator:ad5a577fea0419d075e8b4de7c1416f9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36024e853b8d234c3c045c4e30327e57"><td class="memItemLeft" align="right" valign="top"><a id="a36024e853b8d234c3c045c4e30327e57" name="a36024e853b8d234c3c045c4e30327e57"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>but3press_cbfunction</b> (const struct device *dev, struct gpio_callback *cb, uint32_t pins)</td></tr>
+<tr class="separator:a36024e853b8d234c3c045c4e30327e57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad98aaf56309e1b0b996d247f18b73b0e"><td class="memItemLeft" align="right" valign="top"><a id="ad98aaf56309e1b0b996d247f18b73b0e" name="ad98aaf56309e1b0b996d247f18b73b0e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>but4press_cbfunction</b> (const struct device *dev, struct gpio_callback *cb, uint32_t pins)</td></tr>
+<tr class="separator:ad98aaf56309e1b0b996d247f18b73b0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6288eba0f8e8ad3ab1544ad731eb7667"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a6288eba0f8e8ad3ab1544ad731eb7667">main</a> (void)</td></tr>
 <tr class="memdesc:a6288eba0f8e8ad3ab1544ad731eb7667"><td class="mdescLeft">&#160;</td><td class="mdescRight">Where the semaphores are initialized and the each thread is created. <br  />
  Every thread has it's specific porpouse for the treatment of the signal.  <a href="main_8c.html#a6288eba0f8e8ad3ab1544ad731eb7667">More...</a><br /></td></tr>
 <tr class="separator:a6288eba0f8e8ad3ab1544ad731eb7667"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91c4a467078baf29eb254476f50fa310"><td class="memItemLeft" align="right" valign="top"><a id="a91c4a467078baf29eb254476f50fa310" name="a91c4a467078baf29eb254476f50fa310"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>clock</b> ()</td></tr>
+<tr class="separator:a91c4a467078baf29eb254476f50fa310"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad1d83e51f4029bf6982a956f1615c96"><td class="memItemLeft" align="right" valign="top"><a id="aad1d83e51f4029bf6982a956f1615c96" name="aad1d83e51f4029bf6982a956f1615c96"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>CONFIG_BUTTONS</b> ()</td></tr>
+<tr class="separator:aad1d83e51f4029bf6982a956f1615c96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2b93d136e8e717529155ea42c53b43a"><td class="memItemLeft" align="right" valign="top"><a id="aa2b93d136e8e717529155ea42c53b43a" name="aa2b93d136e8e717529155ea42c53b43a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>MENU</b> ()</td></tr>
+<tr class="separator:aa2b93d136e8e717529155ea42c53b43a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aceb5623f9c37a459a25dc921d5145ad3"><td class="memItemLeft" align="right" valign="top"><a id="aceb5623f9c37a459a25dc921d5145ad3" name="aceb5623f9c37a459a25dc921d5145ad3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>CHANGE_DATE</b> ()</td></tr>
+<tr class="separator:aceb5623f9c37a459a25dc921d5145ad3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e8ca8b9b31f89783e3c0b61c88dfa2b"><td class="memItemLeft" align="right" valign="top"><a id="a0e8ca8b9b31f89783e3c0b61c88dfa2b" name="a0e8ca8b9b31f89783e3c0b61c88dfa2b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SET_DATE_PWM</b> ()</td></tr>
+<tr class="separator:a0e8ca8b9b31f89783e3c0b61c88dfa2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ec1df5840cf701069ab22096c9e8522"><td class="memItemLeft" align="right" valign="top"><a id="a8ec1df5840cf701069ab22096c9e8522" name="a8ec1df5840cf701069ab22096c9e8522"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SET_PWM</b> ()</td></tr>
+<tr class="separator:a8ec1df5840cf701069ab22096c9e8522"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc9cd696869ce9dc4211757b474c169b"><td class="memItemLeft" align="right" valign="top"><a id="abc9cd696869ce9dc4211757b474c169b" name="abc9cd696869ce9dc4211757b474c169b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>CHECK_DATE</b> ()</td></tr>
+<tr class="separator:abc9cd696869ce9dc4211757b474c169b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -200,6 +271,9 @@ struct k_timer&#160;</td><td class="memItemRight" valign="bottom"><b>my_timer</b
 <tr class="memitem:a445f79326d40128ece59a749adff6894"><td class="memItemLeft" align="right" valign="top"><a id="a445f79326d40128ece59a749adff6894" name="a445f79326d40128ece59a749adff6894"></a>
 const struct device *&#160;</td><td class="memItemRight" valign="bottom"><b>adc_dev</b> = NULL</td></tr>
 <tr class="separator:a445f79326d40128ece59a749adff6894"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dc3a538cdf1bca62065cb3fc96d1daf"><td class="memItemLeft" align="right" valign="top"><a id="a0dc3a538cdf1bca62065cb3fc96d1daf" name="a0dc3a538cdf1bca62065cb3fc96d1daf"></a>
+struct k_thread&#160;</td><td class="memItemRight" valign="bottom"><b>thread_1_data</b></td></tr>
+<tr class="separator:a0dc3a538cdf1bca62065cb3fc96d1daf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d4412666e45fbd3d7bb2e537e3e4921"><td class="memItemLeft" align="right" valign="top"><a id="a6d4412666e45fbd3d7bb2e537e3e4921" name="a6d4412666e45fbd3d7bb2e537e3e4921"></a>
 struct k_thread&#160;</td><td class="memItemRight" valign="bottom"><b>thread_A_data</b></td></tr>
 <tr class="separator:a6d4412666e45fbd3d7bb2e537e3e4921"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -209,6 +283,12 @@ struct k_thread&#160;</td><td class="memItemRight" valign="bottom"><b>thread_B_d
 <tr class="memitem:a9723f8aa3cfd56015ee57bc31879f8ec"><td class="memItemLeft" align="right" valign="top"><a id="a9723f8aa3cfd56015ee57bc31879f8ec" name="a9723f8aa3cfd56015ee57bc31879f8ec"></a>
 struct k_thread&#160;</td><td class="memItemRight" valign="bottom"><b>thread_C_data</b></td></tr>
 <tr class="separator:a9723f8aa3cfd56015ee57bc31879f8ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91a7abf451804f293c55d5fc507cee31"><td class="memItemLeft" align="right" valign="top"><a id="a91a7abf451804f293c55d5fc507cee31" name="a91a7abf451804f293c55d5fc507cee31"></a>
+struct k_thread&#160;</td><td class="memItemRight" valign="bottom"><b>thread_D_data</b></td></tr>
+<tr class="separator:a91a7abf451804f293c55d5fc507cee31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace7a9ee607f716b5c1716780f1b35bcb"><td class="memItemLeft" align="right" valign="top"><a id="ace7a9ee607f716b5c1716780f1b35bcb" name="ace7a9ee607f716b5c1716780f1b35bcb"></a>
+k_tid_t&#160;</td><td class="memItemRight" valign="bottom"><b>thread_1_tid</b></td></tr>
+<tr class="separator:ace7a9ee607f716b5c1716780f1b35bcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaac68d6bd12397c115c8f5fb8b8dae16"><td class="memItemLeft" align="right" valign="top"><a id="aaac68d6bd12397c115c8f5fb8b8dae16" name="aaac68d6bd12397c115c8f5fb8b8dae16"></a>
 k_tid_t&#160;</td><td class="memItemRight" valign="bottom"><b>thread_A_tid</b></td></tr>
 <tr class="separator:aaac68d6bd12397c115c8f5fb8b8dae16"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -218,18 +298,42 @@ k_tid_t&#160;</td><td class="memItemRight" valign="bottom"><b>thread_B_tid</b></
 <tr class="memitem:a3e9a231be3f7d1a28871ddfdf5ca8fe3"><td class="memItemLeft" align="right" valign="top"><a id="a3e9a231be3f7d1a28871ddfdf5ca8fe3" name="a3e9a231be3f7d1a28871ddfdf5ca8fe3"></a>
 k_tid_t&#160;</td><td class="memItemRight" valign="bottom"><b>thread_C_tid</b></td></tr>
 <tr class="separator:a3e9a231be3f7d1a28871ddfdf5ca8fe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae130441eb06f8e1d532010c32c8fd15c"><td class="memItemLeft" align="right" valign="top"><a id="ae130441eb06f8e1d532010c32c8fd15c" name="ae130441eb06f8e1d532010c32c8fd15c"></a>
+k_tid_t&#160;</td><td class="memItemRight" valign="bottom"><b>thread_D_tid</b></td></tr>
+<tr class="separator:ae130441eb06f8e1d532010c32c8fd15c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8251657f4ddad084d0e374ac19e0a60"><td class="memItemLeft" align="right" valign="top"><a id="ac8251657f4ddad084d0e374ac19e0a60" name="ac8251657f4ddad084d0e374ac19e0a60"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>var_ab</b> = 0</td></tr>
 <tr class="separator:ac8251657f4ddad084d0e374ac19e0a60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a330b9b5a516c28f3c752951b3c69dea6"><td class="memItemLeft" align="right" valign="top"><a id="a330b9b5a516c28f3c752951b3c69dea6" name="a330b9b5a516c28f3c752951b3c69dea6"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>var_bc</b> = 0</td></tr>
 <tr class="separator:a330b9b5a516c28f3c752951b3c69dea6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20714f7734d792bc4476403c05e393db"><td class="memItemLeft" align="right" valign="top"><a id="a20714f7734d792bc4476403c05e393db" name="a20714f7734d792bc4476403c05e393db"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>var_cd</b> = 0</td></tr>
+<tr class="separator:a20714f7734d792bc4476403c05e393db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3add1c035c038e4a2420a341a7f72e63"><td class="memItemLeft" align="right" valign="top"><a id="a3add1c035c038e4a2420a341a7f72e63" name="a3add1c035c038e4a2420a341a7f72e63"></a>
+struct k_sem&#160;</td><td class="memItemRight" valign="bottom"><b>sem_1a</b></td></tr>
+<tr class="separator:a3add1c035c038e4a2420a341a7f72e63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82e13125c2f279157fcf738219ff21ba"><td class="memItemLeft" align="right" valign="top"><a id="a82e13125c2f279157fcf738219ff21ba" name="a82e13125c2f279157fcf738219ff21ba"></a>
 struct k_sem&#160;</td><td class="memItemRight" valign="bottom"><b>sem_ab</b></td></tr>
 <tr class="separator:a82e13125c2f279157fcf738219ff21ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addc907d18e7e98a64a832ac1c7be5ad1"><td class="memItemLeft" align="right" valign="top"><a id="addc907d18e7e98a64a832ac1c7be5ad1" name="addc907d18e7e98a64a832ac1c7be5ad1"></a>
 struct k_sem&#160;</td><td class="memItemRight" valign="bottom"><b>sem_bc</b></td></tr>
 <tr class="separator:addc907d18e7e98a64a832ac1c7be5ad1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e41357f9cb242cab98e34d3d8042795"><td class="memItemLeft" align="right" valign="top"><a id="a2e41357f9cb242cab98e34d3d8042795" name="a2e41357f9cb242cab98e34d3d8042795"></a>
+struct k_sem&#160;</td><td class="memItemRight" valign="bottom"><b>sem_cd</b></td></tr>
+<tr class="separator:a2e41357f9cb242cab98e34d3d8042795"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe1d1325f26213f5a2612063884c3268"><td class="memItemLeft" align="right" valign="top"><a id="afe1d1325f26213f5a2612063884c3268" name="afe1d1325f26213f5a2612063884c3268"></a>
+volatile int&#160;</td><td class="memItemRight" valign="bottom"><b>dcToggleFlag1</b> = 0</td></tr>
+<tr class="separator:afe1d1325f26213f5a2612063884c3268"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c4e46fbeb53ef3e77299a1d762b92dc"><td class="memItemLeft" align="right" valign="top"><a id="a7c4e46fbeb53ef3e77299a1d762b92dc" name="a7c4e46fbeb53ef3e77299a1d762b92dc"></a>
+volatile int&#160;</td><td class="memItemRight" valign="bottom"><b>dcToggleFlag2</b> = 0</td></tr>
+<tr class="separator:a7c4e46fbeb53ef3e77299a1d762b92dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada933e7051e7d2c2d8bbbfe9a8daac8d"><td class="memItemLeft" align="right" valign="top"><a id="ada933e7051e7d2c2d8bbbfe9a8daac8d" name="ada933e7051e7d2c2d8bbbfe9a8daac8d"></a>
+volatile int&#160;</td><td class="memItemRight" valign="bottom"><b>dcToggleFlag3</b> = 0</td></tr>
+<tr class="separator:ada933e7051e7d2c2d8bbbfe9a8daac8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a613701599c8297e5a2c5704b7231e60c"><td class="memItemLeft" align="right" valign="top"><a id="a613701599c8297e5a2c5704b7231e60c" name="a613701599c8297e5a2c5704b7231e60c"></a>
+volatile int&#160;</td><td class="memItemRight" valign="bottom"><b>dcToggleFlag4</b> = 0</td></tr>
+<tr class="separator:a613701599c8297e5a2c5704b7231e60c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9fa6fd0069c80e42efa98bfec1bdb7f7"><td class="memItemLeft" align="right" valign="top"><a id="a9fa6fd0069c80e42efa98bfec1bdb7f7" name="a9fa6fd0069c80e42efa98bfec1bdb7f7"></a>
 volatile uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>media</b> = 0</td></tr>
 <tr class="separator:a9fa6fd0069c80e42efa98bfec1bdb7f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -242,12 +346,78 @@ volatile uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>media_2<
 <tr class="memitem:a3f3ff6a29334bf0398873d957b1f86b9"><td class="memItemLeft" align="right" valign="top"><a id="a3f3ff6a29334bf0398873d957b1f86b9" name="a3f3ff6a29334bf0398873d957b1f86b9"></a>
 volatile uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>desvio</b> = 0</td></tr>
 <tr class="separator:a3f3ff6a29334bf0398873d957b1f86b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2caed1cbe66b4adb794da880e147fdc"><td class="memItemLeft" align="right" valign="top"><a id="ab2caed1cbe66b4adb794da880e147fdc" name="ab2caed1cbe66b4adb794da880e147fdc"></a>
+volatile int&#160;</td><td class="memItemRight" valign="bottom"><b>count</b> = 0</td></tr>
+<tr class="separator:ab2caed1cbe66b4adb794da880e147fdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4715c47469b21032d46367e8ef4aea0"><td class="memItemLeft" align="right" valign="top"><a id="ad4715c47469b21032d46367e8ef4aea0" name="ad4715c47469b21032d46367e8ef4aea0"></a>
+volatile int&#160;</td><td class="memItemRight" valign="bottom"><b>seconds</b> = 0</td></tr>
+<tr class="separator:ad4715c47469b21032d46367e8ef4aea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab693b677bdc9ded12b06daf49778101c"><td class="memItemLeft" align="right" valign="top"><a id="ab693b677bdc9ded12b06daf49778101c" name="ab693b677bdc9ded12b06daf49778101c"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>minutes</b> = 0</td></tr>
+<tr class="separator:ab693b677bdc9ded12b06daf49778101c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af23005df06fc3cd4264e5eee2dfa2f8c"><td class="memItemLeft" align="right" valign="top"><a id="af23005df06fc3cd4264e5eee2dfa2f8c" name="af23005df06fc3cd4264e5eee2dfa2f8c"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>hours</b> = 0</td></tr>
+<tr class="separator:af23005df06fc3cd4264e5eee2dfa2f8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a587b80cf207596af93422f0932dd001e"><td class="memItemLeft" align="right" valign="top"><a id="a587b80cf207596af93422f0932dd001e" name="a587b80cf207596af93422f0932dd001e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>days</b> = 0</td></tr>
+<tr class="separator:a587b80cf207596af93422f0932dd001e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4788577bb1fbc69702f670fbe80324a"><td class="memItemLeft" align="right" valign="top"><a id="af4788577bb1fbc69702f670fbe80324a" name="af4788577bb1fbc69702f670fbe80324a"></a>
+volatile int&#160;</td><td class="memItemRight" valign="bottom"><b>seconds_init</b> = 0</td></tr>
+<tr class="separator:af4788577bb1fbc69702f670fbe80324a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f7aed1ac48e7afcb46cd13e6f0844d7"><td class="memItemLeft" align="right" valign="top"><a id="a6f7aed1ac48e7afcb46cd13e6f0844d7" name="a6f7aed1ac48e7afcb46cd13e6f0844d7"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>minutes_init</b> = 0</td></tr>
+<tr class="separator:a6f7aed1ac48e7afcb46cd13e6f0844d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af565f1ddf35ff0824ac093fda048db7d"><td class="memItemLeft" align="right" valign="top"><a id="af565f1ddf35ff0824ac093fda048db7d" name="af565f1ddf35ff0824ac093fda048db7d"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>hours_init</b> = 0</td></tr>
+<tr class="separator:af565f1ddf35ff0824ac093fda048db7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cbc4a6b61e0236107b8b40961c633ac"><td class="memItemLeft" align="right" valign="top"><a id="a4cbc4a6b61e0236107b8b40961c633ac" name="a4cbc4a6b61e0236107b8b40961c633ac"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>days_init</b> = 0</td></tr>
+<tr class="separator:a4cbc4a6b61e0236107b8b40961c633ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe7edf6511bedd296647a6464a181c12"><td class="memItemLeft" align="right" valign="top"><a id="afe7edf6511bedd296647a6464a181c12" name="afe7edf6511bedd296647a6464a181c12"></a>
+volatile int&#160;</td><td class="memItemRight" valign="bottom"><b>seconds_finito</b> = 0</td></tr>
+<tr class="separator:afe7edf6511bedd296647a6464a181c12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47da3377a7cc437127abd9d1fd580067"><td class="memItemLeft" align="right" valign="top"><a id="a47da3377a7cc437127abd9d1fd580067" name="a47da3377a7cc437127abd9d1fd580067"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>minutes_finito</b> = 0</td></tr>
+<tr class="separator:a47da3377a7cc437127abd9d1fd580067"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9d3786bcaff1dc2db2a839f9968b9d8"><td class="memItemLeft" align="right" valign="top"><a id="aa9d3786bcaff1dc2db2a839f9968b9d8" name="aa9d3786bcaff1dc2db2a839f9968b9d8"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>hours_finito</b> = 0</td></tr>
+<tr class="separator:aa9d3786bcaff1dc2db2a839f9968b9d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac97cbed0b6ff7e4f43fb7aa1d30ae0af"><td class="memItemLeft" align="right" valign="top"><a id="ac97cbed0b6ff7e4f43fb7aa1d30ae0af" name="ac97cbed0b6ff7e4f43fb7aa1d30ae0af"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>days_finito</b> = 0</td></tr>
+<tr class="separator:ac97cbed0b6ff7e4f43fb7aa1d30ae0af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb528a1cb1ca190150183394d082590d"><td class="memItemLeft" align="right" valign="top"><a id="adb528a1cb1ca190150183394d082590d" name="adb528a1cb1ca190150183394d082590d"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>ref</b> = 50</td></tr>
+<tr class="separator:adb528a1cb1ca190150183394d082590d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5dc203c224c4a493d0d9baf6c1923b47"><td class="memItemLeft" align="right" valign="top"><a id="a5dc203c224c4a493d0d9baf6c1923b47" name="a5dc203c224c4a493d0d9baf6c1923b47"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>choice</b></td></tr>
+<tr class="separator:a5dc203c224c4a493d0d9baf6c1923b47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3536194dd1e8de94daf7e3a0ab288a48"><td class="memItemLeft" align="right" valign="top"><a id="a3536194dd1e8de94daf7e3a0ab288a48" name="a3536194dd1e8de94daf7e3a0ab288a48"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>scan</b></td></tr>
+<tr class="separator:a3536194dd1e8de94daf7e3a0ab288a48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a444bba56566901e8effff9bf629cc8fd"><td class="memItemLeft" align="right" valign="top"><a id="a444bba56566901e8effff9bf629cc8fd" name="a444bba56566901e8effff9bf629cc8fd"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>toggle_mode</b> = 1</td></tr>
+<tr class="separator:a444bba56566901e8effff9bf629cc8fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b213d637911a53ed4959e0a6598cd4b"><td class="memItemLeft" align="right" valign="top"><a id="a7b213d637911a53ed4959e0a6598cd4b" name="a7b213d637911a53ed4959e0a6598cd4b"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>flag_end_binds</b> = 0</td></tr>
+<tr class="separator:a7b213d637911a53ed4959e0a6598cd4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab518068147d78b821bb5403cb49f2c4e"><td class="memItemLeft" align="right" valign="top"><a id="ab518068147d78b821bb5403cb49f2c4e" name="ab518068147d78b821bb5403cb49f2c4e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>flag_console</b> = 0</td></tr>
+<tr class="separator:ab518068147d78b821bb5403cb49f2c4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af67047d84e5970e9fe0ee3ec99004627"><td class="memItemLeft" align="right" valign="top"><a id="af67047d84e5970e9fe0ee3ec99004627" name="af67047d84e5970e9fe0ee3ec99004627"></a>
+volatile int&#160;</td><td class="memItemRight" valign="bottom"><b>nits</b></td></tr>
+<tr class="separator:af67047d84e5970e9fe0ee3ec99004627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6752fa88c3c4b2b201f2904aff7c0497"><td class="memItemLeft" align="right" valign="top"><a id="a6752fa88c3c4b2b201f2904aff7c0497" name="a6752fa88c3c4b2b201f2904aff7c0497"></a>
+volatile int&#160;</td><td class="memItemRight" valign="bottom"><b>pwm</b></td></tr>
+<tr class="separator:a6752fa88c3c4b2b201f2904aff7c0497"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bdb01685edac199a72a928cfe7b59bb"><td class="memItemLeft" align="right" valign="top"><a id="a2bdb01685edac199a72a928cfe7b59bb" name="a2bdb01685edac199a72a928cfe7b59bb"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>nits_pret</b> =0</td></tr>
+<tr class="separator:a2bdb01685edac199a72a928cfe7b59bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Main file with the creation of all of the threads and structures for the assigment. </p>
 <p >This file contains all of the important data for the ADC, PWM, semaphores and the logic behind the work.</p>
 <dl class="section author"><dt>Author</dt><dd>Jose Mestre Batista and Renato Rocha </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>31 May 2022 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>23 June 2022 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a6288eba0f8e8ad3ab1544ad731eb7667" name="a6288eba0f8e8ad3ab1544ad731eb7667"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6288eba0f8e8ad3ab1544ad731eb7667">&#9670;&nbsp;</a></span>main()</h2>
@@ -282,9 +452,9 @@ volatile uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>desvio</
 <div class="line">thread_C_tid = k_thread_create(&amp;thread_C_data, thread_C_stack,</div>
 <div class="line">     K_THREAD_STACK_SIZEOF(thread_C_stack), <a class="code hl_function" href="main_8c.html#a6eec62f04743b40b6d744ecd2f31cdd2">thread_C_code</a>,</div>
 <div class="line">     NULL, NULL, NULL, thread_C_prio, 0, K_NO_WAIT); </div>
-<div class="ttc" id="amain_8c_html_a61675a61bbec86901b2fe28f008e881c"><div class="ttname"><a href="main_8c.html#a61675a61bbec86901b2fe28f008e881c">thread_A_code</a></div><div class="ttdeci">void thread_A_code(void *argA, void *argB, void *argC)</div><div class="ttdoc">The thread A has the porpouse of reading the adc sampling and implement it in a semaphore....</div><div class="ttdef"><b>Definition:</b> main.c:220</div></div>
-<div class="ttc" id="amain_8c_html_a6eec62f04743b40b6d744ecd2f31cdd2"><div class="ttname"><a href="main_8c.html#a6eec62f04743b40b6d744ecd2f31cdd2">thread_C_code</a></div><div class="ttdeci">void thread_C_code(void *argA, void *argB, void *argC)</div><div class="ttdoc">The thread C deals with the values for the PWM.   Using the data from the mean done previously it is ...</div><div class="ttdef"><b>Definition:</b> main.c:328</div></div>
-<div class="ttc" id="amain_8c_html_a99cef2c8673e9c73162dd97f0247ca8e"><div class="ttname"><a href="main_8c.html#a99cef2c8673e9c73162dd97f0247ca8e">thread_B_code</a></div><div class="ttdeci">void thread_B_code(void *argA, void *argB, void *argC)</div><div class="ttdoc">This thread deals with the information from the semphores and calculates the mean with samples that d...</div><div class="ttdef"><b>Definition:</b> main.c:269</div></div>
+<div class="ttc" id="amain_8c_html_a61675a61bbec86901b2fe28f008e881c"><div class="ttname"><a href="main_8c.html#a61675a61bbec86901b2fe28f008e881c">thread_A_code</a></div><div class="ttdeci">void thread_A_code(void *argA, void *argB, void *argC)</div><div class="ttdoc">The thread A has the porpouse of reading the adc sampling and implement it in a semaphore....</div><div class="ttdef"><b>Definition:</b> main.c:438</div></div>
+<div class="ttc" id="amain_8c_html_a6eec62f04743b40b6d744ecd2f31cdd2"><div class="ttname"><a href="main_8c.html#a6eec62f04743b40b6d744ecd2f31cdd2">thread_C_code</a></div><div class="ttdeci">void thread_C_code(void *argA, void *argB, void *argC)</div><div class="ttdoc">The thread C deals with the values for the PWM.   Using the data from the mean done previously it is ...</div><div class="ttdef"><b>Definition:</b> main.c:535</div></div>
+<div class="ttc" id="amain_8c_html_a99cef2c8673e9c73162dd97f0247ca8e"><div class="ttname"><a href="main_8c.html#a99cef2c8673e9c73162dd97f0247ca8e">thread_B_code</a></div><div class="ttdeci">void thread_B_code(void *argA, void *argB, void *argC)</div><div class="ttdoc">This thread deals with the information from the semphores and calculates the mean with samples that d...</div><div class="ttdef"><b>Definition:</b> main.c:476</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

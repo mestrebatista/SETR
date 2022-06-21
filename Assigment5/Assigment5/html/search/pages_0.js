@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['tasks_20in_20zephyr_20documentation_20_2d_20semaphores_0',['Tasks in Zephyr documentation - Semaphores',['../index.html',1,'']]]
+  ['closed_20loop_20control_20application_20in_20zephyr_0',['Closed loop control application in Zephyr',['../index.html',1,'']]]
 ];
