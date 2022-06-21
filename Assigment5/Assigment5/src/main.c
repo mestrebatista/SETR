@@ -341,6 +341,13 @@ void main(void)
               printk("\n");
               printk("Hora Inicial -> %d:%d:%d\n", hours_init, minutes_init, seconds_init);
               printk("Hora Final -> %d:%d:%d\n", hours_finito, minutes_finito, seconds_finito);
+          } else if(choice == '7') {
+              printk("\n");
+              printk("Hora Atual -> %d:%d:%d\n", hours, minutes, seconds);
+              printk("Hora Inicial -> %d:%d:%d\n", hours_init, minutes_init, seconds_init);
+              printk("Hora Final -> %d:%d:%d\n", hours_finito, minutes_finito, seconds_finito);
+              printk("ACTUAL -> %d    //    LUMINOSITY -> %d    //    PWM -> %d \n",ref, nits,pwm);
+              printk("\n");
           } else break;
         
     }
@@ -525,39 +532,61 @@ void thread_B_code(void *argA , void *argB, void *argC)
 
 /* ###################    THREAD C    ######################*/
 
-void thread_C_code(void *argA , void *argB, void *argC)
-{
+void thread_C_code(void *argA, void *argB, void *argC) {
   int i;
   int ret = 0;
   int u;
   int flag = 0;
+  int error = 0;
+  int integral = 0;
+  int Kp = 0.5;
+  int Ki = 0.3;
 
-  /*printk("Thread C Init\n\r");*/
+  /* printk("Thread C Init\n\r");
+  */
 
-  while(1)
-  {
-    k_sem_take(&sem_bc , K_FOREVER);
+      while (1) {
+    k_sem_take(&sem_bc, K_FOREVER);
 
-    /*printk("Thread C Activated\n\r");*/
+    /* printk("Thread C Activated\n\r");
+    */
 
     ret = 0;
     flag = 1;
 
-    nits = (uint16_t)(3000 * var_bc / ((float) 1023));
-    nits = -0.0455*nits + 136.36; 
-    
-    if(flag){
-      if(nits>ref) u--;
-      else if(nits<ref) u++;
+    nits = (uint16_t)(3000 * var_bc / ((float)1023));
+    nits = -0.0455 * nits + 136.36;
 
-      if(u >= 100) u = 100;
-      if(u<=0) u = 0;
+    int u_mid = nits;
+
+    if (flag) {
+
+      error = u_mid - u;
+      integral += error;
+      if (integral > 100)
+        integral = 100; // Positive clamping to avoid wind-up
+      if (integral < 0)
+        integral = 0; // Negative clamping to avoid wind-up
+
+      u += ((Kp * error) + (Ki * integral / 20));
+
+      if (u > 100) {
+        u_mid = 100;
+      } else if (u < 0) {
+        u_mid = 0;
+      } else {
+        u_mid = u;
+      }
+
+      /* if(u >= 100) u = 100;
+      // if(u<=0) u = 0; */
     }
 
-    /*printk("ref -> %d | nits -> %d | u -> %d",ref,nits,u);*/
-    var_cd = 100 - u;
-    pwm = u;
-      
+    /* printk("ref -> %d | nits -> %d | u -> %d", ref, nits, u);
+    */
+        var_cd = 100 - u_mid;
+    pwm = u_mid;
+
     k_sem_give(&sem_cd);
   }
 }
@@ -694,6 +723,8 @@ void MENU()
   printk("3 - Escolher luminosidade\n");
   printk("4 - Verficar data atual\n");
   printk("5 - Verificar PWM atual\n");
+  printk("6 - Verificar Periodo ON/OFF\n");
+  printk("7 - Mostrar tudo\n");
   printk("Escolha ->  ");
 }
 
