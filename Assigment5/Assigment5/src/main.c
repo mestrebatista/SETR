@@ -265,7 +265,6 @@ int scan;
 int toggle_mode = 1;
 int flag_end_binds = 0;
 int flag_console = 0;
-int flag_setted = 0;
 
 volatile int nits;
 volatile int pwm;
@@ -330,7 +329,6 @@ void main(void)
             CHANGE_DATE();
           } else if(choice == '2') {
             SET_DATE_PWM();
-            flag_setted = 1;
           } else if(choice == '3') {
             SET_PWM();
           } else if(choice == '4') {
@@ -339,6 +337,10 @@ void main(void)
           } else if(choice == '5') {
             printk("\n");
             printk("ACTUAL -> %d    //    LUMINOSITY -> %d    //    PWM -> %d \n",ref, nits,pwm);
+          } else if(choice == '6') {
+              printk("\n");
+              printk("Hora Inicial -> %d:%d:%d\n", hours_init, minutes_init, seconds_init);
+              printk("Hora Final -> %d:%d:%d\n", hours_finito, minutes_finito, seconds_finito);
           } else break;
         
     }
@@ -381,15 +383,8 @@ void thread_1_code(void *argA , void *argB, void *argC)
            printf("\n\x1b[2J\r");
            printf("MODO MANUAL\n");
            dcToggleFlag1 = 0;
-
         }
-        if( ((hours_init <= hours) && (hours_finito >= hours)) && ((minutes_init < minutes) || (minutes_finito > minutes)) && ((seconds_init < seconds) && (seconds_finito > seconds)) ) {
-           ref = nits_pret;
-        } 
-        else 
-        {
-           ref = 0;
-        }
+        CHECK_DATE();
         k_sem_give(&sem_1a);
     } 
     else 
@@ -751,6 +746,7 @@ void SET_DATE_PWM ()
     hours_init = 0;
     minutes_init = 0;
     seconds_init = 0;
+    scan = 0;
     printk("\n");
     printk("Coloque a hora de inicio(ex: 21): ");
     for (int i = 0; i <= 2; i++) {
@@ -762,6 +758,7 @@ void SET_DATE_PWM ()
       } else
         break;
     }
+    scan = 0;
     printk("\n");
     printk("Coloque os minutos de inicio (ex: 21): ");
     for (int i = 0; i <= 2; i++) {
@@ -773,6 +770,7 @@ void SET_DATE_PWM ()
       } else
         break;
     }
+    scan = 0;
     printk("\n");
     printk("Coloque os segundos de inicio (ex: 21): ");
     for (int i = 0; i <= 2; i++) {
@@ -787,6 +785,7 @@ void SET_DATE_PWM ()
     hours_finito = 0;
     minutes_finito = 0;
     seconds_finito = 0;
+    scan = 0;
     printk("\n");
     printk("Coloque a hora de fim (ex: 21): ");
     for (int i = 0; i <= 2; i++) {
@@ -800,6 +799,7 @@ void SET_DATE_PWM ()
     }
     printk("\n");
     printk("Coloque os minutos de fim (ex: 21): ");
+    scan = 0;
     for (int i = 0; i <= 2; i++) {
       scan = console_getchar();
       console_putchar(scan);
@@ -809,6 +809,7 @@ void SET_DATE_PWM ()
       } else
         break;
     }
+    scan = 0;
     printk("\n");
     printk("Coloque os segundos de fim (ex: 21): ");
     for (int i = 0; i <= 2; i++) {
@@ -844,3 +845,47 @@ void SET_PWM() {
     printk("Luminosidade -> %d\n", nits_pret);
 }
 
+void CHECK_DATE() {
+      ref = 0;
+        if (hours_init < hours) {
+          if (hours_finito > hours) {
+            ref = nits_pret;
+          } else if (hours_finito == hours) {
+            if (minutes_finito > minutes) {
+              ref = nits_pret;
+            } else if (minutes_finito == minutes) {
+              if (seconds_finito >= seconds) {
+                ref = nits_pret;
+              }
+            }
+          }
+        } else if (hours_init == hours) {
+          if (minutes_init < minutes) {
+            if (hours_finito > hours) {
+              ref = nits_pret;
+            } else if (hours_finito == hours) {
+              if (minutes_finito > minutes) {
+                ref = nits_pret;
+              } else if (minutes_finito == minutes) {
+                if (seconds_finito >= seconds) {
+                  ref = nits_pret;
+                }
+              }
+            }
+          } else if (minutes_init == minutes) {
+            if (seconds_init < seconds) {
+              if (hours_finito > hours) {
+                ref = nits_pret;
+              } else if (hours_finito == hours) {
+                if (minutes_finito > minutes) {
+                  ref = nits_pret;
+                } else if (minutes_finito == minutes) {
+                  if (seconds_finito >= seconds) {
+                    ref = nits_pret;
+                  }
+                }
+              }
+            }
+          }
+        }
+}
