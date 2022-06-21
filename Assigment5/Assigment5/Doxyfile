@@ -32,7 +32,7 @@ DOXYFILE_ENCODING      = UTF-8
 # title of most generated pages and in a few other places.
 # The default value is: My Project.
 
-PROJECT_NAME           = "Tasks in Zephyr (Assigment 4) - Semaphores"
+PROJECT_NAME           = "Closed loop control application in Zephyr (Assigment 5)"
 
 # The PROJECT_NUMBER tag can be used to enter a project or revision number. This
 # could be handy for archiving the generated documentation or if some version
@@ -44,7 +44,7 @@ PROJECT_NUMBER         = v1.0
 # for a project that appears at the top of each page and should give viewer a
 # quick idea about the purpose of the project. Keep the description short.
 
-PROJECT_BRIEF          = "Processing an analog signal using semaphores and shared memory"
+PROJECT_BRIEF          = "Develop an application to control the light intensity of a given region. This system can operate in Automatic mode and Manual mode."
 
 # With the PROJECT_LOGO tag one can specify a logo or an icon that is included
 # in the documentation. The maximum height of the logo should not exceed 55
@@ -58,7 +58,7 @@ PROJECT_LOGO           =
 # entered, it will be relative to the location where doxygen was started. If
 # left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       = D:/joseo/Documents/UA/4ano/2_semestre/SETR/git_repo/SETR/Assigment4
+OUTPUT_DIRECTORY       = C:/Users/joseo/Desktop/setr/SETR/Assigment5/Assigment5
 
 # If the CREATE_SUBDIRS tag is set to YES then doxygen will create 4096 sub-
 # directories (in 2 levels) under the output directory of each output format and
@@ -874,7 +874,7 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = D:/joseo/Documents/UA/4ano/2_semestre/SETR/git_repo/SETR/Assigment4/src
+INPUT                  = C:/Users/joseo/Desktop/setr/SETR/Assigment5/Assigment5/src
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
