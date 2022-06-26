@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['thread_5fa_5fcode_0',['thread_A_code',['../main_8c.html#a61675a61bbec86901b2fe28f008e881c',1,'thread_A_code(void *argA, void *argB, void *argC):&#160;main.c'],['../main_8h.html#a61675a61bbec86901b2fe28f008e881c',1,'thread_A_code(void *argA, void *argB, void *argC):&#160;main.c']]],
-  ['thread_5fb_5fcode_1',['thread_B_code',['../main_8c.html#a99cef2c8673e9c73162dd97f0247ca8e',1,'thread_B_code(void *argA, void *argB, void *argC):&#160;main.c'],['../main_8h.html#a99cef2c8673e9c73162dd97f0247ca8e',1,'thread_B_code(void *argA, void *argB, void *argC):&#160;main.c']]],
-  ['thread_5fc_5fcode_2',['thread_C_code',['../main_8c.html#a6eec62f04743b40b6d744ecd2f31cdd2',1,'thread_C_code(void *argA, void *argB, void *argC):&#160;main.c'],['../main_8h.html#a6eec62f04743b40b6d744ecd2f31cdd2',1,'thread_C_code(void *argA, void *argB, void *argC):&#160;main.c']]]
+  ['change_5fdate_0',['CHANGE_DATE',['../main_8c.html#aceb5623f9c37a459a25dc921d5145ad3',1,'CHANGE_DATE():&#160;main.c'],['../main_8h.html#aceb5623f9c37a459a25dc921d5145ad3',1,'CHANGE_DATE():&#160;main.c']]],
+  ['check_5fdate_1',['CHECK_DATE',['../main_8c.html#abc9cd696869ce9dc4211757b474c169b',1,'CHECK_DATE():&#160;main.c'],['../main_8h.html#abc9cd696869ce9dc4211757b474c169b',1,'CHECK_DATE():&#160;main.c']]],
+  ['clock_2',['clock',['../main_8c.html#a91c4a467078baf29eb254476f50fa310',1,'clock():&#160;main.c'],['../main_8h.html#a91c4a467078baf29eb254476f50fa310',1,'clock():&#160;main.c']]],
+  ['config_5fbuttons_3',['CONFIG_BUTTONS',['../main_8c.html#aad1d83e51f4029bf6982a956f1615c96',1,'CONFIG_BUTTONS():&#160;main.c'],['../main_8h.html#aad1d83e51f4029bf6982a956f1615c96',1,'CONFIG_BUTTONS():&#160;main.c']]]
 ];

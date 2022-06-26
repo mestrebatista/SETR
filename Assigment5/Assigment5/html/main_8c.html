@@ -207,8 +207,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a1aa340a38690690e42169ae37089ca8f"><td class="memItemLeft" align="right" valign="top"><a id="a1aa340a38690690e42169ae37089ca8f" name="a1aa340a38690690e42169ae37089ca8f"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>K_THREAD_STACK_DEFINE</b> (thread_D_stack, STACK_SIZE)</td></tr>
 <tr class="separator:a1aa340a38690690e42169ae37089ca8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34a4258fe75e1af4915bda747584375a"><td class="memItemLeft" align="right" valign="top"><a id="a34a4258fe75e1af4915bda747584375a" name="a34a4258fe75e1af4915bda747584375a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>thread_1_code</b> (void *argA, void *argB, void *argC)</td></tr>
+<tr class="memitem:a34a4258fe75e1af4915bda747584375a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a34a4258fe75e1af4915bda747584375a">thread_1_code</a> (void *argA, void *argB, void *argC)</td></tr>
+<tr class="memdesc:a34a4258fe75e1af4915bda747584375a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The thread 1 has the porpouse of the logic behind the toogle betwen the manual mode and the automatic mode set by the problem. <br  />
+ It also serves deal with the use of the nordic buttons.  <a href="main_8c.html#a34a4258fe75e1af4915bda747584375a">More...</a><br /></td></tr>
 <tr class="separator:a34a4258fe75e1af4915bda747584375a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61675a61bbec86901b2fe28f008e881c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a61675a61bbec86901b2fe28f008e881c">thread_A_code</a> (void *argA, void *argB, void *argC)</td></tr>
 <tr class="memdesc:a61675a61bbec86901b2fe28f008e881c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The thread A has the porpouse of reading the adc sampling and implement it in a semaphore. <br  />
@@ -219,48 +220,64 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>thread_1_code</b> (vo
  The resulting value it's given to the next semaphore.  <a href="main_8c.html#a99cef2c8673e9c73162dd97f0247ca8e">More...</a><br /></td></tr>
 <tr class="separator:a99cef2c8673e9c73162dd97f0247ca8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6eec62f04743b40b6d744ecd2f31cdd2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a6eec62f04743b40b6d744ecd2f31cdd2">thread_C_code</a> (void *argA, void *argB, void *argC)</td></tr>
-<tr class="memdesc:a6eec62f04743b40b6d744ecd2f31cdd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The thread C deals with the values for the PWM. <br  />
- Using the data from the mean done previously it is possible to see the output on the led of the board and on the screen.  <a href="main_8c.html#a6eec62f04743b40b6d744ecd2f31cdd2">More...</a><br /></td></tr>
+<tr class="memdesc:a6eec62f04743b40b6d744ecd2f31cdd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The thread C deals with the values for the LED. <br  />
+ Using the data from the mean done previously it's possible to calculate de nits for the led, this porcesses is supported by a controller for a better signal conditioning.  <a href="main_8c.html#a6eec62f04743b40b6d744ecd2f31cdd2">More...</a><br /></td></tr>
 <tr class="separator:a6eec62f04743b40b6d744ecd2f31cdd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a621f0dfdf57a438495482f571278e7"><td class="memItemLeft" align="right" valign="top"><a id="a1a621f0dfdf57a438495482f571278e7" name="a1a621f0dfdf57a438495482f571278e7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>thread_D_code</b> (void *argA, void *argB, void *argC)</td></tr>
+<tr class="memitem:a1a621f0dfdf57a438495482f571278e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a1a621f0dfdf57a438495482f571278e7">thread_D_code</a> (void *argA, void *argB, void *argC)</td></tr>
+<tr class="memdesc:a1a621f0dfdf57a438495482f571278e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The thread D deals with the values for the PWM. <br  />
+ Using the data from the mean done previously it is possible to set the output pwm.  <a href="main_8c.html#a1a621f0dfdf57a438495482f571278e7">More...</a><br /></td></tr>
 <tr class="separator:a1a621f0dfdf57a438495482f571278e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7d90a3db3be4d74a95d59cb9bc36764"><td class="memItemLeft" align="right" valign="top"><a id="ae7d90a3db3be4d74a95d59cb9bc36764" name="ae7d90a3db3be4d74a95d59cb9bc36764"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>but1press_cbfunction</b> (const struct device *dev, struct gpio_callback *cb, uint32_t pins)</td></tr>
+<tr class="memdesc:ae7d90a3db3be4d74a95d59cb9bc36764"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function only serves to update the respective flag and to inform that the button 1 was pressed. <br /></td></tr>
 <tr class="separator:ae7d90a3db3be4d74a95d59cb9bc36764"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5a577fea0419d075e8b4de7c1416f9b"><td class="memItemLeft" align="right" valign="top"><a id="ad5a577fea0419d075e8b4de7c1416f9b" name="ad5a577fea0419d075e8b4de7c1416f9b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>but2press_cbfunction</b> (const struct device *dev, struct gpio_callback *cb, uint32_t pins)</td></tr>
+<tr class="memdesc:ad5a577fea0419d075e8b4de7c1416f9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function only serves to update the respective flag and to inform that the button 2 was pressed. <br /></td></tr>
 <tr class="separator:ad5a577fea0419d075e8b4de7c1416f9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36024e853b8d234c3c045c4e30327e57"><td class="memItemLeft" align="right" valign="top"><a id="a36024e853b8d234c3c045c4e30327e57" name="a36024e853b8d234c3c045c4e30327e57"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>but3press_cbfunction</b> (const struct device *dev, struct gpio_callback *cb, uint32_t pins)</td></tr>
+<tr class="memdesc:a36024e853b8d234c3c045c4e30327e57"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function only serves to update the respective flag and to inform that the button 3 was pressed. <br /></td></tr>
 <tr class="separator:a36024e853b8d234c3c045c4e30327e57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad98aaf56309e1b0b996d247f18b73b0e"><td class="memItemLeft" align="right" valign="top"><a id="ad98aaf56309e1b0b996d247f18b73b0e" name="ad98aaf56309e1b0b996d247f18b73b0e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>but4press_cbfunction</b> (const struct device *dev, struct gpio_callback *cb, uint32_t pins)</td></tr>
+<tr class="memdesc:ad98aaf56309e1b0b996d247f18b73b0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function only serves to update the respective flag and to inform that the button 4 was pressed. <br /></td></tr>
 <tr class="separator:ad98aaf56309e1b0b996d247f18b73b0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6288eba0f8e8ad3ab1544ad731eb7667"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a6288eba0f8e8ad3ab1544ad731eb7667">main</a> (void)</td></tr>
 <tr class="memdesc:a6288eba0f8e8ad3ab1544ad731eb7667"><td class="mdescLeft">&#160;</td><td class="mdescRight">Where the semaphores are initialized and the each thread is created. <br  />
- Every thread has it's specific porpouse for the treatment of the signal.  <a href="main_8c.html#a6288eba0f8e8ad3ab1544ad731eb7667">More...</a><br /></td></tr>
+ Every thread has it's specific porpouse for the treatment of the signal. <br  />
+ It is also the fuction where the menu logic it's placed.  <a href="main_8c.html#a6288eba0f8e8ad3ab1544ad731eb7667">More...</a><br /></td></tr>
 <tr class="separator:a6288eba0f8e8ad3ab1544ad731eb7667"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91c4a467078baf29eb254476f50fa310"><td class="memItemLeft" align="right" valign="top"><a id="a91c4a467078baf29eb254476f50fa310" name="a91c4a467078baf29eb254476f50fa310"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>clock</b> ()</td></tr>
+<tr class="memdesc:a91c4a467078baf29eb254476f50fa310"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for the setup of the hours, minutes and seconds. <br  />
+ <br /></td></tr>
 <tr class="separator:a91c4a467078baf29eb254476f50fa310"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad1d83e51f4029bf6982a956f1615c96"><td class="memItemLeft" align="right" valign="top"><a id="aad1d83e51f4029bf6982a956f1615c96" name="aad1d83e51f4029bf6982a956f1615c96"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>CONFIG_BUTTONS</b> ()</td></tr>
+<tr class="memdesc:aad1d83e51f4029bf6982a956f1615c96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for the configuration of all the buttons. <br  />
+ <br /></td></tr>
 <tr class="separator:aad1d83e51f4029bf6982a956f1615c96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2b93d136e8e717529155ea42c53b43a"><td class="memItemLeft" align="right" valign="top"><a id="aa2b93d136e8e717529155ea42c53b43a" name="aa2b93d136e8e717529155ea42c53b43a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>MENU</b> ()</td></tr>
+<tr class="memitem:aa2b93d136e8e717529155ea42c53b43a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#aa2b93d136e8e717529155ea42c53b43a">MENU</a> ()</td></tr>
+<tr class="memdesc:aa2b93d136e8e717529155ea42c53b43a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for the Menu prints.  <a href="main_8c.html#aa2b93d136e8e717529155ea42c53b43a">More...</a><br /></td></tr>
 <tr class="separator:aa2b93d136e8e717529155ea42c53b43a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aceb5623f9c37a459a25dc921d5145ad3"><td class="memItemLeft" align="right" valign="top"><a id="aceb5623f9c37a459a25dc921d5145ad3" name="aceb5623f9c37a459a25dc921d5145ad3"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>CHANGE_DATE</b> ()</td></tr>
+<tr class="memdesc:aceb5623f9c37a459a25dc921d5145ad3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for the change of the date. <br /></td></tr>
 <tr class="separator:aceb5623f9c37a459a25dc921d5145ad3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e8ca8b9b31f89783e3c0b61c88dfa2b"><td class="memItemLeft" align="right" valign="top"><a id="a0e8ca8b9b31f89783e3c0b61c88dfa2b" name="a0e8ca8b9b31f89783e3c0b61c88dfa2b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SET_DATE_PWM</b> ()</td></tr>
+<tr class="memdesc:a0e8ca8b9b31f89783e3c0b61c88dfa2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to establish the time where the automatic mode will operate. <br  />
+ <br /></td></tr>
 <tr class="separator:a0e8ca8b9b31f89783e3c0b61c88dfa2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ec1df5840cf701069ab22096c9e8522"><td class="memItemLeft" align="right" valign="top"><a id="a8ec1df5840cf701069ab22096c9e8522" name="a8ec1df5840cf701069ab22096c9e8522"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SET_PWM</b> ()</td></tr>
+<tr class="memdesc:a8ec1df5840cf701069ab22096c9e8522"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to set the luminosity of the LED based on the pwm. <br  />
+ <br /></td></tr>
 <tr class="separator:a8ec1df5840cf701069ab22096c9e8522"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc9cd696869ce9dc4211757b474c169b"><td class="memItemLeft" align="right" valign="top"><a id="abc9cd696869ce9dc4211757b474c169b" name="abc9cd696869ce9dc4211757b474c169b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>CHECK_DATE</b> ()</td></tr>
+<tr class="memdesc:abc9cd696869ce9dc4211757b474c169b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function only to verify if the input dates are in order. <br /></td></tr>
 <tr class="separator:abc9cd696869ce9dc4211757b474c169b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -436,25 +453,140 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>nits_pret</b> =0</td><
 </div><div class="memdoc">
 
 <p>Where the semaphores are initialized and the each thread is created. <br  />
- Every thread has it's specific porpouse for the treatment of the signal. </p>
+ Every thread has it's specific porpouse for the treatment of the signal. <br  />
+ It is also the fuction where the menu logic it's placed. </p>
 <p ><br  />
- Snippet of code where the initialization is done: </p><div class="fragment"><div class="line">k_sem_init(&amp;sem_ab, 0, 1);</div>
+ Snippet of code where the initialization is done: </p><div class="fragment"><div class="line">k_sem_init(&amp;sem_1a, 0, 1);</div>
+<div class="line">k_sem_init(&amp;sem_ab, 0, 1);</div>
 <div class="line">k_sem_init(&amp;sem_bc, 0, 1);</div>
+<div class="line">k_sem_init(&amp;sem_cd, 0, 1);</div>
 <div class="line"> </div>
-<div class="line">thread_A_tid = k_thread_create(&amp;thread_A_data, thread_A_stack,</div>
-<div class="line">     K_THREAD_STACK_SIZEOF(thread_A_stack), <a class="code hl_function" href="main_8c.html#a61675a61bbec86901b2fe28f008e881c">thread_A_code</a>,</div>
-<div class="line">     NULL, NULL, NULL, thread_A_prio, 0, K_NO_WAIT);</div>
+<div class="line">thread_1_tid = k_thread_create(&amp;thread_1_data, thread_1_stack,</div>
+<div class="line">      K_THREAD_STACK_SIZEOF(thread_1_stack), <a class="code hl_function" href="main_8c.html#a34a4258fe75e1af4915bda747584375a">thread_1_code</a>,</div>
+<div class="line">      NULL, NULL, NULL, thread_1_prio, 0, K_NO_WAIT);</div>
 <div class="line"> </div>
-<div class="line">thread_B_tid = k_thread_create(&amp;thread_B_data, thread_B_stack,</div>
+<div class="line">  thread_A_tid = k_thread_create(&amp;thread_A_data, thread_A_stack,</div>
+<div class="line">  K_THREAD_STACK_SIZEOF(thread_A_stack), <a class="code hl_function" href="main_8c.html#a61675a61bbec86901b2fe28f008e881c">thread_A_code</a>,</div>
+<div class="line">  NULL, NULL, NULL, thread_A_prio, 0, K_NO_WAIT);    </div>
+<div class="line"> </div>
+<div class="line"> thread_B_tid = k_thread_create(&amp;thread_B_data, thread_B_stack,</div>
 <div class="line">     K_THREAD_STACK_SIZEOF(thread_B_stack), <a class="code hl_function" href="main_8c.html#a99cef2c8673e9c73162dd97f0247ca8e">thread_B_code</a>,</div>
 <div class="line">     NULL, NULL, NULL, thread_B_prio, 0, K_NO_WAIT);</div>
 <div class="line"> </div>
-<div class="line">thread_C_tid = k_thread_create(&amp;thread_C_data, thread_C_stack,</div>
+<div class="line"> thread_C_tid = k_thread_create(&amp;thread_C_data, thread_C_stack,</div>
 <div class="line">     K_THREAD_STACK_SIZEOF(thread_C_stack), <a class="code hl_function" href="main_8c.html#a6eec62f04743b40b6d744ecd2f31cdd2">thread_C_code</a>,</div>
-<div class="line">     NULL, NULL, NULL, thread_C_prio, 0, K_NO_WAIT); </div>
+<div class="line">     NULL, NULL, NULL, thread_C_prio, 0, K_NO_WAIT);</div>
+<div class="line"> </div>
+<div class="line"> thread_D_tid = k_thread_create(&amp;thread_D_data, thread_D_stack,</div>
+<div class="line">     K_THREAD_STACK_SIZEOF(thread_D_stack), <a class="code hl_function" href="main_8c.html#a1a621f0dfdf57a438495482f571278e7">thread_D_code</a>,</div>
+<div class="line">     NULL, NULL, NULL, thread_D_prio, 0, K_NO_WAIT);</div>
+<div class="ttc" id="amain_8c_html_a1a621f0dfdf57a438495482f571278e7"><div class="ttname"><a href="main_8c.html#a1a621f0dfdf57a438495482f571278e7">thread_D_code</a></div><div class="ttdeci">void thread_D_code(void *argA, void *argB, void *argC)</div><div class="ttdoc">The thread D deals with the values for the PWM.   Using the data from the mean done previously it is ...</div><div class="ttdef"><b>Definition:</b> main.c:594</div></div>
+<div class="ttc" id="amain_8c_html_a34a4258fe75e1af4915bda747584375a"><div class="ttname"><a href="main_8c.html#a34a4258fe75e1af4915bda747584375a">thread_1_code</a></div><div class="ttdeci">void thread_1_code(void *argA, void *argB, void *argC)</div><div class="ttdoc">The thread 1 has the porpouse of the logic behind the toogle betwen the manual mode and the automatic...</div><div class="ttdef"><b>Definition:</b> main.c:364</div></div>
 <div class="ttc" id="amain_8c_html_a61675a61bbec86901b2fe28f008e881c"><div class="ttname"><a href="main_8c.html#a61675a61bbec86901b2fe28f008e881c">thread_A_code</a></div><div class="ttdeci">void thread_A_code(void *argA, void *argB, void *argC)</div><div class="ttdoc">The thread A has the porpouse of reading the adc sampling and implement it in a semaphore....</div><div class="ttdef"><b>Definition:</b> main.c:438</div></div>
-<div class="ttc" id="amain_8c_html_a6eec62f04743b40b6d744ecd2f31cdd2"><div class="ttname"><a href="main_8c.html#a6eec62f04743b40b6d744ecd2f31cdd2">thread_C_code</a></div><div class="ttdeci">void thread_C_code(void *argA, void *argB, void *argC)</div><div class="ttdoc">The thread C deals with the values for the PWM.   Using the data from the mean done previously it is ...</div><div class="ttdef"><b>Definition:</b> main.c:535</div></div>
+<div class="ttc" id="amain_8c_html_a6eec62f04743b40b6d744ecd2f31cdd2"><div class="ttname"><a href="main_8c.html#a6eec62f04743b40b6d744ecd2f31cdd2">thread_C_code</a></div><div class="ttdeci">void thread_C_code(void *argA, void *argB, void *argC)</div><div class="ttdoc">The thread C deals with the values for the LED.   Using the data from the mean done previously it's p...</div><div class="ttdef"><b>Definition:</b> main.c:535</div></div>
 <div class="ttc" id="amain_8c_html_a99cef2c8673e9c73162dd97f0247ca8e"><div class="ttname"><a href="main_8c.html#a99cef2c8673e9c73162dd97f0247ca8e">thread_B_code</a></div><div class="ttdeci">void thread_B_code(void *argA, void *argB, void *argC)</div><div class="ttdoc">This thread deals with the information from the semphores and calculates the mean with samples that d...</div><div class="ttdef"><b>Definition:</b> main.c:476</div></div>
+</div><!-- fragment --> 
+</div>
+</div>
+<a id="aa2b93d136e8e717529155ea42c53b43a" name="aa2b93d136e8e717529155ea42c53b43a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2b93d136e8e717529155ea42c53b43a">&#9670;&nbsp;</a></span>MENU()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MENU </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function for the Menu prints. </p>
+<pre class="fragment">-&gt;  Modo Automatico - SENSOR DE LUZ
+-&gt;  1 - Modificar data atual
+-&gt;  2 - Escolher periodo de ON/OFF
+-&gt;  3 - Escolher luminosidade
+-&gt;  4 - Verficar data atual
+-&gt;  5 - Verificar PWM atual
+-&gt;  6 - Verificar Periodo ON/OFF
+-&gt;  7 - Mostrar tudo
+Escolha -&gt;</pre> 
+</div>
+</div>
+<a id="a34a4258fe75e1af4915bda747584375a" name="a34a4258fe75e1af4915bda747584375a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34a4258fe75e1af4915bda747584375a">&#9670;&nbsp;</a></span>thread_1_code()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void thread_1_code </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>argA</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>argB</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>argC</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The thread 1 has the porpouse of the logic behind the toogle betwen the manual mode and the automatic mode set by the problem. <br  />
+ It also serves deal with the use of the nordic buttons. </p>
+<div class="fragment"><div class="line"><span class="keywordflow">if</span>(toggle_mode) </div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">if</span>(dcToggleFlag1 == 1) </div>
+<div class="line">    {       </div>
+<div class="line">       toggle_mode = 0;</div>
+<div class="line">       choice = <span class="stringliteral">&#39;10&#39;</span>;</div>
+<div class="line">       printf(<span class="stringliteral">&quot;\n\x1b[2J\r&quot;</span>);</div>
+<div class="line">       printf(<span class="stringliteral">&quot;MODO MANUAL\n&quot;</span>);</div>
+<div class="line">       dcToggleFlag1 = 0;</div>
+<div class="line">    }</div>
+<div class="line">    <a class="code hl_function" href="main_8c.html#abc9cd696869ce9dc4211757b474c169b">CHECK_DATE</a>();</div>
+<div class="line">    k_sem_give(&amp;sem_1a);</div>
+<div class="line">} </div>
+<div class="line"><span class="keywordflow">else</span> </div>
+<div class="line">{</div>
+<div class="line">   <span class="keywordflow">if</span>(dcToggleFlag2 == 1) </div>
+<div class="line">   {</div>
+<div class="line">      toggle_mode = 1;</div>
+<div class="line">      dcToggleFlag2 = 0;</div>
+<div class="line">   }</div>
+<div class="line">   <span class="keywordflow">if</span>(dcToggleFlag3 == 1) </div>
+<div class="line">   {</div>
+<div class="line">      ref-=10;</div>
+<div class="line">      <span class="keywordflow">if</span>(ref&lt;= 0) ref = 0;</div>
+<div class="line">      printk(<span class="stringliteral">&quot;ref -&gt; %d\n&quot;</span>,(100-ref));</div>
+<div class="line">      dcToggleFlag3 = 0;</div>
+<div class="line">   }</div>
+<div class="line">   <span class="keywordflow">if</span>(dcToggleFlag4 == 1) </div>
+<div class="line">   {</div>
+<div class="line">      ref+=10;</div>
+<div class="line">      <span class="keywordflow">if</span>(ref&gt;= 100) ref = 100;</div>
+<div class="line">      printk(<span class="stringliteral">&quot;ref -&gt; %d\n&quot;</span>,(100-ref));</div>
+<div class="line">      dcToggleFlag4 = 0;</div>
+<div class="line">   }</div>
+<div class="line">    var_cd = ref;</div>
+<div class="line">    k_sem_give(&amp;sem_cd);</div>
+<div class="line">}</div>
+<div class="ttc" id="amain_8c_html_abc9cd696869ce9dc4211757b474c169b"><div class="ttname"><a href="main_8c.html#abc9cd696869ce9dc4211757b474c169b">CHECK_DATE</a></div><div class="ttdeci">void CHECK_DATE()</div><div class="ttdoc">Function only to verify if the input dates are in order.</div><div class="ttdef"><b>Definition:</b> main.c:879</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -492,17 +624,22 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>nits_pret</b> =0</td><
 
 <p>The thread A has the porpouse of reading the adc sampling and implement it in a semaphore. <br  />
  Then it deals with the timing to read such samples. </p>
-<div class="fragment"><div class="line"> k_sem_give(&amp;sem_ab);</div>
-<div class="line"> </div>
-<div class="line">  fin_time = k_uptime_get();</div>
-<div class="line"> </div>
-<div class="line">  <span class="keywordflow">if</span> (fin_time &lt; release_time) </div>
+<div class="fragment"><div class="line">err = adc_sample();</div>
+<div class="line"><span class="keywordflow">if</span> (err) </div>
+<div class="line">{</div>
+<div class="line">  printk(<span class="stringliteral">&quot;adc_sample() failed with error code %d\n\r&quot;</span>, err);</div>
+<div class="line">} </div>
+<div class="line"><span class="keywordflow">else</span> </div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordflow">if</span> (adc_sample_buffer[0] &gt; 1023) </div>
 <div class="line">  {</div>
-<div class="line">    k_msleep(release_time - fin_time);</div>
-<div class="line">    release_time += thread_A_period;</div>
+<div class="line">    <span class="comment">//printk(&quot;adc reading out of range\n\r&quot;);</span></div>
+<div class="line">  } </div>
+<div class="line">  <span class="keywordflow">else</span> </div>
+<div class="line">  {</div>
+<div class="line">    var_ab = adc_sample_buffer[0];</div>
 <div class="line">  }</div>
 <div class="line">}</div>
-<div class="line">timing_stop();</div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -587,19 +724,78 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>nits_pret</b> =0</td><
       </table>
 </div><div class="memdoc">
 
-<p>The thread C deals with the values for the PWM. <br  />
- Using the data from the mean done previously it is possible to see the output on the led of the board and on the screen. </p>
-<div class="fragment"><div class="line">ret = pwm_pin_set_usec(pwm0_dev, BOARDLED_PIN,</div>
-<div class="line">      pwmPeriod_us, (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>)((pwmPeriod_us * var_bc) / 1023), PWM_POLARITY_NORMAL);</div>
+<p>The thread C deals with the values for the LED. <br  />
+ Using the data from the mean done previously it's possible to calculate de nits for the led, this porcesses is supported by a controller for a better signal conditioning. </p>
+<div class="fragment"><div class="line">nits = (uint16_t)(3000 * var_bc / ((<span class="keywordtype">float</span>)1023));</div>
+<div class="line">nits = -0.0455 * nits + 136.36;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keywordflow">if</span> (ret) </div>
-<div class="line">  {</div>
-<div class="line">    printk(<span class="stringliteral">&quot;Error %d: failed to set pulse width\n&quot;</span>, ret);</div>
-<div class="line">   <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="keywordflow">if</span> (flag) {</div>
+<div class="line"> </div>
+<div class="line">  error = u_mid - u;</div>
+<div class="line">  integral += error;</div>
+<div class="line">  <span class="keywordflow">if</span> (integral &gt; 100)</div>
+<div class="line">    integral = 100; <span class="comment">// Positive clamping to avoid wind-up</span></div>
+<div class="line">  <span class="keywordflow">if</span> (integral &lt; 0)</div>
+<div class="line">    integral = 0; <span class="comment">// Negative clamping to avoid wind-up</span></div>
+<div class="line"> </div>
+<div class="line">  u += ((Kp * error) + (Ki * integral / 20));</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">if</span> (u &gt; 100) {</div>
+<div class="line">    u_mid = 100;</div>
+<div class="line">  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (u &lt; 0) {</div>
+<div class="line">    u_mid = 0;</div>
+<div class="line">  } <span class="keywordflow">else</span> {</div>
+<div class="line">    u_mid = u;</div>
 <div class="line">  }</div>
+<div class="line">}</div>
+</div><!-- fragment --> 
+</div>
+</div>
+<a id="a1a621f0dfdf57a438495482f571278e7" name="a1a621f0dfdf57a438495482f571278e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a621f0dfdf57a438495482f571278e7">&#9670;&nbsp;</a></span>thread_D_code()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void thread_D_code </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>argA</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>argB</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>argC</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The thread D deals with the values for the PWM. <br  />
+ Using the data from the mean done previously it is possible to set the output pwm. </p>
+<div class="fragment"><div class="line">k_sem_take(&amp;sem_cd , K_FOREVER);</div>
+<div class="line">ret = 0;</div>
 <div class="line"> </div>
-<div class="line">  var_bc = (uint16_t)(1000 * var_bc * ((<span class="keywordtype">float</span>)3 / 1023));</div>
-<div class="line">  printk(<span class="stringliteral">&quot;PWM -&gt; %4u \n\r&quot;</span>,(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>)((pwmPeriod_us * var_bc) / 3000));</div>
+<div class="line">ret = pwm_pin_set_usec(pwm0_dev, BOARDLED_PIN,</div>
+<div class="line">    pwmPeriod_us, (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>)((pwmPeriod_us * var_cd) / 100), PWM_POLARITY_NORMAL);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordflow">if</span> (ret) </div>
+<div class="line">{</div>
+<div class="line">  printk(<span class="stringliteral">&quot;Error %d: failed to set pulse width\n&quot;</span>, ret);</div>
+<div class="line">  <span class="keywordflow">return</span>;</div>
+<div class="line">}</div>
 </div><!-- fragment --> 
 </div>
 </div>
